@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-m">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes Mémoire - Français B1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals (bg-amber-50, text-stone-800, card-white, accent-amber-500) -->
+    <!-- Application Structure Plan: A single-page flashcard application. The core structure features a main header, a control bar (category filter dropdown, shuffle button), the interactive flashcard area (clickable to flip), and navigation controls (previous, flip, next) with a progress indicator. This structure was chosen for its directness and usability, immediately presenting the user with the learning tool and providing simple controls (category filter) to manage the large 200-word list effectively. -->
+    <!-- Visualization & Content Choices: Report Info: 200 B1 French Words. Goal: Learn/Review Vocabulary. Presentation Method: Interactive HTML/CSS/JS flashcard (div with 3D flip effect). Interaction: Click card/button to flip; navigation buttons (next/prev) to change cards; dropdown (select) to filter deck by category; shuffle button. Justification: This directly fulfills the user's 'flashcard' request in the most intuitive, interactive way. Filtering is essential for making a 200-word deck usable. Library/Method: Vanilla JS for state (current card, current deck) and DOM manipulation; Tailwind CSS for layout and styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .flashcard-container {
+            perspective: 1000px;
+        }
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .flashcard-container.is-flipped .flashcard {
+            transform: rotateY(180deg);
+        }
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .flashcard-front {
+            background-color: white;
+            color: #292524;
+        }
+        .flashcard-back {
+            background-color: #f5f5f4;
+            color: #292524;
+            transform: rotateY(180deg);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-amber-50 text-stone-800 min-h-screen flex items-center justify-center p-4">
+
+    <main class="w-full max-w-2xl mx-auto p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl">
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-amber-900">Vocabulaire Français B1</h1>
+            <p class="text-lg text-stone-600">200 mots essentiels à maîtriser</p>
+        </header>
+
+        <section class="controls mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="w-full sm:w-auto">
+                <label for="category-select" class="sr-only">Catégorie</label>
+                <select id="category-select" class="w-full sm:w-auto p-2 border border-stone-300 rounded-lg shadow-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                    <option value="all">Toutes les catégories (200)</option>
+                    <option value="cat1">Verbes (Action) (20)</option>
+                    <option value="cat2">Verbes (Pensée) (20)</option>
+                    <option value="cat3">Noms (Personnes/Société) (20)</option>
+                    <option value="cat4">Noms (Objets/Lieux) (20)</option>
+                    <option value="cat5">Noms (Concepts/Idées) (20)</option>
+                    <option value="cat6">Adjectifs (Description) (20)</option>
+                    <option value="cat7">Adjectifs (Opinion) (20)</option>
+                    <option value="cat8">Adverbes & Intensité (20)</option>
+                    <option value="cat9">Connecteurs & Prépositions (20)</option>
+                    <option value="cat10">Environnement & Tech (20)</option>
+                </select>
+            </div>
+            <button id="shuffle-button" class="w-full sm:w-auto px-4 py-2 bg-amber-500 text-white font-semibold rounded-lg shadow-md hover:bg-amber-600 transition duration-200">
+                Mélanger
+            </button>
+        </section>
+
+        <section class="flashcard-section mb-4">
+            <p id="progress-indicator" class="text-center text-stone-500 mb-2">Carte 1 sur 200</p>
+            <div id="flashcard-container" class="flashcard-container w-full h-64 sm:h-80 cursor-pointer" onclick="flipCard()">
+                <div class="flashcard">
+                    <div class="flashcard-face flashcard-front">
+                        <h2 id="card-front-text" class="text-4xl font-bold text-center"></h2>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <h3 id="card-back-text" class="text-3xl font-semibold text-center"></h3>
+                        <p id="card-type-text" class="text-xl text-stone-600 italic mt-2"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="navigation-controls grid grid-cols-3 gap-4">
+            <button id="prev-button" class="px-5 py-3 bg-stone-200 text-stone-700 font-semibold rounded-lg shadow-md hover:bg-stone-300 transition duration-200">
+                Précédent
+            </button>
+            <button id="flip-button" class="px-5 py-3 bg-amber-500 text-white font-semibold rounded-lg shadow-md hover:bg-amber-600 transition duration-200">
+                Retourner
+            </button>
+            <button id="next-button" class="px-5 py-3 bg-stone-200 text-stone-700 font-semibold rounded-lg shadow-md hover:bg-stone-300 transition duration-200">
+                Suivant
+            </button>
+        </nav>
+    </main>
+
+    <script>
+        const masterDeck = [
+            { french: "agir", english: "to act", type: "v.", category: "cat1" },
+            { french: "atteindre", english: "to reach, achieve", type: "v.", category: "cat1" },
+            { french: "augmenter", english: "to increase", type: "v.", category: "cat1" },
+            { french: "baisser", english: "to decrease, lower", type: "v.", category: "cat1" },
+            { french: "construire", english: "to build", type: "v.", category: "cat1" },
+            { french: "courir", english: "to run", type: "v.", category: "cat1" },
+            { french: "créer", english: "to create", type: "v.", category: "cat1" },
+            { french: "développer", english: "to develop", type: "v.", category: "cat1" },
+            { french: "devenir", english: "to become", type: "v.", category: "cat1" },
+            { french: "diriger", english: "to direct, lead", type: "v.", category: "cat1" },
+            { french: "durer", english: "to last", type: "v.", category: "cat1" },
+            { french: "empêcher", english: "to prevent", type: "v.", category: "cat1" },
+            { french: "éviter", english: "to avoid", type: "v.", category: "cat1" },
+            { french: "gérer", english: "to manage", type: "v.", category: "cat1" },
+            { french: "lancer", english: "to launch, throw", type: "v.", category: "cat1" },
+            { french: "maintenir", english: "to maintain", type: "v.", category: "cat1" },
+            { french: "obtenir", english: "to obtain", type: "v.", category: "cat1" },
+            { french: "permettre", english: "to allow, permit", type: "v.", category: "cat1" },
+            { french: "produire", english: "to produce", type: "v.", category: "cat1" },
+            { french: "proposer", english: "to propose, suggest", type: "v.", category: "cat1" },
+            
+            { french: "accepter", english: "to accept", type: "v.", category: "cat2" },
+            { french: "affirmer", english: "to affirm, state", type: "v.", category: "cat2" },
+            { french: "ajouter", english: "to add", type: "v.", category: "cat2" },
+            { french: "annoncer", english: "to announce", type: "v.", category: "cat2" },
+            { french: "appartenir (à)", english: "to belong (to)", type: "v.", category: "cat2" },
+            { french: "avertir", english: "to warn", type: "v.", category: "cat2" },
+            { french: "considérer", english: "to consider", type: "v.", category: "cat2" },
+            { french: "convaincre", english: "to convince", type: "v.", category: "cat2" },
+            { french: "craindre", english: "to fear", type: "v.", category: "cat2" },
+            { french: "décider (de)", english: "to decide (to)", type: "v.", category: "cat2" },
+            { french: "espérer", english: "to hope", type: "v.", category: "cat2" },
+            { french: "expliquer", english: "to explain", type: "v.", category: "cat2" },
+            { french: "imaginer", english: "to imagine", type: "v.", category: "cat2" },
+            { french: "oser", english: "to dare", type: "v.", category: "cat2" },
+            { french: "paraître", english: "to seem, appear", type: "v.", category: "cat2" },
+            { french: "prétendre", english: "to claim", type: "v.", category: "cat2" },
+            { french: "prévoir", english: "to foresee, plan", type: "v.", category: "cat2" },
+            { french: "promettre", english: "to promise", type: "v.", category: "cat2" },
+            { french: "reconnaître", english: "to recognize", type: "v.", category: "cat2" },
+            { french: "sembler", english: "to seem", type: "v.", category: "cat2" },
+
+            { french: "un/e adulte", english: "an adult", type: "n.m./f.", category: "cat3" },
+            { french: "un/e citoyen/ne", english: "a citizen", type: "n.m./f.", category: "cat3" },
+            { french: "la foule", english: "the crowd", type: "n.f.", category: "cat3" },
+            { french: "un/e étranger/ère", english: "a stranger, foreigner", type: "n.m./f.", category: "cat3" },
+            { french: "le gouvernement", english: "the government", type: "n.m.", category: "cat3" },
+            { french: "un/e habitant/e", english: "an inhabitant", type: "n.m./f.", category: "cat3" },
+            { french: "un individu", english: "an individual", type: "n.m.", category: "cat3" },
+            { french: "la jeunesse", english: "the youth", type: "n.f.", category: "cat3" },
+            { french: "un/e membre", english: "a member", type: "n.m./f.", category: "cat3" },
+            { french: "la population", english: "the population", type: "n.f.", category: "cat3" },
+            { french: "le public", english: "the public", type: "n.m.", category: "cat3" },
+            { french: "une règle", english: "a rule", type: "n.f.", category: "cat3" },
+            { french: "la sécurité", english: "security, safety", type: "n.f.", category: "cat3" },
+            { french: "la société", english: "society", type: "n.f.", category: "cat3" },
+            { french: "un témoin", english: "a witness", type: "n.m.", category: "cat3" },
+            { french: "la violence", english: "violence", type: "n.f.", category: "cat3" },
+            { french: "un/e collègue", english: "a colleague", type: "n.m./f.", category: "cat3" },
+            { french: "un/e responsable", english: "a person in charge", type: "n.m./f.", category: "cat3" },
+            { french: "un/e spécialiste", english: "a specialist", type: "n.m./f.", category: "cat3" },
+            { french: "un/e voisin/e", english: "a neighbor", type: "n.m./f.", category: "cat3" },
+
+            { french: "un appareil", english: "a device, appliance", type: "n.m.", category: "cat4" },
+            { french: "un bâtiment", english: "a building", type: "n.m.", category: "cat4" },
+            { french: "un bureau", english: "an office, desk", type: "n.m.", category: "cat4" },
+            { french: "un coin", english: "a corner", type: "n.m.", category: "cat4" },
+            { french: "le droit", english: "the right, law", type: "n.m.", category: "cat4" },
+            { french: "une émission", english: "a broadcast, program", type: "n.f.", category: "cat4" },
+            { french: "un endroit", english: "a place", type: "n.m.", category: "cat4" },
+            { french: "une entreprise", english: "a company, business", type: "n.f.", category: "cat4" },
+            { french: "un équipement", english: "equipment", type: "n.m.", category: "cat4" },
+            { french: "un espace", english: "a space", type: "n.m.", category: "cat4" },
+            { french: "un exemple", english: "an example", type: "n.m.", category: "cat4" },
+            { french: "une frontière", english: "a border", type: "n.f.", category: "cat4" },
+            { french: "un lieu", english: "a place", type: "n.m.", category: "cat4" },
+            { french: "un logement", english: "housing, accommodation", type: "n.m.", category: "cat4" },
+            { french: "un moyen", english: "a means, way", type: "n.m.", category: "cat4" },
+            { french: "un quartier", english: "a neighborhood", type: "n.m.", category: "cat4" },
+            { french: "un réseau", english: "a network", type: "n.m.", category: "cat4" },
+            { french: "un service", english: "a service", type: "n.m.", category: "cat4" },
+            { french: "un site", english: "a site, website", type: "n.m.", category: "cat4" },
+            { french: "le transport", english: "transportation", type: "n.m.", category: "cat4" },
+
+            { french: "un avis", english: "an opinion", type: "n.m.", category: "cat5" },
+            { french: "un but", english: "a goal, aim", type: "n.m.", category: "cat5" },
+            { french: "une cause", english: "a cause, reason", type: "n.f.", category: "cat5" },
+            { french: "une conséquence", english: "a consequence", type: "n.f.", category: "cat5" },
+            { french: "la croissance", english: "growth", type: "n.f.", category: "cat5" },
+            { french: "une différence", english: "a difference", type: "n.f.", category: "cat5" },
+            { french: "une difficulté", english: "a difficulty", type: "n.f.", category: "cat5" },
+            { french: "un effort", english: "an effort", type: "n.m.", category: "cat5" },
+            { french: "une erreur", english: "an error, mistake", type: "n.f.", category: "cat5" },
+            { french: "l'habitude (f)", english: "the habit", type: "n.f.", category: "cat5" },
+            { french: "l'importance (f)", english: "importance", type: "n.f.", category: "cat5" },
+            { french: "une influence", english: "an influence", type: "n.f.", category: "cat5" },
+            { french: "une information", english: "a piece of information", type: "n.f.", category: "cat5" },
+            { french: "la liberté", english: "freedom, liberty", type: "n.f.", category: "cat5" },
+            { french: "la mémoire", english: "memory", type: "n.f.", category: "cat5" },
+            { french: "la moitié", english: "the half", type: "n.f.", category: "cat5" },
+            { french: "un objectif", english: "an objective, goal", type: "n.m.", category: "cat5" },
+            { french: "la paix", english: "peace", type: "n.f.", category: "cat5" },
+            { french: "la plupart", english: "the majority, most", type: "n.f.", category: "cat5" },
+            { french: "un risque", english: "a risk", type: "n.m.", category: "cat5" },
+
+            { french: "actuel/le", english: "current", type: "adj.", category: "cat6" },
+            { french: "ancien/ne", english: "ancient, former", type: "adj.", category: "cat6" },
+            { french: "bas/se", english: "low", type: "adj.", category: "cat6" },
+            { french: "capable", english: "capable, able", type: "adj.", category: "cat6" },
+            { french: "certain/e", english: "certain, sure", type: "adj.", category: "cat6" },
+            { french: "clair/e", english: "clear, light", type: "adj.", category: "cat6" },
+            { french: "différent/e", english: "different", type: "adj.", category: "cat6" },
+            { french: "dur/e", english: "hard, difficult", type: "adj.", category: "cat6" },
+            { french: "efficace", english: "effective, efficient", type: "adj.", category: "cat6" },
+            { french: "entier/ère", english: "entire, whole", type: "adj.", category: "cat6" },
+            { french: "étrange", english: "strange", type: "adj.", category: "cat6" },
+            { french: "fort/e", english: "strong", type: "adj.", category: "cat6" },
+            { french: "grave", english: "serious", type: "adj.", category: "cat6" },
+            { french: "humain/e", english: "human", type: "adj.", category: "cat6" },
+            { french: "international/e", english: "international", type: "adj.", category: "cat6" },
+            { french: "léger/ère", english: "light (weight)", type: "adj.", category: "cat6" },
+            { french: "lourd/e", english: "heavy", type: "adj.", category: "cat6" },
+            { french: "nombreux/euses", english: "numerous", type: "adj.", category: "cat6" },
+            { french: "principal/e", english: "main, principal", type: "adj.", category: "cat6" },
+            { french: "public/publique", english: "public", type: "adj.", category: "cat6" },
+            
+            { french: "agréable", english: "pleasant", type: "adj.", category: "cat7" },
+            { french: "content/e", english: "happy, pleased", type: "adj.", category: "cat7" },
+            { french: "déçu/e", english: "disappointed", type: "adj.", category: "cat7" },
+            { french: "drôle", english: "funny", type: "adj.", category: "cat7" },
+            { french: "étonnant/e", english: "astonishing, surprising", type: "adj.", category: "cat7" },
+            { french: "fier/fière", english: "proud", type: "adj.", category: "cat7" },
+            { french: "heureux/euse", english: "happy", type: "adj.", category: "cat7" },
+            { french: "inquiet/ète", english: "worried", type: "adj.", category: "cat7" },
+            { french: "jaloux/ouse", english: "jealous", type: "adj.", category: "cat7" },
+            { french: "juste", english: "fair, just", type: "adj.", category: "cat7" },
+            { french: "libre", english: "free", type: "adj.", category: "cat7" },
+            { french: "malade", english: "sick", type: "adj.", category: "cat7" },
+            { french: "mauvais/e", english: "bad", type: "adj.", category: "cat7" },
+            { french: "meilleur/e", english: "better, best", type: "adj.", category: "cat7" },
+            { french: "pauvre", english: "poor", type: "adj.", category: "cat7" },
+            { french: "prêt/e", english: "ready", type: "adj.", category: "cat7" },
+            { french: "riche", english: "rich", type: "adj.", category: "cat7" },
+            { french: "surpris/e", english: "surprised", type: "adj.", category: "cat7" },
+            { french: "triste", english: "sad", type: "adj.", category: "cat7" },
+            { french: "utile", english: "useful", type: "adj.", category: "cat7" },
+
+            { french: "ailleurs", english: "elsewhere", type: "adv.", category: "cat8" },
+            { french: "ainsi", english: "thus, so", type: "adv.", category: "cat8" },
+            { french: "autant", english: "as much, as many", type: "adv.", category: "cat8" },
+            { french: "autrefois", english: "formerly, in the past", type: "adv.", category: "cat8" },
+            { french: "cependant", english: "however", type: "adv.", category: "cat8" },
+            { french: "d'abord", english: "firstly, at first", type: "adv.", category: "cat8" },
+            { french: "ensuite", english: "next, then", type: "adv.", category: "cat8" },
+            { french: "environ", english: "approximately", type: "adv.", category: "cat8" },
+            { french: "jamais", english: "never", type: "adv.", category: "cat8" },
+            { french: "longtemps", english: "for a long time", type: "adv.", category: "cat8" },
+            { french: "maintenant", english: "now", type: "adv.", category: "cat8" },
+            { french: "parfois", english: "sometimes", type: "adv.", category: "cat8" },
+            { french: "partout", english: "everywhere", type: "adv.", category: "cat8" },
+            { french: "pendant", english: "during", type: "prep.", category: "cat8" },
+            { french: "pourtant", english: "yet, however", type: "adv.", category: "cat8" },
+            { french: "récemment", english: "recently", type: "adv.", category: "cat8" },
+            { french: "soudain", english: "suddenly", type: "adv.", category: "cat8" },
+            { french: "surtout", english: "especially, above all", type: "adv.", category: "cat8" },
+            { french: "toujours", english: "always, still", type: "adv.", category: "cat8" },
+            { french: "vraiment", english: "really, truly", type: "adv.", category: "cat8" },
+
+            { french: "afin de", english: "in order to", type: "conj.", category: "cat9" },
+            { french: "à travers", english: "through, across", type: "prep.", category: "cat9" },
+            { french: "car", english: "because, for", type: "conj.", category: "cat9" },
+            { french: "c'est-à-dire", english: "that is to say", type: "expr.", category: "cat9" },
+            { french: "contre", english: "against", type: "prep.", category: "cat9" },
+            { french: "depuis", english: "since, for (time)", type: "prep.", category: "cat9" },
+            { french: "dès que", english: "as soon as", type: "conj.", category: "cat9" },
+            { french: "donc", english: "so, therefore", type: "conj.", category: "cat9" },
+            { french: "lorsque", english: "when", type: "conj.", category: "cat9" },
+            { french: "mais", english: "but", type: "conj.", category: "cat9" },
+            { french: "malgré", english: "despite", type: "prep.", category: "cat9" },
+            { french: "néanmoins", english: "nevertheless", type: "adv.", category: "cat9" },
+            { french: "ou", english: "or", type: "conj.", category: "cat9" },
+            { french: "parmi", english: "among", type: "prep.", category: "cat9" },
+            { french: "grâce à", english: "thanks to", type: "prep.", category: "cat9" },
+            { french: "à cause de", english: "because of", type: "prep.", category: "cat9" },
+            { french: "selon", english: "according to", type: "prep.", category: "cat9" },
+            { french: "sauf", english: "except", type: "prep.", category: "cat9" },
+            { french: "tandis que", english: "whereas, while", type: "conj.", category: "cat9" },
+            { french: "vers", english: "towards, around", type: "prep.", category: "cat9" },
+
+            { french: "l'avenir (m)", english: "the future", type: "n.m.", category: "cat10" },
+            { french: "le changement", english: "change", type: "n.m.", category: "cat10" },
+            { french: "le climat", english: "climate", type: "n.m.", category: "cat10" },
+            { french: "la communication", english: "communication", type: "n.f.", category: "cat10" },
+            { french: "la consommation", english: "consumption", type: "n.f.", category: "cat10" },
+            { french: "l'énergie (f)", english: "energy", type: "n.f.", category: "cat10" },
+            { french: "l'environnement (m)", english: "the environment", type: "n.m.", category: "cat10" },
+            { french: "la planète", english: "the planet", type: "n.f.", category: "cat10" },
+            { french: "la pollution", english: "pollution", type: "n.f.", category: "cat10" },
+            { french: "un produit", english: "a product", type: "n.m.", category: "cat10" },
+            { french: "le progrès", english: "progress", type: "n.m.", category: "cat10" },
+            { french: "la protection", english: "protection", type: "n.f.", category: "cat10" },
+            { french: "la recherche", english: "research", type: "n.f.", category: "cat10" },
+            { french: "une ressource", english: "a resource", type: "n.f.", category: "cat10" },
+            { french: "la santé", english: "health", type: "n.f.", category: "cat10" },
+            { french: "la science", english: "science", type: "n.f.", category: "cat10" },
+            { french: "un système", english: "a system", type: "n.m.", category: "cat10" },
+            { french: "la Terre", english: "Earth, ground", type: "n.f.", category: "cat10" },
+            { french: "la vitesse", english: "speed", type: "n.f.", category: "cat10" },
+            { french: "une voiture", english: "a car", type: "n.f.", category: "cat10" }
+        ];
+
+        let currentDeck = [...masterDeck];
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const cardContainer = document.getElementById('flashcard-container');
+        const cardFrontText = document.getElementById('card-front-text');
+        const cardBackText = document.getElementById('card-back-text');
+        const cardTypeText = document.getElementById('card-type-text');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const categorySelect = document.getElementById('category-select');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const flipButton = document.getElementById('flip-button');
+        const shuffleButton = document.getElementById('shuffle-button');
+
+        function updateCard() {
+            if (currentDeck.length === 0) {
+                cardFrontText.textContent = "Aucune carte";
+                cardBackText.textContent = "";
+                cardTypeText.textContent = "";
+                updateProgress();
+                return;
+            }
+            const card = currentDeck[currentIndex];
+            cardFrontText.textContent = card.french;
+            cardBackText.textContent = card.english;
+            cardTypeText.textContent = card.type;
+            if (isFlipped) {
+                flipCard(true);
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = currentDeck.length;
+            const current = total > 0 ? currentIndex + 1 : 0;
+            progressIndicator.textContent = `Carte ${current} sur ${total}`;
+        }
+
+        function flipCard(forceFront = false) {
+            if (forceFront) {
+                cardContainer.classList.remove('is-flipped');
+                isFlipped = false;
+            } else {
+                cardContainer.classList.toggle('is-flipped');
+                isFlipped = !isFlipped;
+            }
+        }
+
+        function nextCard() {
+            if (currentDeck.length === 0) return;
+            currentIndex = (currentIndex + 1) % currentDeck.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            if (currentDeck.length === 0) return;
+            currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
+            updateCard();
+        }
+
+        function shuffleDeck() {
+            for (let i = currentDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+
+        function filterDeck() {
+            const category = categorySelect.value;
+            if (category === 'all') {
+                currentDeck = [...masterDeck];
+            } else {
+                currentDeck = masterDeck.filter(card => card.category === category);
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+
+        prevButton.addEventListener('click', prevCard);
+        nextButton.addEventListener('click', nextCard);
+        flipButton.addEventListener('click', () => flipCard(false));
+        shuffleButton.addEventListener('click', shuffleDeck);
+        categorySelect.addEventListener('change', filterDeck);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextCard();
+            } else if (e.key === 'ArrowLeft') {
+                prevCard();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                flipCard(false);
+            }
+        });
+
+        updateCard();
+    </script>
+</body>
+</html>
