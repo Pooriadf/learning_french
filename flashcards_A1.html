@@ -77,11 +77,20 @@
             <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 500</p>
             <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
+                    <!-- Front Face with Audio Button -->
                     <div class="flashcard-face flashcard-front">
-                        <div class="flex flex-col items-center gap-4">
+                        <div class="flex flex-col items-center gap-4 relative z-10">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Français</span>
-                            <h2 id="card-front-text" class="text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight"></h2>
-                            <p class="text-slate-400 text-sm mt-4 font-medium">Toucher pour retourner</p>
+        
+                            <!-- The Word -->
+                            <h2 id="card-front-text" class="text-4xl sm:text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
+        
+                            <!-- AUDIO BUTTON (New) -->
+                            <button onclick="playAudio(event)" class="mt-2 w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+
+                            <p class="text-slate-400 text-sm mt-2 font-medium">Toucher pour retourner</p>
                         </div>
                     </div>
                     <div class="flashcard-face flashcard-back p-8">
