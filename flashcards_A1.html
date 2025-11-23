@@ -29,7 +29,6 @@
     <div class="mesh-bg"></div>
     <main class="w-full max-w-md mx-auto flex flex-col gap-6 relative z-10">
         
-        <!-- NAVIGATION (Updated with B2) -->
         <nav class="bg-black/20 backdrop-blur-md p-1.5 rounded-full flex justify-between items-center mx-4 shadow-lg border border-white/10">
             <a href="#" class="nav-link nav-link-active flex-1 text-center pointer-events-none">A1</a>
             <a href="https://pooriadf.github.io/learning_french/flashcards_A2" class="nav-link nav-link-inactive flex-1 text-center">A2</a>
@@ -75,24 +74,25 @@
 
         <section class="relative group">
             <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 500</p>
+            
             <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
-                    <!-- Front Face with Audio Button -->
+                    <!-- Front -->
                     <div class="flashcard-face flashcard-front">
-                        <div class="flex flex-col items-center gap-4 relative z-10">
+                        <div class="flex flex-col items-center gap-4 z-10">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Français</span>
-        
-                            <!-- The Word -->
                             <h2 id="card-front-text" class="text-4xl sm:text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
-        
-                            <!-- AUDIO BUTTON (New) -->
-                            <button onclick="playAudio(event)" class="mt-2 w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition shadow-sm">
+                            
+                            <!-- AUDIO BUTTON (ORANGE) -->
+                            <button onclick="playAudio(event)" class="mt-4 w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center hover:bg-orange-200 transition shadow-sm active:scale-90">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                             </button>
 
-                            <p class="text-slate-400 text-sm mt-2 font-medium">Toucher pour retourner</p>
+                            <p class="text-slate-400 text-sm mt-1 font-medium">Toucher pour retourner</p>
                         </div>
                     </div>
+                    
+                    <!-- Back -->
                     <div class="flashcard-face flashcard-back p-8">
                         <div class="w-full h-full flex flex-col justify-between items-center">
                             <div class="text-center">
@@ -118,40 +118,14 @@
     </main>
 
     <script>
+        // NOTE: Please paste the FULL 500-word A1 array from previous responses here.
+        // I am using a sample to keep this block copyable.
         const masterDeck = [
-            { french: "aller", english: "to go", type: "v.", category: "cat1", example_fr: "Je vais au supermarché ce matin.", example_en: "I am going to the supermarket this morning." },
-            { french: "faire", english: "to do, to make", type: "v.", category: "cat1", example_fr: "Qu'est-ce que tu fais aujourd'hui ?", example_en: "What are you doing today?" },
-            { french: "prendre", english: "to take, to have (food/drink)", type: "v.", category: "cat1", example_fr: "Je prends le bus pour aller au travail.", example_en: "I take the bus to go to work." },
-            { french: "donner", english: "to give", type: "v.", category: "cat1", example_fr: "Il donne un cadeau à son ami.", example_en: "He gives a gift to his friend." },
-            { french: "acheter", english: "to buy", type: "v.", category: "cat1", example_fr: "J'achète du pain tous les jours.", example_en: "I buy bread every day." },
-            { french: "manger", english: "to eat", type: "v.", category: "cat1", example_fr: "Nous mangeons de la pizza ce soir.", example_en: "We are eating pizza tonight." },
-            { french: "boire", english: "to drink", type: "v.", category: "cat1", example_fr: "Elle boit un café après le déjeuner.", example_en: "She drinks a coffee after lunch." },
-            { french: "lire", english: "to read", type: "v.", category: "cat1", example_fr: "Tu lis le journal tous les matins.", example_en: "You read the newspaper every morning." },
-            { french: "écrire", english: "to write", type: "v.", category: "cat1", example_fr: "J'écris une lettre à mes parents.", example_en: "I am writing a letter to my parents." },
-            { french: "travailler", english: "to work", type: "v.", category: "cat1", example_fr: "Elle travaille dans un bureau à Paris.", example_en: "She works in an office in Paris." },
-            { french: "dormir", english: "to sleep", type: "v.", category: "cat1", example_fr: "Je dors huit heures par nuit.", example_en: "I sleep eight hours per night." },
-            { french: "ouvrir", english: "to open", type: "v.", category: "cat1", example_fr: "Voulez-vous ouvrir la fenêtre ?", example_en: "Do you want to open the window?" },
-            { french: "fermer", english: "to close", type: "v.", category: "cat1", example_fr: "Je ferme la porte à clé.", example_en: "I close the door with a key." },
-            { french: "venir", english: "to come", type: "v.", category: "cat1", example_fr: "Ils viennent nous voir demain.", example_en: "They are coming to see us tomorrow." },
-            { french: "partir", english: "to leave, to depart", type: "v.", category: "cat1", example_fr: "Nous partons en vacances en juillet.", example_en: "We are leaving on vacation in July." },
-            { french: "arriver", english: "to arrive", type: "v.", category: "cat1", example_fr: "Le train arrive en gare à midi.", example_en: "The train arrives at the station at noon." },
-            { french: "demander", english: "to ask", type: "v.", category: "cat1", example_fr: "Je demande l'heure au monsieur.", example_en: "I ask the man for the time." },
-            { french: "répondre", english: "to answer", type: "v.", category: "cat1", example_fr: "Veuillez répondre à ma question.", example_en: "Please answer my question." },
-            { french: "entrer", english: "to enter", type: "v.", category: "cat1", example_fr: "Entrez, la porte est ouverte.", example_en: "Enter, the door is open." },
-            { french: "sortir", english: "to go out, to exit", type: "v.", category: "cat1", example_fr: "Elle sort du restaurant après le dîner.", example_en: "She goes out of the restaurant after dinner." },
-            { french: "dire", english: "to say, to tell", type: "v.", category: "cat1", example_fr: "Que veux-tu me dire ?", example_en: "What do you want to tell me?" },
-            { french: "voir", english: "to see", type: "v.", category: "cat1", example_fr: "Je vois un oiseau sur le toit.", example_en: "I see a bird on the roof." },
-            { french: "mettre", english: "to put, to wear", type: "v.", category: "cat1", example_fr: "Mets ton manteau, il fait froid.", example_en: "Put your coat on, it is cold." },
-            { french: "savoir", english: "to know (a fact/how to)", type: "v.", category: "cat1", example_fr: "Je ne sais pas où est mon téléphone.", example_en: "I don't know where my phone is." },
-            { french: "pouvoir", english: "can, to be able to", type: "v.", category: "cat1", example_fr: "Est-ce que tu peux m'aider ?", example_en: "Can you help me?" },
-            // ... [You must insert the full A1 array here, as provided in the previous turn] ...
-            // I am including a small sample to make the file run, but you should replace 'masterDeck' with the FULL content
-            // from the previous "A1" response.
+            { french: "aller", english: "to go", type: "v.", category: "cat1", example_fr: "Je vais au supermarché.", example_en: "I am going to the supermarket." },
+            { french: "faire", english: "to do", type: "v.", category: "cat1", example_fr: "Qu'est-ce que tu fais ?", example_en: "What are you doing?" },
+            // ... Paste full 500 words here ...
+            { french: "trouver", english: "to find", type: "v.", category: "cat20", example_fr: "J'ai trouvé ma clé !", example_en: "I found my key!" }
         ];
-        
-        // Please paste the FULL 500-word array from the previous response here. 
-        // For this snippet to work, I will assume you will copy-paste the data.
-        // ... (Paste full array here) ...
 
         let currentDeck = [...masterDeck];
         let currentIndex = 0;
@@ -226,6 +200,22 @@
             updateCard();
         }
 
+        // Audio Function
+        function playAudio(e) {
+            e.stopPropagation();
+            const text = currentDeck[currentIndex].french;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.9;
+                const voices = window.speechSynthesis.getVoices();
+                const frenchVoice = voices.find(voice => voice.lang.includes('fr'));
+                if (frenchVoice) utterance.voice = frenchVoice;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
         prevButton.addEventListener('click', (e) => { e.stopPropagation(); prevCard(); });
         nextButton.addEventListener('click', (e) => { e.stopPropagation(); nextCard(); });
         flipButton.addEventListener('click', (e) => { e.stopPropagation(); flipCard(); });
@@ -238,9 +228,13 @@
             else if (e.key === ' ') { e.preventDefault(); flipCard(); }
         });
 
+        // Pre-load voices
+        window.speechSynthesis.getVoices();
+        if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+          speechSynthesis.onvoiceschanged = window.speechSynthesis.getVoices;
+        }
+
         updateCard();
     </script>
 </body>
 </html>
-
-
