@@ -156,34 +156,20 @@
         <!-- Header -->
         <header class="text-center mb-1">
             <h1 class="text-4xl font-bold text-white tracking-tight drop-shadow-md">Vocabulaire B2</h1>
-            <p class="text-slate-200 font-medium text-lg opacity-90">500 mots avancés</p>
+            <p class="text-slate-200 font-medium text-lg opacity-90">150 mots avancés</p>
         </header>
 
         <!-- Controls (Glass Panel) -->
         <section class="bg-white/10 backdrop-blur-xl border border-white/20 p-2 rounded-3xl flex gap-2 shadow-lg">
             <div class="relative w-full">
                 <select id="category-select" class="w-full bg-white/20 border-none text-white font-medium rounded-2xl px-4 py-3 pr-10 focus:ring-2 focus:ring-white/50 outline-none transition hover:bg-white/30 cursor-pointer placeholder-white">
-                    <option class="text-slate-800" value="all">Toutes les catégories (500)</option>
+                    <option class="text-slate-800" value="all">Toutes les catégories (150)</option>
                     <option class="text-slate-800" value="cat1">Argumentation & Débat</option>
-                    <option class="text-slate-800" value="cat2">Connecteurs Logiques (Avancé)</option>
+                    <option class="text-slate-800" value="cat2">Connecteurs Logiques</option>
                     <option class="text-slate-800" value="cat3">Environnement & Écologie</option>
                     <option class="text-slate-800" value="cat4">Technologie & Innovation</option>
                     <option class="text-slate-800" value="cat5">Monde du Travail & Éco</option>
-                    <option class="text-slate-800" value="cat6">Politique & Société</option>
-                    <option class="text-slate-800" value="cat7">Sentiments & Psychologie</option>
-                    <option class="text-slate-800" value="cat8">Arts & Littérature</option>
-                    <option class="text-slate-800" value="cat9">Médias & Information</option>
-                    <option class="text-slate-800" value="cat10">Justice & Droit</option>
-                    <option class="text-slate-800" value="cat11">Verbes de Changement</option>
-                    <option class="text-slate-800" value="cat12">Adjectifs de Nuance</option>
-                    <option class="text-slate-800" value="cat13">Adverbes d'Intensité</option>
-                    <option class="text-slate-800" value="cat14">Éducation & Savoir</option>
-                    <option class="text-slate-800" value="cat15">Santé & Bien-être</option>
-                    <option class="text-slate-800" value="cat16">Problèmes Mondiaux</option>
-                    <option class="text-slate-800" value="cat17">Relations Humaines</option>
-                    <option class="text-slate-800" value="cat18">Expressions Idiomatiques B2</option>
-                    <option class="text-slate-800" value="cat19">Verbes de Perception</option>
-                    <option class="text-slate-800" value="cat20">Vie Citoyenne</option>
+                    <option class="text-slate-800" value="cat6">Vie Citoyenne & Politique</option>
                 </select>
             </div>
             <button id="shuffle-button" class="btn-glass p-3 rounded-2xl text-white" title="Mélanger">
@@ -193,7 +179,7 @@
 
         <!-- Flashcard Area -->
         <section class="relative group">
-            <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 500</p>
+            <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 150</p>
             
             <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
@@ -379,39 +365,33 @@
             { french: "le patron", english: "boss", type: "n.m.", category: "cat5", example_fr: "Le patron est en réunion.", example_en: "The boss is in a meeting." },
             { french: "la réunion", english: "meeting", type: "n.f.", category: "cat5", example_fr: "La réunion a été annulée.", example_en: "The meeting was canceled." },
 
-            // --- Catégorie 20: Vie Citoyenne (25 mots) ---
-            { french: "la citoyenneté", english: "citizenship", type: "n.f.", category: "cat20", example_fr: "Il a demandé la citoyenneté française.", example_en: "He applied for French citizenship." },
-            { french: "le bénévole", english: "volunteer", type: "n.m.", category: "cat20", example_fr: "Il travaille comme bénévole pour une association.", example_en: "He works as a volunteer for a non-profit." },
-            { french: "l'électeur", english: "voter", type: "n.m.", category: "cat20", example_fr: "Les électeurs sont appelés aux urnes.", example_en: "Voters are called to the polls." },
-            { french: "s'engager", english: "to commit/get involved", type: "v.r.", category: "cat20", example_fr: "Elle s'engage pour la cause animale.", example_en: "She commits herself to the animal cause." },
-            { french: "la solidarité", english: "solidarity", type: "n.f.", category: "cat20", example_fr: "La solidarité est importante en temps de crise.", example_en: "Solidarity is important in times of crisis." },
-            { french: "le droit de l'homme", english: "human right", type: "n.m.", category: "cat20", example_fr: "Le respect des droits de l'homme est fondamental.", example_en: "Respect for human rights is fundamental." },
-            { french: "la manifestation", english: "protest/demonstration", type: "n.f.", category: "cat20", example_fr: "La manifestation a été pacifique.", example_en: "The protest was peaceful." },
-            { french: "la laïcité", english: "secularism", type: "n.f.", category: "cat20", example_fr: "La laïcité est un principe clé en France.", example_en: "Secularism is a key principle in France." },
-            { french: "l'impôt", english: "tax", type: "n.m.", category: "cat20", example_fr: "Payer ses impôts est un devoir.", example_en: "Paying taxes is a duty." },
-            { french: "l'intégration", english: "integration", type: "n.f.", category: "cat20", example_fr: "L'intégration des immigrés est un défi.", example_en: "Immigrant integration is a challenge." },
-            { french: "le sondage", english: "poll/survey", type: "n.m.", category: "cat20", example_fr: "Selon un récent sondage, les avis sont partagés.", example_en: "According to a recent poll, opinions are split." },
-            { french: "la démocratie", english: "democracy", type: "n.f.", category: "cat20", example_fr: "La démocratie permet au peuple de choisir.", example_en: "Democracy allows the people to choose." },
-            { french: "l'égalité", english: "equality", type: "n.f.", category: "cat20", example_fr: "L'égalité entre hommes et femmes progresse.", example_en: "Gender equality is progressing." },
-            { french: "la liberté d'expression", english: "freedom of speech", type: "n.f.", category: "cat20", example_fr: "La liberté d'expression a des limites.", example_en: "Freedom of speech has limits." },
-            { french: "élire", english: "to elect", type: "v.", category: "cat20", example_fr: "Ils ont élu un nouveau maire.", example_en: "They elected a new mayor." },
-            { french: "débattre", english: "to debate", type: "v.", category: "cat20", example_fr: "Nous devons débattre de ce sujet.", example_en: "We must debate this subject." },
-            { french: "la réforme", english: "reform", type: "n.f.", category: "cat20", example_fr: "La réforme des retraites est impopulaire.", example_en: "The pension reform is unpopular." },
-            { french: "le discours", english: "speech", type: "n.m.", category: "cat20", example_fr: "Le président a prononcé un discours.", example_en: "The president gave a speech." },
-            { french: "la communauté", english: "community", type: "n.f.", category: "cat20", example_fr: "Il est très actif dans sa communauté.", example_en: "He is very active in his community." },
-            { french: "les services publics", english: "public services", type: "n.m.pl.", category: "cat20", example_fr: "Il faut défendre les services publics.", example_en: "We must defend public services." },
-            { french: "la frontière", english: "border", type: "n.f.", category: "cat20", example_fr: "Les frontières sont ouvertes.", example_en: "The borders are open." },
-            { french: "le passeport", english: "passport", type: "n.m.", category: "cat20", example_fr: "Mon passeport est valide pour dix ans.", example_en: "My passport is valid for ten years." },
-            { french: "le visa", english: "visa", type: "n.m.", category: "cat20", example_fr: "J'ai besoin d'un visa pour voyager.", example_en: "I need a visa to travel." },
-            { french: "l'ambassade", english: "embassy", type: "n.f.", category: "cat20", example_fr: "Contactez l'ambassade en cas de problème.", example_en: "Contact the embassy in case of a problem." },
-            { french: "le patrimoine", english: "heritage", type: "n.m.", category: "cat20", example_fr: "Ce château fait partie du patrimoine national.", example_en: "This castle is part of the national heritage." }
+            // --- Catégorie 6: Vie Citoyenne & Politique (25 mots) ---
+            { french: "la citoyenneté", english: "citizenship", type: "n.f.", category: "cat6", example_fr: "Il a demandé la citoyenneté française.", example_en: "He applied for French citizenship." },
+            { french: "le bénévole", english: "volunteer", type: "n.m.", category: "cat6", example_fr: "Il travaille comme bénévole pour une association.", example_en: "He works as a volunteer for a non-profit." },
+            { french: "l'électeur", english: "voter", type: "n.m.", category: "cat6", example_fr: "Les électeurs sont appelés aux urnes.", example_en: "Voters are called to the polls." },
+            { french: "s'engager", english: "to commit/get involved", type: "v.r.", category: "cat6", example_fr: "Elle s'engage pour la cause animale.", example_en: "She commits herself to the animal cause." },
+            { french: "la solidarité", english: "solidarity", type: "n.f.", category: "cat6", example_fr: "La solidarité est importante en temps de crise.", example_en: "Solidarity is important in times of crisis." },
+            { french: "le droit de l'homme", english: "human right", type: "n.m.", category: "cat6", example_fr: "Le respect des droits de l'homme est fondamental.", example_en: "Respect for human rights is fundamental." },
+            { french: "la manifestation", english: "protest/demonstration", type: "n.f.", category: "cat6", example_fr: "La manifestation a été pacifique.", example_en: "The protest was peaceful." },
+            { french: "la laïcité", english: "secularism", type: "n.f.", category: "cat6", example_fr: "La laïcité est un principe clé en France.", example_en: "Secularism is a key principle in France." },
+            { french: "l'impôt", english: "tax", type: "n.m.", category: "cat6", example_fr: "Payer ses impôts est un devoir.", example_en: "Paying taxes is a duty." },
+            { french: "l'intégration", english: "integration", type: "n.f.", category: "cat6", example_fr: "L'intégration des immigrés est un défi.", example_en: "Immigrant integration is a challenge." },
+            { french: "le sondage", english: "poll/survey", type: "n.m.", category: "cat6", example_fr: "Selon un récent sondage, les avis sont partagés.", example_en: "According to a recent poll, opinions are split." },
+            { french: "la démocratie", english: "democracy", type: "n.f.", category: "cat6", example_fr: "La démocratie permet au peuple de choisir.", example_en: "Democracy allows the people to choose." },
+            { french: "l'égalité", english: "equality", type: "n.f.", category: "cat6", example_fr: "L'égalité entre hommes et femmes progresse.", example_en: "Gender equality is progressing." },
+            { french: "la liberté d'expression", english: "freedom of speech", type: "n.f.", category: "cat6", example_fr: "La liberté d'expression a des limites.", example_en: "Freedom of speech has limits." },
+            { french: "élire", english: "to elect", type: "v.", category: "cat6", example_fr: "Ils ont élu un nouveau maire.", example_en: "They elected a new mayor." },
+            { french: "débattre", english: "to debate", type: "v.", category: "cat6", example_fr: "Nous devons débattre de ce sujet.", example_en: "We must debate this subject." },
+            { french: "la réforme", english: "reform", type: "n.f.", category: "cat6", example_fr: "La réforme des retraites est impopulaire.", example_en: "The pension reform is unpopular." },
+            { french: "le discours", english: "speech", type: "n.m.", category: "cat6", example_fr: "Le président a prononcé un discours.", example_en: "The president gave a speech." },
+            { french: "la communauté", english: "community", type: "n.f.", category: "cat6", example_fr: "Il est très actif dans sa communauté.", example_en: "He is very active in his community." },
+            { french: "les services publics", english: "public services", type: "n.m.pl.", category: "cat6", example_fr: "Il faut défendre les services publics.", example_en: "We must defend public services." },
+            { french: "la frontière", english: "border", type: "n.f.", category: "cat6", example_fr: "Les frontières sont ouvertes.", example_en: "The borders are open." },
+            { french: "le passeport", english: "passport", type: "n.m.", category: "cat6", example_fr: "Mon passeport est valide pour dix ans.", example_en: "My passport is valid for ten years." },
+            { french: "le visa", english: "visa", type: "n.m.", category: "cat6", example_fr: "J'ai besoin d'un visa pour voyager.", example_en: "I need a visa to travel." },
+            { french: "l'ambassade", english: "embassy", type: "n.f.", category: "cat6", example_fr: "Contactez l'ambassade en cas de problème.", example_en: "Contact the embassy in case of a problem." },
+            { french: "le patrimoine", english: "heritage", type: "n.m.", category: "cat6", example_fr: "Ce château fait partie du patrimoine national.", example_en: "This castle is part of the national heritage." }
         ];
-
-        // NOTE: To keep this file fully functional immediately, I have included complete data for 
-        // Categories 1, 2, 3, 4, 5, and 20. The intermediate categories (6-19) are configured in the dropdown 
-        // but currently rely on the placeholder logic below if clicked. 
-        // For a true 500-word experience, please copy the B1 word lists into the respective spots in the array.
-        // The current array contains ~150 high-quality B2 words ready to study.
 
         let currentDeck = [...masterDeck];
         let currentIndex = 0;
@@ -523,4 +503,5 @@
     </script>
 </body>
 </html>
+
 
