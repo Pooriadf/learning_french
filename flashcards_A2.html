@@ -29,7 +29,7 @@
     <div class="mesh-bg"></div>
     <main class="w-full max-w-md mx-auto flex flex-col gap-6 relative z-10">
         
-        <!-- NAVIGATION (Updated with B2) -->
+        <!-- NAVIGATION -->
         <nav class="bg-black/20 backdrop-blur-md p-1.5 rounded-full flex justify-between items-center mx-4 shadow-lg border border-white/10">
             <a href="https://pooriadf.github.io/learning_french/flashcards_A1" class="nav-link nav-link-inactive flex-1 text-center">A1</a>
             <a href="#" class="nav-link nav-link-active flex-1 text-center pointer-events-none">A2</a>
@@ -75,15 +75,25 @@
 
         <section class="relative group">
             <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 500</p>
+            
             <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
+                    <!-- Front -->
                     <div class="flashcard-face flashcard-front">
-                        <div class="flex flex-col items-center gap-4">
+                        <div class="flex flex-col items-center gap-4 z-10">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Français</span>
-                            <h2 id="card-front-text" class="text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight"></h2>
-                            <p class="text-slate-400 text-sm mt-4 font-medium">Toucher pour retourner</p>
+                            <h2 id="card-front-text" class="text-4xl sm:text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
+                            
+                            <!-- AUDIO BUTTON (BLUE) -->
+                            <button onclick="playAudio(event)" class="mt-4 w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition shadow-sm active:scale-90">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+
+                            <p class="text-slate-400 text-sm mt-1 font-medium">Toucher pour retourner</p>
                         </div>
                     </div>
+                    
+                    <!-- Back -->
                     <div class="flashcard-face flashcard-back p-8">
                         <div class="w-full h-full flex flex-col justify-between items-center">
                             <div class="text-center">
@@ -91,6 +101,7 @@
                                 <h3 id="card-back-text" class="text-3xl font-bold text-slate-800 mb-1"></h3>
                                 <p id="card-type-text" class="text-lg text-slate-500 font-medium italic font-serif"></p>
                             </div>
+                            
                             <div class="w-full bg-slate-50 rounded-2xl p-4 border border-slate-100">
                                 <p id="example-fr" class="text-lg text-slate-700 font-medium mb-1 text-center leading-snug"></p>
                                 <p id="example-en" class="text-sm text-slate-400 text-center"></p>
@@ -136,14 +147,520 @@
             { french: "vivre", english: "to live", type: "v.", category: "cat1", example_fr: "J'ai vécu à Londres pendant 5 ans.", example_en: "I lived in London for 5 years." },
             { french: "visiter", english: "to visit (a place)", type: "v.", category: "cat1", example_fr: "J'ai visité le musée hier.", example_en: "I visited the museum yesterday." },
             { french: "rendre visite (à)", english: "to visit (a person)", type: "v.", category: "cat1", example_fr: "Je rendrai visite à ma grand-mère ce week-end.", example_en: "I will visit my grandmother this weekend." },
-            // ... [You must insert the full A2 array here, as provided in the previous turn] ...
-            // I am including a small sample to make the file run, but you should replace 'masterDeck' with the FULL content
-            // from the previous "A2" response.
+
+            // --- Catégorie 2: Verbes (Opinion, Sentiment Avancé) (25 mots) ---
+            { french: "espérer", english: "to hope", type: "v.", category: "cat2", example_fr: "J'espère qu'il fera beau demain.", example_en: "I hope that the weather will be nice tomorrow." },
+            { french: "penser (que)", english: "to think (that)", type: "v.", category: "cat2", example_fr: "Je pense que tu as raison.", example_en: "I think that you are right." },
+            { french: "croire (que)", english: "to believe (that)", type: "v.", category: "cat2", example_fr: "Je crois qu'elle est en retard.", example_en: "I believe that she is late." },
+            { french: "trouver (que)", english: "to find, to think (opinion)", type: "v.", category: "cat2", example_fr: "Je trouve que ce film est excellent.", example_en: "I find (think) that this movie is excellent." },
+            { french: "dire (que)", english: "to say (that)", type: "v.", category: "cat2", example_fr: "Il dit qu'il ne peut pas venir.", example_en: "He says that he cannot come." },
+            { french: "expliquer", english: "to explain", type: "v.", category: "cat2", example_fr: "Peux-tu m'expliquer la règle ?", example_en: "Can you explain the rule to me?" },
+            { french: "raconter", english: "to tell (a story)", type: "v.", category: "cat2", example_fr: "Elle raconte une histoire drôle.", example_en: "She tells a funny story." },
+            { french: "proposer", english: "to propose, suggest", type: "v.", category: "cat2", example_fr: "Je propose d'aller au cinéma.", example_en: "I suggest going to the cinema." },
+            { french: "accepter", english: "to accept", type: "v.", category: "cat2", example_fr: "J'accepte votre invitation avec plaisir.", example_en: "I accept your invitation with pleasure." },
+            { french: "refuser", english: "to refuse", type: "v.", category: "cat2", example_fr: "Il refuse de m'aider.", example_en: "He refuses to help me." },
+            { french: "s'ennuyer", english: "to be bored", type: "v.r.", category: "cat2", example_fr: "Je m'ennuie beaucoup ici.", example_en: "I am very bored here." },
+            { french: "s'énerver", english: "to get annoyed/angry", type: "v.r.", category: "cat2", example_fr: "Il s'énerve facilement.", example_en: "He gets annoyed easily." },
+            { french: "s'intéresser (à)", english: "to be interested (in)", type: "v.r.", category: "cat2", example_fr: "Elle s'intéresse à l'art moderne.", example_en: "She is interested in modern art." },
+            { french: "se plaindre (de)", english: "to complain (about)", type: "v.r.", category: "cat2", example_fr: "Il se plaint toujours du temps.", example_en: "He always complains about the weather." },
+            { french: "se reposer", english: "to rest", type: "v.r.", category: "cat2", example_fr: "Je dois me reposer après le travail.", example_en: "I must rest after work." },
+            { french: "préférer", english: "to prefer", type: "v.", category: "cat2", example_fr: "Je préfère voyager en train.", example_en: "I prefer to travel by train." },
+            { french: "détester", english: "to hate", type: "v.", category: "cat2", example_fr: "Elle déteste le froid.", example_en: "She hates the cold." },
+            { french: "craindre", english: "to fear", type: "v.", category: "cat2", example_fr: "Je crains qu'il ne vienne pas.", example_en: "I fear that he will not come." },
+            { french: "vouloir (dire)", english: "to mean", type: "v.", category: "cat2", example_fr: "Qu'est-ce que ce mot veut dire ?", example_en: "What does this word mean?" },
+            { french: "sembler", english: "to seem", type: "v.", category: "cat2", example_fr: "Il semble fatigué aujourd'hui.", example_en: "He seems tired today." },
+            { french: "annoncer", english: "to announce", type: "v.", category: "cat2", example_fr: "La météo annonce de la pluie.", example_en: "The weather forecast announces rain." },
+            { french: "assurer", english: "to assure, ensure", type: "v.", category: "cat2", example_fr: "J'assure que tout est prêt.", example_en: "I assure that everything is ready." },
+            { french: "deviner", english: "to guess", type: "v.", category: "cat2", example_fr: "Peux-tu deviner mon âge ?", example_en: "Can you guess my age?" },
+            { french: "exprimer", english: "to express", type: "v.", category: "cat2", example_fr: "Il exprime bien ses idées.", example_en: "He expresses his ideas well." },
+            { french: "promettre", english: "to promise", type: "v.", category: "cat2", example_fr: "Je vous promets de faire de mon mieux.", example_en: "I promise you to do my best." },
+
+            // --- Catégorie 3: Noms (Loisirs & Culture) (25 mots) ---
+            { french: "le film", english: "the film, movie", type: "n.m.", category: "cat3", example_fr: "Nous avons regardé un film au cinéma.", example_en: "We watched a movie at the cinema." },
+            { french: "le cinéma", english: "the cinema, movie theater", type: "n.m.", category: "cat3", example_fr: "J'aime aller au cinéma le week-end.", example_en: "I like to go to the cinema on the weekend." },
+            { french: "la télévision (la télé)", english: "the television (TV)", type: "n.f.", category: "cat3", example_fr: "Je regarde les informations à la télé.", example_en: "I watch the news on TV." },
+            { french: "la musique", english: "the music", type: "n.f.", category: "cat3", example_fr: "J'écoute de la musique classique.", example_en: "I listen to classical music." },
+            { french: "la chanson", english: "the song", type: "n.f.", category: "cat3", example_fr: "C'est ma chanson préférée.", example_en: "This is my favorite song." },
+            { french: "le livre", english: "the book", type: "n.m.", category: "cat3", example_fr: "J'ai lu un bon livre de science-fiction.", example_en: "I read a good science fiction book." },
+            { french: "le musée", english: "the museum", type: "n.m.", category: "cat3", example_fr: "Le musée est fermé le mardi.", example_en: "The museum is closed on Tuesday." },
+            { french: "la peinture", english: "the painting, paint", type: "n.f.", category: "cat3", example_fr: "C'est une peinture très célèbre.", example_en: "It is a very famous painting." },
+            { french: "le sport", english: "the sport", type: "n.m.", category: "cat3", example_fr: "Quel sport pratiques-tu ?", example_en: "Which sport do you practice?" },
+            { french: "le football (le foot)", english: "the football (soccer)", type: "n.m.", category: "cat3", example_fr: "Ils jouent au foot tous les dimanches.", example_en: "They play football every Sunday." },
+            { french: "le temps libre", english: "the free time", type: "n.m.", category: "cat3", example_fr: "Qu'est-ce que tu fais pendant ton temps libre ?", example_en: "What do you do during your free time?" },
+            { french: "le loisir", english: "the leisure activity, hobby", type: "n.m.", category: "cat3", example_fr: "Mon loisir préféré est la lecture.", example_en: "My favorite hobby is reading." },
+            { french: "le concert", english: "the concert", type: "n.m.", category: "cat3", example_fr: "Nous allons au concert de rock ce soir.", example_en: "We are going to the rock concert tonight." },
+            { french: "le spectacle", english: "the show, performance", type: "n.m.", category: "cat3", example_fr: "C'était un spectacle magnifique.", example_en: "It was a magnificent show." },
+            { french: "l'art (m)", english: "the art", type: "n.m.", category: "cat3", example_fr: "J'aime beaucoup l'art contemporain.", example_en: "I really like contemporary art." },
+            { french: "l'exposition (f)", english: "the exhibition", type: "n.f.", category: "cat3", example_fr: "L'exposition est ouverte jusqu'à 18h.", example_en: "The exhibition is open until 6 PM." },
+            { french: "le jeu", english: "the game", type: "n.m.", category: "cat3", example_fr: "Les enfants jouent à un jeu de société.", example_en: "The children are playing a board game." },
+            { french: "la fête", english: "the party, celebration", type: "n.f.", category: "cat3", example_fr: "Il y a une grande fête ce samedi.", example_en: "There is a big party this Saturday." },
+            { french: "le cadeau", english: "the gift", type: "n.m.", category: "cat3", example_fr: "Merci pour ce beau cadeau.", example_en: "Thank you for this beautiful gift." },
+            { french: "la photo", english: "the photo", type: "n.f.", category: "cat3", example_fr: "Je prends une photo du paysage.", example_en: "I am taking a photo of the landscape." },
+            { french: "le journal", english: "the newspaper", type: "n.m.", category: "cat3", example_fr: "Je lis les nouvelles dans le journal.", example_en: "I read the news in the newspaper." },
+            { french: "le magazine", english: "the magazine", type: "n.m.", category: "cat3", example_fr: "Ce magazine parle de mode.", example_en: "This magazine talks about fashion." },
+            { french: "la bande dessinée (BD)", english: "the comic book", type: "n.f.", category: "cat3", example_fr: "Mon fils adore lire des BD.", example_en: "My son loves reading comic books." },
+            { french: "l'instrument (m)", english: "the instrument", type: "n.m.", category: "cat3", example_fr: "Elle joue d'un instrument de musique.", example_en: "She plays a musical instrument." },
+            { french: "la danse", english: "the dance", type: "n.f.", category: "cat3", example_fr: "J'apprends la danse classique.", example_en: "I am learning classical dance." },
+
+            // --- Catégorie 4: Noms (Travail & Études) (25 mots) ---
+            { french: "le travail", english: "the work, job", type: "n.m.", category: "cat4", example_fr: "Mon travail est très intéressant.", example_en: "My job is very interesting." },
+            { french: "l'emploi (m)", english: "the job, employment", type: "n.m.", category: "cat4", example_fr: "Il cherche un nouvel emploi.", example_en: "He is looking for a new job." },
+            { french: "le bureau", english: "the office, desk", type: "n.m.", category: "cat4", example_fr: "Mon bureau est au centre-ville.", example_en: "My office is downtown." },
+            { french: "le collègue", english: "the colleague (m)", type: "n.m.", category: "cat4", example_fr: "J'ai déjeuné avec mes collègues.", example_en: "I had lunch with my colleagues." },
+            { french: "le chef", english: "the boss, chief", type: "n.m.", category: "cat4", example_fr: "Mon chef est très exigeant.", example_en: "My boss is very demanding." },
+            { french: "la réunion", english: "the meeting", type: "n.f.", category: "cat4", example_fr: "Nous avons une réunion à 10 heures.", example_en: "We have a meeting at 10 o'clock." },
+            { french: "le document", english: "the document", type: "n.m.", category: "cat4", example_fr: "Veuillez signer ce document.", example_en: "Please sign this document." },
+            { french: "l'ordinateur (m)", english: "the computer", type: "n.m.", category: "cat4", example_fr: "J'utilise mon ordinateur pour le travail.", example_en: "I use my computer for work." },
+            { french: "le téléphone", english: "the phone", type: "n.m.", category: "cat4", example_fr: "Je reçois beaucoup d'appels sur mon téléphone.", example_en: "I receive many calls on my phone." },
+            { french: "le cours", english: "the class, course", type: "n.m.", category: "cat4", example_fr: "J'ai un cours de cuisine ce soir.", example_en: "I have a cooking class tonight." },
+            { french: "l'université (f)", english: "the university", type: "n.f.", category: "cat4", example_fr: "Il étudie à l'université.", example_en: "He studies at the university." },
+            { french: "le diplôme", english: "the diploma, degree", type: "n.m.", category: "cat4", example_fr: "J'ai obtenu mon diplôme l'année dernière.", example_en: "I obtained my degree last year." },
+            { french: "l'examen (m)", english: "the exam", type: "n.m.", category: "cat4", example_fr: "J'ai réussi mon examen de français.", example_en: "I passed my French exam." },
+            { french: "le professeur", english: "the teacher (m)", type: "n.m.", category: "cat4", example_fr: "Le professeur explique la leçon.", example_en: "The teacher explains the lesson." },
+            { french: "l'étudiant/e (m/f)", english: "the student", type: "n.m./f.", category: "cat4", example_fr: "L'étudiant travaille dur pour réussir.", example_en: "The student works hard to succeed." },
+            { french: "le stage", english: "the internship", type: "n.m.", category: "cat4", example_fr: "Elle fait un stage dans une banque.", example_en: "She is doing an internship in a bank." },
+            { french: "le salaire", english: "the salary", type: "n.m.", category: "cat4", example_fr: "Mon salaire est payé tous les mois.", example_en: "My salary is paid every month." },
+            { french: "la profession", english: "the profession", type: "n.f.", category: "cat4", example_fr: "Quelle est votre profession ?", example_en: "What is your profession?" },
+            { french: "la carrière", english: "the career", type: "n.f.", category: "cat4", example_fr: "Il a une longue carrière dans l'enseignement.", example_en: "He has a long career in teaching." },
+            { french: "la pause", english: "the break", type: "n.f.", category: "cat4", example_fr: "Faisons une pause-café.", example_en: "Let's take a coffee break." },
+            { french: "le projet", english: "the project", type: "n.m.", category: "cat4", example_fr: "Nous travaillons sur un nouveau projet.", example_en: "We are working on a new project." },
+            { french: "la tâche", english: "the task", type: "n.f.", category: "cat4", example_fr: "Cette tâche est facile à réaliser.", example_en: "This task is easy to complete." },
+            { french: "l'équipe (f)", english: "the team", type: "n.f.", category: "cat4", example_fr: "Notre équipe est très motivée.", example_en: "Our team is very motivated." },
+            { french: "le curriculum vitae (CV)", english: "the resume, CV", type: "n.m.", category: "cat4", example_fr: "J'ai envoyé mon CV à plusieurs entreprises.", example_en: "I sent my resume to several companies." },
+            { french: "l'entretien (m)", english: "the interview", type: "n.m.", category: "cat4", example_fr: "J'ai un entretien d'embauche demain.", example_en: "I have a job interview tomorrow." },
+
+            // --- Catégorie 5: Noms (Corps & Santé) (25 mots) ---
+            { french: "le corps", english: "the body", type: "n.m.", category: "cat5", example_fr: "Il faut prendre soin de son corps.", example_en: "You must take care of your body." },
+            { french: "la tête", english: "the head", type: "n.f.", category: "cat5", example_fr: "J'ai mal à la tête.", example_en: "I have a headache." },
+            { french: "le bras", english: "the arm", type: "n.m.", category: "cat5", example_fr: "Il a levé le bras.", example_en: "He raised his arm." },
+            { french: "la main", english: "the hand", type: "n.f.", category: "cat5", example_fr: "Donne-moi ta main.", example_en: "Give me your hand." },
+            { french: "le pied", english: "the foot", type: "n.m.", category: "cat5", example_fr: "J'ai mal au pied après la marche.", example_en: "My foot hurts after walking." },
+            { french: "la jambe", english: "the leg", type: "n.f.", category: "cat5", example_fr: "Elle a une longue jambe.", example_en: "She has a long leg." },
+            { french: "l'œil (m)", english: "the eye (sing.)", type: "n.m.", category: "cat5", example_fr: "Il a les yeux bleus.", example_en: "He has blue eyes." },
+            { french: "l'oreille (f)", english: "the ear", type: "n.f.", category: "cat5", example_fr: "J'ai mal à l'oreille.", example_en: "My ear hurts." },
+            { french: "la bouche", english: "the mouth", type: "n.f.", category: "cat5", example_fr: "Ouvre la bouche pour parler.", example_en: "Open your mouth to speak." },
+            { french: "le nez", english: "the nose", type: "n.m.", category: "cat5", example_fr: "Mon nez est rouge à cause du froid.", example_en: "My nose is red because of the cold." },
+            { french: "la santé", english: "the health", type: "n.f.", category: "cat5", example_fr: "Faire du sport est bon pour la santé.", example_en: "Doing sport is good for your health." },
+            { french: "le médecin", english: "the doctor", type: "n.m.", category: "cat5", example_fr: "J'ai rendez-vous chez le médecin.", example_en: "I have an appointment at the doctor's." },
+            { french: "la maladie", english: "the illness, sickness", type: "n.f.", category: "cat5", example_fr: "C'est une maladie courante en hiver.", example_en: "It is a common illness in winter." },
+            { french: "la fièvre", english: "the fever", type: "n.f.", category: "cat5", example_fr: "Il a une forte fièvre.", example_en: "He has a high fever." },
+            { french: "la douleur", english: "the pain", type: "n.f.", category: "cat5", example_fr: "Où se situe la douleur ?", example_en: "Where is the pain located?" },
+            { french: "le médicament", english: "the medication", type: "n.m.", category: "cat5", example_fr: "Prenez ce médicament deux fois par jour.", example_en: "Take this medication twice a day." },
+            { french: "l'ordonnance (f)", english: "the prescription", type: "n.f.", category: "cat5", example_fr: "Le médecin m'a donné une ordonnance.", example_en: "The doctor gave me a prescription." },
+            { french: "la fatigue", english: "the tiredness", type: "n.f.", category: "cat5", example_fr: "Je ressens une grande fatigue.", example_en: "I feel very tired." },
+            { french: "le sport", english: "the sport", type: "n.m.", category: "cat5", example_fr: "Je fais du sport tous les matins.", example_en: "I do sport every morning." },
+            { french: "l'exercice (m)", english: "the exercise", type: "n.m.", category: "cat5", example_fr: "Faire de l'exercice est important.", example_en: "Doing exercise is important." },
+            { french: "la nourriture", english: "the food", type: "n.f.", category: "cat5", example_fr: "Mangez de la nourriture saine.", example_en: "Eat healthy food." },
+            { french: "le poids", english: "the weight", type: "n.m.", category: "cat5", example_fr: "J'ai perdu du poids.", example_en: "I lost weight." },
+            { french: "le sommeil", english: "the sleep", type: "n.m.", category: "cat5", example_fr: "Il a besoin de sommeil.", example_en: "He needs sleep." },
+            { french: "la forme", english: "the shape, fitness", type: "n.f.", category: "cat5", example_fr: "Être en bonne forme physique.", example_en: "To be in good physical shape." },
+            { french: "le stress", english: "the stress", type: "n.m.", category: "cat5", example_fr: "Le travail cause beaucoup de stress.", example_en: "Work causes a lot of stress." },
+
+            // --- Catégorie 6: Noms (Vêtements & Mode) (25 mots) ---
+            { french: "le vêtement", english: "the piece of clothing", type: "n.m.", category: "cat6", example_fr: "J'ai acheté de nouveaux vêtements.", example_en: "I bought new clothes." },
+            { french: "la robe", english: "the dress", type: "n.f.", category: "cat6", example_fr: "Elle porte une robe rouge.", example_en: "She is wearing a red dress." },
+            { french: "la chemise", english: "the shirt (collared)", type: "n.f.", category: "cat6", example_fr: "Ma chemise est blanche et bleue.", example_en: "My shirt is white and blue." },
+            { french: "le T-shirt", english: "the T-shirt", type: "n.m.", category: "cat6", example_fr: "J'ai mis un T-shirt en coton.", example_en: "I put on a cotton T-shirt." },
+            { french: "le pantalon", english: "the pants", type: "n.m.", category: "cat6", example_fr: "Il porte un pantalon noir.", example_en: "He is wearing black pants." },
+            { french: "la jupe", english: "the skirt", type: "n.f.", category: "cat6", example_fr: "Elle a une jupe courte.", example_en: "She has a short skirt." },
+            { french: "le manteau", english: "the coat", type: "n.m.", category: "cat6", example_fr: "Il fait froid, prends ton manteau.", example_en: "It is cold, take your coat." },
+            { french: "le pull", english: "the sweater, jumper", type: "n.m.", category: "cat6", example_fr: "Mon pull est trop grand.", example_en: "My sweater is too big." },
+            { french: "la chaussure", english: "the shoe", type: "n.f.", category: "cat6", example_fr: "J'ai besoin de nouvelles chaussures.", example_en: "I need new shoes." },
+            { french: "la chaussette", english: "the sock", type: "n.f.", category: "cat6", example_fr: "Où sont mes chaussettes rouges ?", example_en: "Where are my red socks?" },
+            { french: "le chapeau", english: "the hat", type: "n.m.", category: "cat6", example_fr: "Il porte un chapeau de soleil.", example_en: "He is wearing a sun hat." },
+            { french: "l'écharpe (f)", english: "the scarf", type: "n.f.", category: "cat6", example_fr: "J'ai une écharpe en laine pour l'hiver.", example_en: "I have a wool scarf for the winter." },
+            { french: "les gants (m.pl.)", english: "the gloves", type: "n.m.pl.", category: "cat6", example_fr: "J'ai perdu mes gants.", example_en: "I lost my gloves." },
+            { french: "le maillot de bain", english: "the swimsuit", type: "n.m.", category: "cat6", example_fr: "N'oublie pas ton maillot de bain pour la plage.", example_en: "Don't forget your swimsuit for the beach." },
+            { french: "le pyjama", english: "the pajamas", type: "n.m.", category: "cat6", example_fr: "Je mets mon pyjama avant de dormir.", example_en: "I put on my pajamas before sleeping." },
+            { french: "la taille", english: "the size (clothing), height", type: "n.f.", category: "cat6", example_fr: "Quelle est votre taille de chemise ?", example_en: "What is your shirt size?" },
+            { french: "la couleur", english: "the color", type: "n.f.", category: "cat6", example_fr: "Quelle est ta couleur préférée ?", example_en: "What is your favorite color?" },
+            { french: "la mode", english: "the fashion", type: "n.f.", category: "cat6", example_fr: "Ce vêtement est à la mode cette année.", example_en: "This garment is fashionable this year." },
+            { french: "le bijou", english: "the jewel, piece of jewelry", type: "n.m.", category: "cat6", example_fr: "Elle porte un beau bijou en or.", example_en: "She is wearing a beautiful gold piece of jewelry." },
+            { french: "le sac à main", english: "the handbag", type: "n.m.", category: "cat6", example_fr: "Mon sac à main est lourd.", example_en: "My handbag is heavy." },
+            { french: "porter", english: "to wear", type: "v.", category: "cat6", example_fr: "Je porte une veste aujourd'hui.", example_en: "I am wearing a jacket today." },
+            { french: "essayer", english: "to try on, to try", type: "v.", category: "cat6", example_fr: "Je veux essayer cette paire de chaussures.", example_en: "I want to try on this pair of shoes." },
+            { french: "cher", english: "expensive", type: "adj.", category: "cat6", example_fr: "Cette robe est trop chère pour moi.", example_en: "This dress is too expensive for me." },
+            { french: "bon marché", english: "cheap, inexpensive", type: "adj.", category: "cat6", example_fr: "Ce magasin vend des vêtements bon marché.", example_en: "This store sells cheap clothes." },
+            { french: "habiller (s')", english: "to get dressed", type: "v.r.", category: "cat6", example_fr: "Je m'habille avant le petit-déjeuner.", example_en: "I get dressed before breakfast." },
+
+            // --- Catégorie 7: Adjectifs (Opinion) (25 mots) ---
+            { french: "calme", english: "calm, quiet", type: "adj.", category: "cat7", example_fr: "J'aime travailler dans un endroit calme.", example_en: "I like to work in a quiet place." },
+            { french: "poli/e", english: "polite", type: "adj.", category: "cat7", example_fr: "Il est toujours très poli.", example_en: "He is always very polite." },
+            { french: "impoli/e", english: "impolite, rude", type: "adj.", category: "cat7", example_fr: "Être impoli est inacceptable.", example_en: "Being rude is unacceptable." },
+            { french: "drôle", english: "funny", type: "adj.", category: "cat7", example_fr: "Elle raconte des histoires drôles.", example_en: "She tells funny stories." },
+            { french: "sérieux/euse", english: "serious", type: "adj.", category: "cat7", example_fr: "C'est une personne très sérieuse.", example_en: "She is a very serious person." },
+            { french: "patient/e", english: "patient", type: "adj.", category: "cat7", example_fr: "Il est très patient avec les enfants.", example_en: "He is very patient with children." },
+            { french: "impatient/e", english: "impatient", type: "adj.", category: "cat7", example_fr: "Je suis impatient d'attendre.", example_en: "I am impatient to wait." },
+            { french: "génial/e", english: "great, brilliant", type: "adj.", category: "cat7", example_fr: "C'est une idée géniale !", example_en: "It's a brilliant idea!" },
+            { french: "agréable", english: "pleasant", type: "adj.", category: "cat7", example_fr: "Nous avons passé une soirée agréable.", example_en: "We had a pleasant evening." },
+            { french: "désagréable", english: "unpleasant", type: "adj.", category: "cat7", example_fr: "C'est une situation désagréable.", example_en: "It is an unpleasant situation." },
+            { french: "intéressant/e", english: "interesting", type: "adj.", category: "cat7", example_fr: "Le livre est très intéressant.", example_en: "The book is very interesting." },
+            { french: "ennuyeux/euse", english: "boring", type: "adj.", category: "cat7", example_fr: "Le film était vraiment ennuyeux.", example_en: "The movie was really boring." },
+            { french: "sympathique (sympa)", english: "nice, friendly", type: "adj.", category: "cat7", example_fr: "Ma voisine est très sympa.", example_en: "My neighbor is very friendly." },
+            { french: "stupide", english: "stupid", type: "adj.", category: "cat7", example_fr: "C'est une question stupide.", example_en: "It is a stupid question." },
+            { french: "facile", english: "easy", type: "adj.", category: "cat7", example_fr: "Ce n'est pas facile d'apprendre le chinois.", example_en: "It is not easy to learn Chinese." },
+            { french: "difficile", english: "difficult", type: "adj.", category: "cat7", example_fr: "L'examen était très difficile.", example_en: "The exam was very difficult." },
+            { french: "important/e", english: "important", type: "adj.", category: "cat7", example_fr: "C'est une information importante.", example_en: "It is important information." },
+            { french: "inutile", english: "useless", type: "adj.", category: "cat7", example_fr: "Ce cadeau est totalement inutile.", example_en: "This gift is totally useless." },
+            { french: "possible", english: "possible", type: "adj.", category: "cat7", example_fr: "Est-ce possible de changer l'heure ?", example_en: "Is it possible to change the time?" },
+            { french: "impossible", english: "impossible", type: "adj.", category: "cat7", example_fr: "C'est impossible à faire.", example_en: "It is impossible to do." },
+            { french: "dangereux/euse", english: "dangerous", type: "adj.", category: "cat7", example_fr: "C'est une route dangereuse en hiver.", example_en: "It is a dangerous road in winter." },
+            { french: "sûr/e", english: "safe, sure", type: "adj.", category: "cat7", example_fr: "Je suis sûr que tu vas aimer.", example_en: "I am sure you will like it." },
+            { french: "décidé/e", english: "decided, determined", type: "adj.", category: "cat7", example_fr: "Elle est décidée à partir.", example_en: "She is determined to leave." },
+            { french: "content/e", english: "happy, pleased", type: "adj.", category: "cat7", example_fr: "Je suis content de mon nouveau vélo.", example_en: "I am pleased with my new bike." },
+            { french: "étonné/e", english: "astonished, surprised", type: "adj.", category: "cat7", example_fr: "J'étais très étonné de la voir ici.", example_en: "I was very surprised to see her here." },
+
+            // --- Catégorie 8: Adjectifs (Nationalités) (25 mots) ---
+            { french: "français/e", english: "French", type: "adj.", category: "cat8", example_fr: "Je suis français et j'habite à Paris.", example_en: "I am French and I live in Paris." },
+            { french: "américain/e", english: "American", type: "adj.", category: "cat8", example_fr: "Mon ami est américain.", example_en: "My friend is American." },
+            { french: "anglais/e", english: "English", type: "adj.", category: "cat8", example_fr: "Elle est anglaise et parle très bien français.", example_en: "She is English and speaks French very well." },
+            { french: "espagnol/e", english: "Spanish", type: "adj.", category: "cat8", example_fr: "J'aime la cuisine espagnole.", example_en: "I like Spanish cuisine." },
+            { french: "italien/ne", english: "Italian", type: "adj.", category: "cat8", example_fr: "Ce restaurant italien est excellent.", example_en: "This Italian restaurant is excellent." },
+            { french: "allemand/e", english: "German", type: "adj.", category: "cat8", example_fr: "Mon professeur d'allemand est très gentil.", example_en: "My German teacher is very kind." },
+            { french: "chinois/e", english: "Chinese", type: "adj.", category: "cat8", example_fr: "J'ai un ami chinois.", example_en: "I have a Chinese friend." },
+            { french: "japonais/e", english: "Japanese", type: "adj.", category: "cat8", example_fr: "Elle aime les films japonais.", example_en: "She likes Japanese movies." },
+            { french: "russe", english: "Russian", type: "adj.", category: "cat8", example_fr: "J'ai une collègue russe.", example_en: "I have a Russian colleague." },
+            { french: "canadien/ne", english: "Canadian", type: "adj.", category: "cat8", example_fr: "Il est canadien, il vient de Montréal.", example_en: "He is Canadian, he comes from Montreal." },
+            { french: "mexicain/e", english: "Mexican", type: "adj.", category: "cat8", example_fr: "La cuisine mexicaine est délicieuse.", example_en: "Mexican cuisine is delicious." },
+            { french: "brésilien/ne", english: "Brazilian", type: "adj.", category: "cat8", example_fr: "Elle est brésilienne et parle portugais.", example_en: "She is Brazilian and speaks Portuguese." },
+            { french: "européen/ne", english: "European", type: "adj.", category: "cat8", example_fr: "C'est un pays européen.", example_en: "It is a European country." },
+            { french: "international/e", english: "international", type: "adj.", category: "cat8", example_fr: "C'est un aéroport international.", example_en: "It is an international airport." },
+            { french: "national/e", english: "national", type: "adj.", category: "cat8", example_fr: "C'est un plat national.", example_en: "It is a national dish." },
+            { french: "régional/e", english: "regional", type: "adj.", category: "cat8", example_fr: "C'est une spécialité régionale.", example_en: "It is a regional specialty." },
+            { french: "local/e", english: "local", type: "adj.", category: "cat8", example_fr: "J'achète des produits locaux.", example_en: "I buy local products." },
+            { french: "étranger/ère", english: "foreign", type: "adj.", category: "cat8", example_fr: "Je parle une langue étrangère.", example_en: "I speak a foreign language." },
+            { french: "parisien/ne", english: "from Paris", type: "adj.", category: "cat8", example_fr: "Il est parisien.", example_en: "He is from Paris." },
+            { french: "lyonnais/e", english: "from Lyon", type: "adj.", category: "cat8", example_fr: "Elle est lyonnaise.", example_en: "She is from Lyon." },
+            { french: "le pays", english: "the country", type: "n.m.", category: "cat8", example_fr: "Quel pays voulez-vous visiter ?", example_en: "Which country do you want to visit?" },
+            { french: "la ville", english: "the city", type: "n.f.", category: "cat8", example_fr: "J'aime vivre en ville.", example_en: "I like living in the city." },
+            { french: "le village", english: "the village", type: "n.m.", category: "cat8", example_fr: "Il habite dans un petit village.", example_en: "He lives in a small village." },
+            { french: "la région", english: "the region", type: "n.f.", category: "cat8", example_fr: "La région est très belle.", example_en: "The region is very beautiful." },
+            { french: "la capitale", english: "the capital city", type: "n.f.", category: "cat8", example_fr: "Paris est la capitale de la France.", example_en: "Paris is the capital of France." },
+
+            // --- Catégorie 9: Adverbes (Manière/Degré) (25 mots) ---
+            { french: "vraiment", english: "really, truly", type: "adv.", category: "cat9", example_fr: "Ce film est vraiment drôle.", example_en: "This movie is really funny." },
+            { french: "sérieusement", english: "seriously", type: "adv.", category: "cat9", example_fr: "Parle sérieusement, s'il te plaît.", example_en: "Speak seriously, please." },
+            { french: "simplement", english: "simply", type: "adv.", category: "cat9", example_fr: "Explique-le simplement.", example_en: "Explain it simply." },
+            { french: "facilement", english: "easily", type: "adv.", category: "cat9", example_fr: "Il apprend facilement les langues.", example_en: "He learns languages easily." },
+            { french: "difficilement", english: "with difficulty", type: "adv.", category: "cat9", example_fr: "Elle marche difficilement après sa chute.", example_en: "She walks with difficulty after her fall." },
+            { french: "normalement", english: "normally", type: "adv.", category: "cat9", example_fr: "Normalement, je me lève à 7h.", example_en: "Normally, I wake up at 7 AM." },
+            { french: "malheureusement", english: "unfortunately", type: "adv.", category: "cat9", example_fr: "Malheureusement, le magasin est fermé.", example_en: "Unfortunately, the store is closed." },
+            { french: "heureusement", english: "fortunately", type: "adv.", category: "cat9", example_fr: "Heureusement, il n'y a pas eu d'accident.", example_en: "Fortunately, there was no accident." },
+            { french: "doucement", english: "gently, softly, slowly", type: "adv.", category: "cat9", example_fr: "Parle doucement, s'il te plaît.", example_en: "Speak softly, please." },
+            { french: "clairement", english: "clearly", type: "adv.", category: "cat9", example_fr: "Il a expliqué le problème clairement.", example_en: "He explained the problem clearly." },
+            { french: "rapidement", english: "quickly", type: "adv.", category: "cat9", example_fr: "Le bus est arrivé rapidement.", example_en: "The bus arrived quickly." },
+            { french: "lentement", english: "slowly", type: "adv.", category: "cat9", example_fr: "Il mange lentement.", example_en: "He eats slowly." },
+            { french: "beaucoup", english: "a lot", type: "adv.", category: "cat9", example_fr: "J'aime beaucoup lire.", example_en: "I like reading a lot." },
+            { french: "peu", english: "little", type: "adv.", category: "cat9", example_fr: "Je dors peu la nuit.", example_en: "I sleep little at night." },
+            { french: "assez", english: "enough", type: "adv.", category: "cat9", example_fr: "J'ai assez mangé.", example_en: "I ate enough." },
+            { french: "trop", english: "too much", type: "adv.", category: "cat9", example_fr: "Il y a trop de bruit.", example_en: "There is too much noise." },
+            { french: "plus", english: "more", type: "adv.", category: "cat9", example_fr: "Je veux plus de pain.", example_en: "I want more bread." },
+            { french: "moins", english: "less", type: "adv.", category: "cat9", example_fr: "Il fait moins chaud aujourd'hui.", example_en: "It is less cold today." },
+            { french: "mieux", english: "better", type: "adv.", category: "cat9", example_fr: "Je me sens mieux maintenant.", example_en: "I feel better now." },
+            { french: "pire", english: "worse", type: "adv.", category: "cat9", example_fr: "La situation est pire qu'hier.", example_en: "The situation is worse than yesterday." },
+            { french: "aussi", english: "also, too, as", type: "adv.", category: "cat9", example_fr: "Elle vient aussi avec nous.", example_en: "She is also coming with us." },
+            { french: "surtout", english: "especially, above all", type: "adv.", category: "cat9", example_fr: "J'aime le sport, surtout le tennis.", example_en: "I like sport, especially tennis." },
+            { french: "seulement", english: "only", type: "adv.", category: "cat9", example_fr: "Il me reste seulement deux euros.", example_en: "I only have two euros left." },
+            { french: "ensemble", english: "together", type: "adv.", category: "cat9", example_fr: "Nous partons en vacances ensemble.", example_en: "We are going on vacation together." },
+            { french: "seul/e", english: "alone", type: "adj.", category: "cat9", example_fr: "Il voyage seul.", example_en: "He travels alone." },
+
+            // --- Catégorie 10: Connecteurs (25 mots) ---
+            { french: "parce que", english: "because", type: "conj.", category: "cat10", example_fr: "Je suis en retard parce que le bus était lent.", example_en: "I am late because the bus was slow." },
+            { french: "car", english: "because, for", type: "conj.", category: "cat10", example_fr: "Il ne sort pas car il fait froid.", example_en: "He is not going out because it is cold." },
+            { french: "comme", english: "as, since", type: "conj.", category: "cat10", example_fr: "Comme il pleut, je reste à la maison.", example_en: "As it is raining, I am staying home." },
+            { french: "puisque", english: "since (it is a known fact)", type: "conj.", category: "cat10", example_fr: "Puisque tu es là, aide-moi.", example_en: "Since you are here, help me." },
+            { french: "donc", english: "so, therefore", type: "adv.", category: "cat10", example_fr: "Il n'a pas mangé, donc il a faim.", example_en: "He did not eat, so he is hungry." },
+            { french: "alors", english: "so, then", type: "adv.", category: "cat10", example_fr: "Il est midi, alors mangeons.", example_en: "It is noon, so let's eat." },
+            { french: "par conséquent", english: "consequently, therefore", type: "expr.", category: "cat10", example_fr: "Il a plu, par conséquent le sol est mouillé.", example_en: "It rained, consequently the ground is wet." },
+            { french: "c'est pourquoi", english: "that's why", type: "expr.", category: "cat10", example_fr: "J'étais malade, c'est pourquoi je ne suis pas venu.", example_en: "I was sick, that's why I didn't come." },
+            { french: "c'est la raison pour laquelle", english: "that is the reason why", type: "expr.", category: "cat10", example_fr: "Il a plu, c'est la raison pour laquelle nous sommes en retard.", example_en: "It rained, that is the reason why we are late." },
+            { french: "mais", english: "but", type: "conj.", category: "cat10", example_fr: "C'est difficile, mais possible.", example_en: "It is difficult, but possible." },
+            { french: "ou", english: "or", type: "conj.", category: "cat10", example_fr: "Tu veux du thé ou du café ?", example_en: "Do you want tea or coffee?" },
+            { french: "et", english: "and", type: "conj.", category: "cat10", example_fr: "J'aime le pain et le fromage.", example_en: "I like bread and cheese." },
+            { french: "ni... ni...", english: "neither... nor...", type: "conj.", category: "cat10", example_fr: "Je ne parle ni anglais ni espagnol.", example_en: "I speak neither English nor Spanish." },
+            { french: "quand", english: "when", type: "conj.", category: "cat10", example_fr: "Je t'appelle quand j'arrive.", example_en: "I will call you when I arrive." },
+            { french: "lorsque", english: "when", type: "conj.", category: "cat10", example_fr: "Nous irons au parc lorsque le soleil brillera.", example_en: "We will go to the park when the sun shines." },
+            { french: "pendant que", english: "while", type: "conj.", category: "cat10", example_fr: "Je lis pendant qu'il cuisine.", example_en: "I read while he cooks." },
+            { french: "avant de", english: "before (doing)", type: "expr.", category: "cat10", example_fr: "Lavez-vous les mains avant de manger.", example_en: "Wash your hands before eating." },
+            { french: "après avoir", english: "after having done", type: "expr.", category: "cat10", example_fr: "Après avoir mangé, je suis parti.", example_en: "After having eaten, I left." },
+            { french: "si", english: "if", type: "conj.", category: "cat10", example_fr: "Si tu veux, on peut sortir.", example_en: "If you want, we can go out." },
+            { french: "bien que", english: "although (requires subjonctif)", type: "conj.", category: "cat10", example_fr: "Bien qu'il soit difficile, il est heureux.", example_en: "Although it is difficult, he is happy." },
+            { french: "tandis que", english: "whereas, while", type: "conj.", category: "cat10", example_fr: "J'aime le thé, tandis qu'il préfère le café.", example_en: "I like tea, whereas he prefers coffee." },
+            { french: "de plus", english: "furthermore, moreover", type: "expr.", category: "cat10", example_fr: "Ce travail est intéressant, de plus il est bien payé.", example_en: "This job is interesting, furthermore it is well paid." },
+            { french: "cependant", english: "however", type: "adv.", category: "cat10", example_fr: "Je suis fatigué, cependant je dois finir.", example_en: "I am tired, however I must finish." },
+            { french: "malgré", english: "despite (prep)", type: "prep.", category: "cat10", example_fr: "Malgré la pluie, nous avons marché.", example_en: "Despite the rain, we walked." },
+            { french: "à cause de", english: "because of (prep)", type: "prep.", category: "cat10", example_fr: "Je suis en retard à cause des embouteillages.", example_en: "I am late because of the traffic jams." },
+
+            // --- Catégorie 11: Prépositions (25 mots) ---
+            { french: "au milieu (de)", english: "in the middle (of)", type: "expr.", category: "cat11", example_fr: "Il y a une table au milieu de la pièce.", example_en: "There is a table in the middle of the room." },
+            { french: "autour (de)", english: "around", type: "prep.", category: "cat11", example_fr: "Les enfants courent autour de la maison.", example_en: "The children are running around the house." },
+            { french: "en haut (de)", english: "at the top (of), upstairs", type: "expr.", category: "cat11", example_fr: "Ma chambre est en haut.", example_en: "My room is upstairs." },
+            { french: "en bas (de)", english: "at the bottom (of), downstairs", type: "expr.", category: "cat11", example_fr: "Le salon est en bas.", example_en: "The living room is downstairs." },
+            { french: "à travers", english: "through, across", type: "prep.", category: "cat11", example_fr: "Nous voyageons à travers l'Europe.", example_en: "We travel across Europe." },
+            { french: "vers", english: "towards, around (time)", type: "prep.", category: "cat11", example_fr: "Je me dirige vers la sortie.", example_en: "I am heading towards the exit." },
+            { french: "sauf", english: "except", type: "prep.", category: "cat11", example_fr: "Tout est prêt, sauf la soupe.", example_en: "Everything is ready, except the soup." },
+            { french: "selon", english: "according to", type: "prep.", category: "cat11", example_fr: "Selon les nouvelles, il va neiger.", example_en: "According to the news, it will snow." },
+            { french: "parmi", english: "among", type: "prep.", category: "cat11", example_fr: "Il est parmi les meilleurs étudiants.", example_en: "He is among the best students." },
+            { french: "au lieu de", english: "instead of", type: "expr.", category: "cat11", example_fr: "Je prends le bus au lieu du métro.", example_en: "I take the bus instead of the subway." },
+            { french: "grâce à", english: "thanks to", type: "expr.", category: "cat11", example_fr: "Grâce à ton aide, j'ai réussi.", example_en: "Thanks to your help, I succeeded." },
+            { french: "vis-à-vis (de)", english: "opposite (to), concerning", type: "expr.", category: "cat11", example_fr: "La banque est vis-à-vis de la poste.", example_en: "The bank is opposite the post office." },
+            { french: "y compris", english: "including", type: "expr.", category: "cat11", example_fr: "J'ai tout payé, y compris la taxe.", example_en: "I paid everything, including the tax." },
+            { french: "en dehors (de)", english: "outside (of)", type: "expr.", category: "cat11", example_fr: "Il travaille en dehors de la ville.", example_en: "He works outside the city." },
+            { french: "jusqu'à", english: "until, up to", type: "prep.", category: "cat11", example_fr: "J'ai marché jusqu'à la rivière.", example_en: "I walked until the river." },
+            { french: "d'après", english: "according to, from", type: "prep.", category: "cat11", example_fr: "D'après moi, c'est faux.", example_en: "According to me, it is wrong." },
+            { french: "faute de", english: "for lack of", type: "expr.", category: "cat11", example_fr: "Faute de temps, je n'ai pas fini.", example_en: "For lack of time, I did not finish." },
+            { french: "hormis", english: "apart from, except for", type: "prep.", category: "cat11", example_fr: "Hormis ce détail, tout est parfait.", example_en: "Apart from this detail, everything is perfect." },
+            { french: "loin de", english: "far from", type: "expr.", category: "cat11", example_fr: "J'habite loin de la mer.", example_en: "I live far from the sea." },
+            { french: "proche de", english: "near to", type: "expr.", category: "cat11", example_fr: "Le parc est proche de chez moi.", example_en: "The park is near my house." },
+            { french: "à droite (de)", english: "to the right (of)", type: "expr.", category: "cat11", example_fr: "Le magasin est à droite de l'église.", example_en: "The store is to the right of the church." },
+            { french: "à gauche (de)", english: "to the left (of)", type: "expr.", category: "cat11", example_fr: "Tournez à gauche au feu.", example_en: "Turn left at the light." },
+            { french: "tout droit", english: "straight ahead", type: "adv.", category: "cat11", example_fr: "Continuez tout droit.", example_en: "Continue straight ahead." },
+            { french: "en bas", english: "downstairs", type: "adv.", category: "cat11", example_fr: "Les toilettes sont en bas.", example_en: "The toilets are downstairs." },
+            { french: "en haut", english: "upstairs", type: "adv.", category: "cat11", example_fr: "La chambre est en haut.", example_en: "The room is upstairs." },
+
+            // --- Catégorie 12: Pronoms (25 mots) ---
+            { french: "le", english: "him, it (D.O. m. sing.)", type: "pron.", category: "cat12", example_fr: "Je le vois.", example_en: "I see him/it." },
+            { french: "la", english: "her, it (D.O. f. sing.)", type: "pron.", category: "cat12", example_fr: "Je la connais.", example_en: "I know her/it." },
+            { french: "les", english: "them (D.O. pl.)", type: "pron.", category: "cat12", example_fr: "Je les achète.", example_en: "I buy them." },
+            { french: "lui", english: "to him, to her (I.O. sing.)", type: "pron.", category: "cat12", example_fr: "Je lui parle.", example_en: "I speak to him/her." },
+            { french: "leur", english: "to them (I.O. pl.)", type: "pron.", category: "cat12", example_fr: "Je leur donne un cadeau.", example_en: "I give them a gift." },
+            { french: "y", english: "there (place or object with 'à')", type: "pron.", category: "cat12", example_fr: "J'y vais demain.", example_en: "I am going there tomorrow." },
+            { french: "en", english: "some, of it/them (quantity or 'de')", type: "pron.", category: "cat12", example_fr: "J'en ai trois.", example_en: "I have three (of them)." },
+            { french: "moi", english: "me (stressed)", type: "pron.", category: "cat12", example_fr: "Viens avec moi.", example_en: "Come with me." },
+            { french: "toi", english: "you (stressed, informal)", type: "pron.", category: "cat12", example_fr: "C'est pour toi.", example_en: "It is for you." },
+            { french: "il y en a", english: "there is/are some", type: "expr.", category: "cat12", example_fr: "Il y en a beaucoup dans la boîte.", example_en: "There are many (of them) in the box." },
+            { french: "il faut y aller", english: "we must go there", type: "expr.", category: "cat12", example_fr: "Il est tard, il faut y aller.", example_en: "It is late, we must go." },
+            { french: "on s'en va", english: "we are leaving", type: "expr.", category: "cat12", example_fr: "C'est fini, on s'en va maintenant.", example_en: "It is finished, we are leaving now." },
+            { french: "le mien/la mienne", english: "mine", type: "pron.poss.", category: "cat12", example_fr: "Ce livre est le mien.", example_en: "This book is mine." },
+            { french: "le tien/la tienne", english: "yours (informal)", type: "pron.poss.", category: "cat12", example_fr: "Ce stylo est le tien.", example_en: "This pen is yours." },
+            { french: "le sien/la sienne", english: "his/hers", type: "pron.poss.", category: "cat12", example_fr: "Cette voiture est la sienne.", example_en: "This car is his/hers." },
+            { french: "le nôtre/la nôtre", english: "ours", type: "pron.poss.", category: "cat12", example_fr: "Le problème est le nôtre.", example_en: "The problem is ours." },
+            { french: "le vôtre/la vôtre", english: "yours (formal/plural)", type: "pron.poss.", category: "cat12", example_fr: "Est-ce votre parapluie ? C'est le vôtre ?", example_en: "Is this your umbrella? Is it yours?" },
+            { french: "le leur/la leur", english: "theirs", type: "pron.poss.", category: "cat12", example_fr: "C'est leur maison, c'est la leur.", example_en: "It is their house, it is theirs." },
+            { french: "celui/celle", english: "this one, that one", type: "pron.dem.", category: "cat12", example_fr: "Je préfère celui-là.", example_en: "I prefer that one." },
+            { french: "ceux/celles", english: "these ones, those ones", type: "pron.dem.", category: "cat12", example_fr: "Quelles fleurs aimes-tu ? Celles-ci.", example_en: "Which flowers do you like? These ones." },
+            { french: "ce que", english: "what (subordinate clause)", type: "pron.rel.", category: "cat12", example_fr: "Je sais ce que tu penses.", example_en: "I know what you think." },
+            { french: "ce qui", english: "what (subject, subordinate clause)", type: "pron.rel.", category: "cat12", example_fr: "Ce qui m'inquiète, c'est le temps.", example_en: "What worries me is the weather." },
+            { french: "quelqu'un", english: "someone", type: "pron.ind.", category: "cat12", example_fr: "Quelqu'un a appelé pour toi.", example_en: "Someone called for you." },
+            { french: "personne", english: "no one", type: "pron.ind.", category: "cat12", example_fr: "Personne n'est venu.", example_en: "No one came." },
+            { french: "rien", english: "nothing", type: "pron.ind.", category: "cat12", example_fr: "Je n'ai rien vu.", example_en: "I saw nothing." },
+
+            // --- Catégorie 13: Quantités & Mesures (25 mots) ---
+            { french: "un kilo", english: "a kilo", type: "n.m.", category: "cat13", example_fr: "Je voudrais un kilo de pommes.", example_en: "I would like a kilo of apples." },
+            { french: "un litre", english: "a liter", type: "n.m.", category: "cat13", example_fr: "Achetez un litre de lait.", example_en: "Buy a liter of milk." },
+            { french: "un mètre", english: "a meter", type: "n.m.", category: "cat13", example_fr: "Le tissu coûte cinq euros le mètre.", example_en: "The fabric costs five euros per meter." },
+            { french: "une douzaine", english: "a dozen", type: "n.f.", category: "cat13", example_fr: "Je prends une douzaine d'œufs.", example_en: "I will take a dozen eggs." },
+            { french: "une paire", english: "a pair", type: "n.f.", category: "cat13", example_fr: "J'ai besoin d'une paire de chaussures.", example_en: "I need a pair of shoes." },
+            { french: "une bouteille", english: "a bottle", type: "n.f.", category: "cat13", example_fr: "Ouvrons une bouteille de vin.", example_en: "Let's open a bottle of wine." },
+            { french: "un verre", english: "a glass", type: "n.m.", category: "cat13", example_fr: "Donne-moi un verre d'eau.", example_en: "Give me a glass of water." },
+            { french: "une tasse", english: "a cup", type: "n.f.", category: "cat13", example_fr: "Je bois une tasse de café.", example_en: "I drink a cup of coffee." },
+            { french: "une tranche", english: "a slice", type: "n.f.", category: "cat13", example_fr: "Je voudrais une tranche de jambon.", example_en: "I would like a slice of ham." },
+            { french: "un morceau", english: " a piece", type: "n.m.", category: "cat13", example_fr: "Donne-moi un morceau de gâteau.", example_en: "Give me a piece of cake." },
+            { french: "une boîte", english: "a box, can", type: "n.f.", category: "cat13", example_fr: "J'ai acheté une boîte de chocolats.", example_en: "I bought a box of chocolates." },
+            { french: "un paquet", english: "a packet, pack", type: "n.m.", category: "cat13", example_fr: "Un paquet de cigarettes coûte cher.", example_en: "A pack of cigarettes is expensive." },
+            { french: "une quantité", english: "a quantity", type: "n.f.", category: "cat13", example_fr: "J'ai une petite quantité d'argent.", example_en: "I have a small quantity of money." },
+            { french: "la mesure", english: "the measure", type: "n.f.", category: "cat13", example_fr: "Il faut prendre la mesure exacte.", example_en: "We must take the exact measure." },
+            { french: "le prix", english: "the price", type: "n.m.", category: "cat13", example_fr: "Quel est le prix de ce produit ?", example_en: "What is the price of this product?" },
+            { french: "le tarif", english: "the tariff, rate", type: "n.m.", category: "cat13", example_fr: "Le tarif pour une nuit est élevé.", example_en: "The rate for one night is high." },
+            { french: "le coût", english: "the cost", type: "n.m.", category: "cat13", example_fr: "Quel est le coût total du voyage ?", example_en: "What is the total cost of the trip?" },
+            { french: "la monnaie", english: "the currency, change (money)", type: "n.f.", category: "cat13", example_fr: "Quelle est la monnaie de ce pays ?", example_en: "What is the currency of this country?" },
+            { french: "l'euro (m)", english: "the euro", type: "n.m.", category: "cat13", example_fr: "Je paie en euros.", example_en: "I pay in euros." },
+            { french: "la carte bancaire", english: "the bank card", type: "n.f.", category: "cat13", example_fr: "Je paie par carte bancaire.", example_en: "I pay by bank card." },
+            { french: "le billet", english: "the bill (money), ticket", type: "n.m.", category: "cat13", example_fr: "J'ai un billet de 20 euros.", example_en: "I have a 20 euro bill." },
+            { french: "une pièce", english: "a coin, a room", type: "n.f.", category: "cat13", example_fr: "J'ai une pièce de deux euros.", example_en: "I have a two euro coin." },
+            { french: "la caisse", english: "the cash register, checkout", type: "n.f.", category: "cat13", example_fr: "Passez à la caisse, s'il vous plaît.", example_en: "Go to the checkout, please." },
+            { french: "payer", english: "to pay", type: "v.", category: "cat13", example_fr: "Vous devez payer maintenant.", example_en: "You must pay now." },
+            { french: "vendre", english: "to sell", type: "v.", category: "cat13", example_fr: "Ce magasin vend des fruits et légumes.", example_en: "This store sells fruits and vegetables." },
+
+            // --- Catégorie 14: Fréquence (25 mots) ---
+            { french: "tous les jours", english: "every day", type: "expr.", category: "cat14", example_fr: "Je travaille tous les jours sauf le dimanche.", example_en: "I work every day except Sunday." },
+            { french: "chaque semaine", english: "every week", type: "expr.", category: "cat14", example_fr: "Nous avons une réunion chaque semaine.", example_en: "We have a meeting every week." },
+            { french: "une fois", english: "once", type: "expr.", category: "cat14", example_fr: "J'ai visité ce pays une seule fois.", example_en: "I visited this country only once." },
+            { french: "deux fois", english: "twice", type: "expr.", category: "cat14", example_fr: "Je vais au sport deux fois par semaine.", example_en: "I go to sports twice a week." },
+            { french: "souvent", english: "often", type: "adv.", category: "cat14", example_fr: "Je vais souvent à la plage en été.", example_en: "I often go to the beach in summer." },
+            { french: "parfois", english: "sometimes", type: "adv.", category: "cat14", example_fr: "Je mange parfois au restaurant.", example_en: "I sometimes eat at the restaurant." },
+            { french: "de temps en temps", english: "from time to time", type: "expr.", category: "cat14", example_fr: "Je lis de temps en temps.", example_en: "I read from time to time." },
+            { french: "rarement", english: "rarely", type: "adv.", category: "cat14", example_fr: "Je le vois rarement.", example_en: "I rarely see him." },
+            { french: "jamais", english: "never", type: "adv.", category: "cat14", example_fr: "Je n'oublierai jamais ce moment.", example_en: "I will never forget this moment." },
+            { french: "toujours", english: "always", type: "adv.", category: "cat14", example_fr: "Il est toujours heureux.", example_en: "He is always happy." },
+            { french: "régulièrement", english: "regularly", type: "adv.", category: "cat14", example_fr: "Je fais de l'exercice régulièrement.", example_en: "I exercise regularly." },
+            { french: "habituellement", english: "usually", type: "adv.", category: "cat14", example_fr: "Habituellement, je prends le train.", example_en: "Usually, I take the train." },
+            { french: "d'habitude", english: "usually", type: "expr.", category: "cat14", example_fr: "D'habitude, je dîne à 19h.", example_en: "Usually, I have dinner at 7 PM." },
+            { french: "en général", english: "in general", type: "expr.", category: "cat14", example_fr: "En général, il fait beau ici.", example_en: "In general, the weather is nice here." },
+            { french: "tous les ans", english: "every year", type: "expr.", category: "cat14", example_fr: "Nous visitons la famille tous les ans.", example_en: "We visit family every year." },
+            { french: "tous les mois", english: "every month", type: "expr.", category: "cat14", example_fr: "Le loyer est payé tous les mois.", example_en: "Rent is paid every month." },
+            { french: "le matin", english: "in the morning", type: "adv.", category: "cat14", example_fr: "Je me lève tôt le matin.", example_en: "I wake up early in the morning." },
+            { french: "l'après-midi", english: "in the afternoon", type: "adv.", category: "cat14", example_fr: "J'étudie l'après-midi.", example_en: "I study in the afternoon." },
+            { french: "le soir", english: "in the evening", type: "adv.", category: "cat14", example_fr: "Nous regardons la télé le soir.", example_en: "We watch TV in the evening." },
+            { french: "la nuit", english: "at night", type: "adv.", category: "cat14", example_fr: "Il fait froid la nuit.", example_en: "It is cold at night." },
+            { french: "hier soir", english: "last night", type: "expr.", category: "cat14", example_fr: "J'ai bien dormi hier soir.", example_en: "I slept well last night." },
+            { french: "demain matin", english: "tomorrow morning", type: "expr.", category: "cat14", example_fr: "Nous partons demain matin.", example_en: "We are leaving tomorrow morning." },
+            { french: "après-demain", english: "the day after tomorrow", type: "adv.", category: "cat14", example_fr: "Je te vois après-demain.", example_en: "I'll see you the day after tomorrow." },
+            { french: "il y a... (temps)", english: "ago", type: "expr.", category: "cat14", example_fr: "J'ai déménagé il y a un an.", example_en: "I moved a year ago." },
+            { french: "dans... (temps)", english: "in (future time)", type: "expr.", category: "cat14", example_fr: "Le train part dans 10 minutes.", example_en: "The train leaves in 10 minutes." },
+
+            // --- Catégorie 15: Voyage & Hébergement (25 mots) ---
+            { french: "voyager", english: "to travel", type: "v.", category: "cat15", example_fr: "J'aime voyager en Europe.", example_en: "I like traveling in Europe." },
+            { french: "le voyage", english: "the trip, journey", type: "n.m.", category: "cat15", example_fr: "Nous faisons un voyage en train.", example_en: "We are taking a trip by train." },
+            { french: "le vol", english: "the flight", type: "n.m.", category: "cat15", example_fr: "Mon vol part à midi.", example_en: "My flight leaves at noon." },
+            { french: "la réservation", english: "the reservation, booking", type: "n.f.", category: "cat15", example_fr: "J'ai fait une réservation d'hôtel.", example_en: "I made a hotel reservation." },
+            { french: "l'hôtel (m)", english: "the hotel", type: "n.m.", category: "cat15", example_fr: "Nous restons trois nuits à l'hôtel.", example_en: "We are staying three nights at the hotel." },
+            { french: "la chambre", english: "the room (hotel/bedroom)", type: "n.f.", category: "cat15", example_fr: "Je voudrais une chambre double.", example_en: "I would like a double room." },
+            { french: "la clé", english: "the key", type: "n.f.", category: "cat15", example_fr: "Où est la clé de ma chambre ?", example_en: "Where is the key to my room?" },
+            { french: "la réception", english: "the reception, front desk", type: "n.f.", category: "cat15", example_fr: "Demandez à la réception.", example_en: "Ask at the reception desk." },
+            { french: "la carte", english: "the map", type: "n.f.", category: "cat15", example_fr: "J'ai besoin d'une carte de la ville.", example_en: "I need a map of the city." },
+            { french: "la valise", english: "the suitcase", type: "n.f.", category: "cat15", example_fr: "Porte ma valise, s'il te plaît.", example_en: "Carry my suitcase, please." },
+            { french: "le passeport", english: "the passport", type: "n.m.", category: "cat15", example_fr: "Montrez votre passeport à la douane.", example_en: "Show your passport at customs." },
+            { french: "la douane", english: "the customs", type: "n.f.", category: "cat15", example_fr: "Je dois passer la douane.", example_en: "I have to go through customs." },
+            { french: "le taxi", english: "the taxi", type: "n.m.", category: "cat15", example_fr: "Prenons un taxi pour la gare.", example_en: "Let's take a taxi to the station." },
+            { french: "le bus", english: "the bus", type: "n.m.", category: "cat15", example_fr: "Où est l'arrêt de bus ?", example_en: "Where is the bus stop?" },
+            { french: "le train", english: "the train", type: "n.m.", category: "cat15", example_fr: "Le train est en retard.", example_en: "The train is late." },
+            { french: "l'avion (m)", english: "the plane", type: "n.m.", category: "cat15", example_fr: "Mon avion a deux heures de retard.", example_en: "My plane is two hours late." },
+            { french: "l'aéroport (m)", english: "the airport", type: "n.m.", category: "cat15", example_fr: "Nous arrivons à l'aéroport.", example_en: "We are arriving at the airport." },
+            { french: "la gare", english: "the train station", type: "n.f.", category: "cat15", example_fr: "La gare est bondée de monde.", example_en: "The train station is crowded with people." },
+            { french: "le billet", english: "the ticket", type: "n.m.", category: "cat15", example_fr: "J'ai perdu mon billet d'avion.", example_en: "I lost my plane ticket." },
+            { french: "louer", english: "to rent, hire", type: "v.", category: "cat15", example_fr: "Nous allons louer un appartement pour la semaine.", example_en: "We are going to rent an apartment for the week." },
+            { french: "le plan", english: "the plan, map", type: "n.m.", category: "cat15", example_fr: "Regardons le plan de la ville.", example_en: "Let's look at the city map." },
+            { french: "l'itinéraire (m)", english: "the itinerary, route", type: "n.m.", category: "cat15", example_fr: "Quel est le meilleur itinéraire ?", example_en: "What is the best route?" },
+            { french: "le retour", english: "the return", type: "n.m.", category: "cat15", example_fr: "Le vol de retour est à 17h.", example_en: "The return flight is at 5 PM." },
+            { french: "le départ", english: "the departure", type: "n.m.", category: "cat15", example_fr: "L'heure de départ est 8h.", example_en: "The departure time is 8 AM." },
+            { french: "l'arrivée (f)", english: "the arrival", type: "n.f.", category: "cat15", example_fr: "Nous attendons l'arrivée du train.", example_en: "We are waiting for the train's arrival." },
+
+            // --- Catégorie 16: Services & Administration (25 mots) ---
+            { french: "la poste", english: "the post office", type: "n.f.", category: "cat16", example_fr: "Où est la poste s'il vous plaît ?", example_en: "Where is the post office please?" },
+            { french: "le timbre", english: "the stamp", type: "n.m.", category: "cat16", example_fr: "J'ai besoin d'acheter des timbres.", example_en: "I need to buy some stamps." },
+            { french: "la lettre", english: "the letter", type: "n.f.", category: "cat16", example_fr: "J'ai écrit une lettre à ma mère.", example_en: "I wrote a letter to my mother." },
+            { french: "le colis", english: "the package", type: "n.m.", category: "cat16", example_fr: "J'envoie un colis au Japon.", example_en: "I am sending a package to Japan." },
+            { french: "le formulaire", english: "the form", type: "n.m.", category: "cat16", example_fr: "Veuillez remplir ce formulaire.", example_en: "Please fill out this form." },
+            { french: "le document", english: "the document", type: "n.m.", category: "cat16", example_fr: "Ce document est important.", example_en: "This document is important." },
+            { french: "le guichet", english: "the counter, window", type: "n.m.", category: "cat16", example_fr: "Allez au guichet numéro trois.", example_en: "Go to counter number three." },
+            { french: "la file", english: "the line, queue", type: "n.f.", category: "cat16", example_fr: "Il y a une longue file d'attente.", example_en: "There is a long waiting line." },
+            { french: "l'assurance (f)", english: "the insurance", type: "n.f.", category: "cat16", example_fr: "J'ai une assurance voyage.", example_en: "I have travel insurance." },
+            { french: "le papier", english: "the paper", type: "n.m.", category: "cat16", example_fr: "J'ai besoin d'un papier pour écrire.", example_en: "I need a piece of paper to write." },
+            { french: "l'argent (m)", english: "the money", type: "n.m.", category: "cat16", example_fr: "Où est l'argent ?", example_en: "Where is the money?" },
+            { french: "la banque", english: "the bank", type: "n.f.", category: "cat16", example_fr: "Je vais à la banque retirer de l'argent.", example_en: "I am going to the bank to withdraw money." },
+            { french: "le compte", english: "the account", type: "n.m.", category: "cat16", example_fr: "J'ai un compte bancaire.", example_en: "I have a bank account." },
+            { french: "retirer", english: "to withdraw (money)", type: "v.", category: "cat16", example_fr: "Je retire 50 euros.", example_en: "I withdraw 50 euros." },
+            { french: "déposer", english: "to deposit (money)", type: "v.", category: "cat16", example_fr: "Je dépose de l'argent sur mon compte.", example_en: "I deposit money into my account." },
+            { french: "le distributeur", english: "the ATM", type: "n.m.", category: "cat16", example_fr: "Le distributeur de billets est en panne.", example_en: "The ATM is broken." },
+            { french: "le prix", english: "the price", type: "n.m.", category: "cat16", example_fr: "Quel est le prix ?", example_en: "What is the price?" },
+            { french: "la facture", english: "the invoice, bill", type: "n.f.", category: "cat16", example_fr: "Je dois payer la facture d'électricité.", example_en: "I must pay the electricity bill." },
+            { french: "payer", english: "to pay", type: "v.", category: "cat16", example_fr: "Comment voulez-vous payer ?", example_en: "How do you want to pay?" },
+            { french: "la carte (bancaire)", english: "the (bank) card", type: "n.f.", category: "cat16", example_fr: "Je paie par carte.", example_en: "I pay by card." },
+            { french: "en espèces", english: "in cash", type: "expr.", category: "cat16", example_fr: "Je préfère payer en espèces.", example_en: "I prefer to pay in cash." },
+            { french: "la signature", english: "the signature", type: "n.f.", category: "cat16", example_fr: "Votre signature est requise.", example_en: "Your signature is required." },
+            { french: "signer", english: "to sign", type: "v.", category: "cat16", example_fr: "Veuillez signer ici.", example_en: "Please sign here." },
+            { french: "l'adresse (f)", english: "the address", type: "n.f.", category: "cat16", example_fr: "Quelle est votre adresse ?", example_en: "What is your address?" },
+            { french: "le numéro (de téléphone)", english: "the number (phone)", type: "n.m.", category: "cat16", example_fr: "Quel est votre numéro de téléphone ?", example_en: "What is your phone number?" },
+
+            // --- Catégorie 17: Communication & Médias (25 mots) ---
+            { french: "parler", english: "to speak", type: "v.", category: "cat17", example_fr: "Nous parlons de nos vacances.", example_en: "We are speaking about our vacation." },
+            { french: "dire", english: "to say, to tell", type: "v.", category: "cat17", example_fr: "Que dit-elle ?", example_en: "What is she saying?" },
+            { french: "écrire", english: "to write", type: "v.", category: "cat17", example_fr: "J'écris un email à mon collègue.", example_en: "I am writing an email to my colleague." },
+            { french: "l'email (m)", english: "the email", type: "n.m.", category: "cat17", example_fr: "J'ai reçu un email important.", example_en: "I received an important email." },
+            { french: "le message", english: "the message", type: "n.m.", category: "cat17", example_fr: "Laisse-moi un message.", example_en: "Leave me a message." },
+            { french: "le téléphone", english: "the phone", type: "n.m.", category: "cat17", example_fr: "Mon téléphone est en panne.", example_en: "My phone is broken." },
+            { french: "téléphoner (à)", english: "to phone, to call", type: "v.", category: "cat17", example_fr: "Je dois téléphoner à ma sœur.", example_en: "I must call my sister." },
+            { french: "l'appel (m)", english: "the call", type: "n.m.", category: "cat17", example_fr: "J'ai reçu un appel de mon chef.", example_en: "I received a call from my boss." },
+            { french: "la conversation", english: "the conversation", type: "n.f.", category: "cat17", example_fr: "Nous avons eu une longue conversation.", example_en: "We had a long conversation." },
+            { french: "la question", english: "the question", type: "n.f.", category: "cat17", example_fr: "J'ai une question à poser.", example_en: "I have a question to ask." },
+            { french: "la réponse", english: "the answer", type: "n.f.", category: "cat17", example_fr: "Quelle est la bonne réponse ?", example_en: "What is the correct answer?" },
+            { french: "le mot", english: "the word", type: "n.m.", category: "cat17", example_fr: "Je ne connais pas ce mot.", example_en: "I don't know this word." },
+            { french: "la phrase", english: "the sentence", type: "n.f.", category: "cat17", example_fr: "Fais une phrase simple.", example_en: "Make a simple sentence." },
+            { french: "l'information (f)", english: "the information", type: "n.f.", category: "cat17", example_fr: "J'ai besoin de plus d'informations.", example_en: "I need more information." },
+            { french: "la nouvelle", english: "the news, piece of news", type: "n.f.", category: "cat17", example_fr: "Quelle est la nouvelle ?", example_en: "What is the news?" },
+            { french: "le journal", english: "the newspaper", type: "n.m.", category: "cat17", example_fr: "Lis le journal tous les jours.", example_en: "Read the newspaper every day." },
+            { french: "le magazine", english: "the magazine", type: "n.m.", category: "cat17", example_fr: "C'est un magazine de mode.", example_en: "It is a fashion magazine." },
+            { french: "la radio", english: "the radio", type: "n.f.", category: "cat17", example_fr: "J'écoute la radio le matin.", example_en: "I listen to the radio in the morning." },
+            { french: "la télévision", english: "the television", type: "n.f.", category: "cat17", example_fr: "Nous regardons la télévision le soir.", example_en: "We watch television in the evening." },
+            { french: "internet", english: "the internet", type: "n.m.", category: "cat17", example_fr: "Je cherche l'information sur internet.", example_en: "I search for the information on the internet." },
+            { french: "le site web", english: "the website", type: "n.m.", category: "cat17", example_fr: "Quel est le site web de l'école ?", example_en: "What is the school's website?" },
+            { french: "le réseau social", english: "the social network", type: "n.m.", category: "cat17", example_fr: "J'utilise un réseau social pour parler à mes amis.", example_en: "I use a social network to talk to my friends." },
+            { french: "la photo", english: "the photo", type: "n.f.", category: "cat17", example_fr: "Regarde cette vieille photo.", example_en: "Look at this old photo." },
+            { french: "le commentaire", english: "the comment", type: "n.m.", category: "cat17", example_fr: "Laisse un commentaire sous la photo.", example_en: "Leave a comment under the photo." },
+            { french: "l'annonce (f)", english: "the advertisement, announcement", type: "n.f.", category: "cat17", example_fr: "J'ai vu une annonce pour un appartement.", example_en: "I saw an advertisement for an apartment." },
+
+            // --- Catégorie 18: Matériaux & Formes (25 mots) ---
+            { french: "le bois", english: "the wood", type: "n.m.", category: "cat18", example_fr: "La table est en bois.", example_en: "The table is made of wood." },
+            { french: "le métal", english: "the metal", type: "n.m.", category: "cat18", example_fr: "La chaise est en métal.", example_en: "The chair is made of metal." },
+            { french: "le plastique", english: "the plastic", type: "n.m.", category: "cat18", example_fr: "La bouteille est en plastique.", example_en: "The bottle is made of plastic." },
+            { french: "le verre", english: "the glass", type: "n.m.", category: "cat18", example_fr: "La fenêtre est en verre.", example_en: "The window is made of glass." },
+            { french: "le papier", english: "the paper", type: "n.m.", category: "cat18", example_fr: "J'écris sur du papier.", example_en: "I write on paper." },
+            { french: "le tissu", english: "the fabric, cloth", type: "n.m.", category: "cat18", example_fr: "La robe est en tissu doux.", example_en: "The dress is made of soft fabric." },
+            { french: "le cuir", english: "the leather", type: "n.m.", category: "cat18", example_fr: "J'ai un sac en cuir.", example_en: "I have a leather bag." },
+            { french: "la laine", english: "the wool", type: "n.f.", category: "cat18", example_fr: "Mon pull est en laine.", example_en: "My sweater is made of wool." },
+            { french: "le coton", english: "the cotton", type: "n.m.", category: "cat18", example_fr: "Le T-shirt est en coton.", example_en: "The T-shirt is made of cotton." },
+            { french: "l'or (m)", english: "the gold", type: "n.m.", category: "cat18", example_fr: "Elle porte une bague en or.", example_en: "She is wearing a gold ring." },
+            { french: "l'argent (m)", english: "the silver", type: "n.m.", category: "cat18", example_fr: "J'ai un bracelet en argent.", example_en: "I have a silver bracelet." },
+            { french: "rond/e", english: "round", type: "adj.", category: "cat18", example_fr: "Le ballon est rond.", example_en: "The ball is round." },
+            { french: "carré/e", english: "square", type: "adj.", category: "cat18", example_fr: "La table est carrée.", example_en: "The table is square." },
+            { french: "rectangle", english: "rectangular", type: "adj.", category: "cat18", example_fr: "Le tableau est rectangle.", example_en: "The painting is rectangular." },
+            { french: "triangulaire", english: "triangular", type: "adj.", category: "cat18", example_fr: "Cette forme est triangulaire.", example_en: "This shape is triangular." },
+            { french: "grand/e", english: "large", type: "adj.", category: "cat18", example_fr: "C'est une grande boîte.", example_en: "It is a large box." },
+            { french: "petit/e", english: "small", type: "adj.", category: "cat18", example_fr: "J'ai un petit bureau.", example_en: "I have a small desk." },
+            { french: "long/ue", english: "long", type: "adj.", category: "cat18", example_fr: "La route est longue.", example_en: "The road is long." },
+            { french: "court/e", english: "short", type: "adj.", category: "cat18", example_fr: "Le film est court.", example_en: "The movie is short." },
+            { french: "haut/e", english: "high, tall", type: "adj.", category: "cat18", example_fr: "C'est un immeuble très haut.", example_en: "It is a very tall building." },
+            { french: "bas/se", english: "low", type: "adj.", category: "cat18", example_fr: "Le prix est bas.", example_en: "The price is low." },
+            { french: "lourd/e", english: "heavy", type: "adj.", category: "cat18", example_fr: "Ce sac est lourd.", example_en: "This bag is heavy." },
+            { french: "léger/ère", english: "light (weight)", type: "adj.", category: "cat18", example_fr: "Le colis est léger.", example_en: "The package is light." },
+            { french: "dur/e", english: "hard", type: "adj.", category: "cat18", example_fr: "Cette pierre est dure.", example_en: "This stone is hard." },
+            { french: "mou/molle", english: "soft", type: "adj.", category: "cat18", example_fr: "Le lit est mou.", example_en: "The bed is soft." },
+
+            // --- Catégorie 19: Phrases utiles (Niveau A2) (25 mots) ---
+            { french: "Je ne suis pas d'accord", english: "I disagree", type: "expr.", category: "cat19", example_fr: "Je ne suis pas d'accord avec votre opinion.", example_en: "I disagree with your opinion." },
+            { french: "Vous avez raison", english: "You are right", type: "expr.", category: "cat19", example_fr: "Vous avez raison, c'est mieux comme ça.", example_en: "You are right, it is better this way." },
+            { french: "J'ai besoin de", english: "I need to", type: "expr.", category: "cat19", example_fr: "J'ai besoin d'acheter du pain.", example_en: "I need to buy some bread." },
+            { french: "Je voudrais", english: "I would like", type: "expr.", category: "cat19", example_fr: "Je voudrais un café, s'il vous plaît.", example_en: "I would like a coffee, please." },
+            { french: "Je peux vous aider ?", english: "Can I help you?", type: "expr.", category: "cat19", example_fr: "Bonjour, je peux vous aider ?", example_en: "Hello, can I help you?" },
+            { french: "Je ne peux pas", english: "I cannot", type: "expr.", category: "cat19", example_fr: "Je ne peux pas venir ce soir.", example_en: "I cannot come tonight." },
+            { french: "Est-ce que je peux", english: "May I...", type: "expr.", category: "cat19", example_fr: "Est-ce que je peux utiliser votre téléphone ?", example_en: "May I use your phone?" },
+            { french: "Quel est le problème ?", english: "What is the problem?", type: "expr.", category: "cat19", example_fr: "Quel est le problème avec votre voiture ?", example_en: "What is the problem with your car?" },
+            { french: "Je me suis perdu(e)", english: "I am lost", type: "expr.", category: "cat19", example_fr: "Excusez-moi, je me suis perdu.", example_en: "Excuse me, I am lost." },
+            { french: "Je cherche", english: "I am looking for", type: "expr.", category: "cat19", example_fr: "Je cherche la gare s'il vous plaît.", example_en: "I am looking for the station please." },
+            { french: "Pouvez-vous répéter ?", english: "Can you repeat?", type: "expr.", category: "cat19", example_fr: "Pouvez-vous répéter, s'il vous plaît ?", example_en: "Can you repeat, please?" },
+            { french: "Je ne comprends pas", english: "I don't understand", type: "expr.", category: "cat19", example_fr: "Je ne comprends pas cette règle.", example_en: "I don't understand this rule." },
+            { french: "Je m'appelle", english: "My name is", type: "expr.", category: "cat19", example_fr: "Je m'appelle Thomas.", example_en: "My name is Thomas." },
+            { french: "J'ai (âge) ans", english: "I am (age) years old", type: "expr.", category: "cat19", example_fr: "J'ai trente ans.", example_en: "I am thirty years old." },
+            { french: "Je suis de (ville/pays)", english: "I am from (city/country)", type: "expr.", category: "cat19", example_fr: "Je suis de Lyon, en France.", example_en: "I am from Lyon, in France." },
+            { french: "Je suis marié(e)", english: "I am married", type: "expr.", category: "cat19", example_fr: "Je suis marié et j'ai deux enfants.", example_en: "I am married and I have two children." },
+            { french: "Je suis célibataire", english: "I am single", type: "expr.", category: "cat19", example_fr: "Je suis célibataire et j'habite seul.", example_en: "I am single and I live alone." },
+            { french: "C'est combien ?", english: "How much is it?", type: "expr.", category: "cat19", example_fr: "Ce pantalon, c'est combien ?", example_en: "These pants, how much are they?" },
+            { french: "Où sont les toilettes ?", english: "Where are the restrooms?", type: "expr.", category: "cat19", example_fr: "Excusez-moi, où sont les toilettes ?", example_en: "Excuse me, where are the restrooms?" },
+            { french: "À quelle heure", english: "At what time", type: "expr.", category: "cat19", example_fr: "À quelle heure commence le film ?", example_en: "At what time does the movie start?" },
+            { french: "Passez une bonne journée", english: "Have a good day", type: "expr.", category: "cat19", example_fr: "Au revoir, passez une bonne journée.", example_en: "Goodbye, have a good day." },
+            { french: "J'ai hâte de", english: "I look forward to", type: "expr.", category: "cat19", example_fr: "J'ai hâte de te revoir.", example_en: "I look forward to seeing you again." },
+            { french: "Je peux vous laisser un message ?", english: "Can I leave you a message?", type: "expr.", category: "cat19", example_fr: "Je peux vous laisser un message pour votre collègue ?", example_en: "Can I leave a message for your colleague?" },
+            { french: "Je préfère", english: "I prefer", type: "expr.", category: "cat19", example_fr: "Je préfère la viande au poisson.", example_en: "I prefer meat over fish." },
+            { french: "Je suis désolé(e)", english: "I am sorry", type: "expr.", category: "cat19", example_fr: "Je suis désolé pour le retard.", example_en: "I am sorry for the delay." },
+
+            // --- Catégorie 20: Verbes Réfléchis Fréquents (25 mots) ---
+            { french: "se réveiller", english: "to wake up", type: "v.r.", category: "cat20", example_fr: "Je me réveille à six heures.", example_en: "I wake up at six o'clock." },
+            { french: "s'habiller", english: "to get dressed", type: "v.r.", category: "cat20", example_fr: "Il s'habille rapidement le matin.", example_en: "He gets dressed quickly in the morning." },
+            { french: "se doucher", english: "to take a shower", type: "v.r.", category: "cat20", example_fr: "Je me douche avant le travail.", example_en: "I take a shower before work." },
+            { french: "se brosser (les dents)", english: "to brush (one's teeth)", type: "v.r.", category: "cat20", example_fr: "Il se brosse les dents après chaque repas.", example_en: "He brushes his teeth after every meal." },
+            { french: "se promener", english: "to go for a walk", type: "v.r.", category: "cat20", example_fr: "Nous nous promenons au parc.", example_en: "We go for a walk in the park." },
+            { french: "s'asseoir", english: "to sit down", type: "v.r.", category: "cat20", example_fr: "Veuillez vous asseoir.", example_en: "Please sit down (formal/plural)." },
+            { french: "se dépêcher", english: "to hurry up", type: "v.r.", category: "cat20", example_fr: "Dépêchez-vous, le train part !", example_en: "Hurry up, the train is leaving!" },
+            { french: "se souvenir (de)", english: "to remember", type: "v.r.", category: "cat20", example_fr: "Je me souviens de mon enfance.", example_en: "I remember my childhood." },
+            { french: "s'appeler", english: "to be called", type: "v.r.", category: "cat20", example_fr: "Elle s'appelle Marie.", example_en: "She is called Marie." },
+            { french: "s'arrêter", english: "to stop (oneself)", type: "v.r.", category: "cat20", example_fr: "La voiture s'est arrêtée au feu rouge.", example_en: "The car stopped at the red light." },
+            { french: "se coucher", english: "to go to bed", type: "v.r.", category: "cat20", example_fr: "Les enfants se couchent à 20h.", example_en: "The children go to bed at 8 PM." },
+            { french: "se sentir", english: "to feel", type: "v.r.", category: "cat20", example_fr: "Comment te sens-tu aujourd'hui ?", example_en: "How do you feel today?" },
+            { french: "s'excuser", english: "to apologize", type: "v.r.", category: "cat20", example_fr: "Il s'excuse pour son retard.", example_en: "He apologizes for his delay." },
+            { french: "se préparer", english: "to get ready", type: "v.r.", category: "cat20", example_fr: "Je me prépare pour sortir.", example_en: "I am getting ready to go out." },
+            { french: "se tromper", english: "to be mistaken", type: "v.r.", category: "cat20", example_fr: "Je me suis trompé de numéro.", example_en: "I got the wrong number." },
+            { french: "se trouver", english: "to be located", type: "v.r.", category: "cat20", example_fr: "Le musée se trouve au centre-ville.", example_en: "The museum is located downtown." },
+            { french: "se rendre (à)", english: "to go (to a place)", type: "v.r.", category: "cat20", example_fr: "Je me rends à l'aéroport.", example_en: "I am going to the airport." },
+            { french: "se cacher", english: "to hide (oneself)", type: "v.r.", category: "cat20", example_fr: "Le chat se cache sous la table.", example_en: "The cat is hiding under the table." },
+            { french: "se coiffer", english: "to do one's hair", type: "v.r.", category: "cat20", example_fr: "Elle se coiffe dans la salle de bains.", example_en: "She does her hair in the bathroom." },
+            { french: "s'amuser", english: "to have fun", type: "v.r.", category: "cat20", example_fr: "Nous nous amusons bien à la fête.", example_en: "We are having a lot of fun at the party." },
+            { french: "se marier", english: "to get married", type: "v.r.", category: "cat20", example_fr: "Ils se sont mariés l'année dernière.", example_en: "They got married last year." },
+            { french: "se promener", english: "to go for a walk", type: "v.r.", category: "cat20", example_fr: "Nous nous sommes promenés dans le parc.", example_en: "We went for a walk in the park." },
+            { french: "s'endormir", english: "to fall asleep", type: "v.r.", category: "cat20", example_fr: "Je m'endors devant la télévision.", example_en: "I fall asleep in front of the television." },
+            { french: "se taire", english: "to be quiet", type: "v.r.", category: "cat20", example_fr: "Taisez-vous, s'il vous plaît !", example_en: "Be quiet, please!" },
+            { french: "se disputer", english: "to argue", type: "v.r.", category: "cat20", example_fr: "Ils se disputent souvent pour des choses stupides.", example_en: "They often argue over stupid things." }
         ];
-        
-        // Please paste the FULL 500-word array from the previous response here. 
-        // For this snippet to work, I will assume you will copy-paste the data.
-        // ... (Paste full array here) ...
 
         let currentDeck = [...masterDeck];
         let currentIndex = 0;
@@ -163,7 +680,15 @@
         const shuffleButton = document.getElementById('shuffle-button');
 
         function updateCard() {
-            if (currentDeck.length === 0) return;
+            if (currentDeck.length === 0) {
+                cardFrontText.textContent = "Aucune carte";
+                cardBackText.textContent = "";
+                cardTypeText.textContent = "";
+                exampleFr.textContent = "Veuillez choisir une autre catégorie.";
+                exampleEn.textContent = "";
+                updateProgress();
+                return;
+            }
             const card = currentDeck[currentIndex];
             cardFrontText.textContent = card.french;
             cardBackText.textContent = card.english;
@@ -184,16 +709,19 @@
         }
 
         function flipCard() {
+            if (currentDeck.length === 0) return;
             cardContainer.classList.toggle('is-flipped');
             isFlipped = !isFlipped;
         }
 
         function nextCard() {
+            if (currentDeck.length === 0) return;
             currentIndex = (currentIndex + 1) % currentDeck.length;
             updateCard();
         }
 
         function prevCard() {
+            if (currentDeck.length === 0) return;
             currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
             updateCard();
         }
@@ -218,6 +746,23 @@
             updateCard();
         }
 
+        // Audio Function
+        function playAudio(e) {
+            e.stopPropagation(); 
+            const text = currentDeck[currentIndex].french;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.9;
+                const voices = window.speechSynthesis.getVoices();
+                const frenchVoice = voices.find(voice => voice.lang.includes('fr'));
+                if (frenchVoice) utterance.voice = frenchVoice;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Event Listeners
         prevButton.addEventListener('click', (e) => { e.stopPropagation(); prevCard(); });
         nextButton.addEventListener('click', (e) => { e.stopPropagation(); nextCard(); });
         flipButton.addEventListener('click', (e) => { e.stopPropagation(); flipCard(); });
@@ -225,14 +770,19 @@
         categorySelect.addEventListener('change', filterDeck);
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextCard();
-            else if (e.key === 'ArrowLeft') prevCard();
-            else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+            if (e.key === 'ArrowRight') {
+                nextCard();
+            } else if (e.key === 'ArrowLeft') {
+                prevCard();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
         });
 
+        // Initial Load
+        window.speechSynthesis.getVoices();
         updateCard();
     </script>
 </body>
 </html>
-
-
