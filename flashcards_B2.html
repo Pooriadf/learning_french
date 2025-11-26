@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vocabulaire B2 - Style iOS</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
-        .mesh-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #0f172a; background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%), radial-gradient(at 80% 0%, hsla(260,100%,60%,0.6) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(240,100%,70%,0.6) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(280,100%,60%,0.6) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(220,100%,50%,0.6) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(200,100%,60%,0.6) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(270,100%,76%,0.6) 0px, transparent 50%); filter: blur(60px); opacity: 0.7; animation: meshMove 20s infinite alternate; }
+        .mesh-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%); background-image: radial-gradient(at 80% 0%, hsla(180,100%,50%,0.6) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(260,100%,70%,0.6) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(300,100%,60%,0.6) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(200,100%,50%,0.6) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(240,100%,70%,0.6) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(340,100%,76%,0.6) 0px, transparent 50%); filter: blur(60px); opacity: 0.7; animation: meshMove 20s infinite alternate; }
         @keyframes meshMove { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
         .flashcard-container { perspective: 1200px; }
         .flashcard { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -19,7 +17,7 @@
         select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
         .btn-glass { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease; }
         .btn-glass:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.4); }
-        .btn-primary { background: #5856D6; color: white; box-shadow: 0 4px 12px rgba(88, 86, 214, 0.3); transition: all 0.3s ease; }
+        .btn-primary { background: #00C7BE; color: white; box-shadow: 0 4px 12px rgba(0, 199, 190, 0.3); transition: all 0.3s ease; }
         .btn-primary:active { transform: scale(0.96); opacity: 0.9; }
         .nav-link { padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; text-decoration: none; }
         .nav-link-active { background-color: white; color: #1e293b; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -40,49 +38,46 @@
 
         <header class="text-center mb-1">
             <h1 class="text-4xl font-bold text-white tracking-tight drop-shadow-md">Vocabulaire B2</h1>
-            <p class="text-slate-200 font-medium text-lg opacity-90">500 mots avancés</p>
+            <p class="text-slate-200 font-medium text-lg opacity-90">Niveau Avancé</p>
         </header>
 
         <section class="bg-white/10 backdrop-blur-xl border border-white/20 p-2 rounded-3xl flex gap-2 shadow-lg">
             <div class="relative w-full">
                 <select id="category-select" class="w-full bg-white/20 border-none text-white font-medium rounded-2xl px-4 py-3 pr-10 focus:ring-2 focus:ring-white/50 outline-none transition hover:bg-white/30 cursor-pointer placeholder-white">
                     <option class="text-slate-800" value="all">Toutes les catégories</option>
-                    <option class="text-slate-800" value="cat1">Argumentation & Débat</option>
-                    <option class="text-slate-800" value="cat2">Connecteurs Logiques</option>
-                    <option class="text-slate-800" value="cat3">Environnement & Écologie</option>
-                    <option class="text-slate-800" value="cat4">Technologie & Innovation</option>
-                    <option class="text-slate-800" value="cat5">Monde du Travail & Éco</option>
-                    <option class="text-slate-800" value="cat6">Vie Citoyenne & Politique</option>
+                    <option class="text-slate-800" value="cat1">1. Verbes (Nuances & Action)</option>
+                    <option class="text-slate-800" value="cat2">2. Opinion & Débat</option>
+                    <option class="text-slate-800" value="cat3">3. Société & Politique</option>
+                    <option class="text-slate-800" value="cat4">4. Économie & Travail</option>
+                    <option class="text-slate-800" value="cat5">5. Environnement & Sciences</option>
+                    <option class="text-slate-800" value="cat6">6. Adjectifs (Caractère)</option>
+                    <option class="text-slate-800" value="cat7">7. Adjectifs (Appréciation)</option>
+                    <option class="text-slate-800" value="cat8">8. Connecteurs Logiques</option>
+                    <option class="text-slate-800" value="cat9">9. Expressions Idiomatiques</option>
+                    <option class="text-slate-800" value="cat10">10. Arts & Culture</option>
+                    <option class="text-slate-800" value="cat11">11. Problèmes & Solutions</option>
+                    <option class="text-slate-800" value="cat12">12. Sentiments Complexes</option>
+                    <option class="text-slate-800" value="cat13">13. Medias & Communication</option>
+                    <option class="text-slate-800" value="cat14">14. Noms Abstraits</option>
+                    <option class="text-slate-800" value="cat15">15. Verbes Pronominaux</option>
                 </select>
             </div>
-            <button id="shuffle-button" class="btn-glass p-3 rounded-2xl text-white" title="Mélanger">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l14.2 12.6"/><path d="M20 2l4 4-4 4"/><path d="M20 14l4 4-4 4"/></svg>
-            </button>
+            <button id="shuffle-button" class="btn-glass p-3 rounded-2xl text-white" title="Mélanger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l14.2 12.6"/><path d="M20 2l4 4-4 4"/><path d="M20 14l4 4-4 4"/></svg></button>
         </section>
 
         <section class="relative group">
-            <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 150</p>
+            <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur ...</p>
             
-            <!-- IMPORTANT: onclick="flipCard()" is still here, BUT the audio button below will stop it -->
             <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
-                    <!-- Front -->
                     <div class="flashcard-face flashcard-front">
                         <div class="flex flex-col items-center gap-4 z-10">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Français</span>
-                            <h2 id="card-front-text" class="text-4xl sm:text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
-                            
-                            <!-- AUDIO BUTTON WITH FIX -->
-                            <!-- onclick="playAudio(event)" ensures we capture the click before the card sees it -->
-                            <button onclick="playAudio(event)" class="mt-4 w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition shadow-sm active:scale-90">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                            </button>
-
+                            <h2 id="card-front-text" class="text-3xl sm:text-4xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
+                            <button onclick="playAudio(event)" class="mt-4 w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition shadow-sm active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
                             <p class="text-slate-400 text-sm mt-1 font-medium">Toucher pour retourner</p>
                         </div>
                     </div>
-                    
-                    <!-- Back -->
                     <div class="flashcard-face flashcard-back p-8">
                         <div class="w-full h-full flex flex-col justify-between items-center">
                             <div class="text-center">
@@ -90,13 +85,10 @@
                                 <h3 id="card-back-text" class="text-3xl font-bold text-slate-800 mb-1"></h3>
                                 <p id="card-type-text" class="text-lg text-slate-500 font-medium italic font-serif"></p>
                             </div>
-                            
-                            <div class="w-full bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                            <div class="w-full bg-slate-50 rounded-2xl p-4 border border-slate-100 relative">
                                 <!-- Sentence Audio Button -->
-                                <button onclick="playExampleAudio(event)" class="absolute top-2 right-2 text-slate-400 hover:text-indigo-500 transition p-1 active:scale-90">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                                </button>
-                                <p id="example-fr" class="text-lg text-slate-700 font-medium mb-1 text-center leading-snug"></p>
+                                <button onclick="playExampleAudio(event)" class="absolute top-2 right-2 text-slate-400 hover:text-indigo-500 transition p-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
+                                <p id="example-fr" class="text-lg text-slate-700 font-medium mb-1 text-center leading-snug pr-6"></p>
                                 <p id="example-en" class="text-sm text-slate-400 text-center"></p>
                             </div>
                         </div>
@@ -114,162 +106,319 @@
 
     <script>
         const masterDeck = [
-            // Cat 1
-            { french: "prétendre", english: "to claim/pretend", type: "v.", category: "cat1", example_fr: "Il prétend avoir la solution.", example_en: "He claims to have the solution." },
-            { french: "convaincre", english: "to convince", type: "v.", category: "cat1", example_fr: "Ses arguments ne m'ont pas convaincu.", example_en: "His arguments did not convince me." },
-            { french: "persuader", english: "to persuade", type: "v.", category: "cat1", example_fr: "J'ai réussi à le persuader de venir.", example_en: "I managed to persuade him to come." },
-            { french: "contredire", english: "to contradict", type: "v.", category: "cat1", example_fr: "Ne me contredis pas devant tout le monde.", example_en: "Don't contradict me in front of everyone." },
-            { french: "soutenir", english: "to support/maintain", type: "v.", category: "cat1", example_fr: "Je soutiens que cette décision est injuste.", example_en: "I maintain that this decision is unfair." },
-            { french: "démentir", english: "to deny/refute", type: "v.", category: "cat1", example_fr: "Le ministre a démenti les rumeurs.", example_en: "The minister denied the rumors." },
-            { french: "insinuer", english: "to insinuate", type: "v.", category: "cat1", example_fr: "Qu'essayez-vous d'insinuer ?", example_en: "What are you trying to insinuate?" },
-            { french: "remettre en cause", english: "to call into question", type: "v.", category: "cat1", example_fr: "Il remet en cause notre stratégie.", example_en: "He is calling our strategy into question." },
-            { french: "souligner", english: "to highlight/underline", type: "v.", category: "cat1", example_fr: "Je voudrais souligner l'importance de ce point.", example_en: "I would like to highlight the importance of this point." },
-            { french: "démontrer", english: "to demonstrate", type: "v.", category: "cat1", example_fr: "L'étude démontre l'efficacité du vaccin.", example_en: "The study demonstrates the effectiveness of the vaccine." },
-            { french: "exagérer", english: "to exaggerate", type: "v.", category: "cat1", example_fr: "N'exagère pas, ce n'est pas si grave.", example_en: "Don't exaggerate, it's not that serious." },
-            { french: "justifier", english: "to justify", type: "v.", category: "cat1", example_fr: "Comment justifiez-vous cette dépense ?", example_en: "How do you justify this expense?" },
-            { french: "critiquer", english: "to criticize", type: "v.", category: "cat1", example_fr: "Il est facile de critiquer sans agir.", example_en: "It's easy to criticize without acting." },
-            { french: "approuver", english: "to approve", type: "v.", category: "cat1", example_fr: "Le comité a approuvé le budget.", example_en: "The committee approved the budget." },
-            { french: "suggérer", english: "to suggest", type: "v.", category: "cat1", example_fr: "Je suggère de faire une pause.", example_en: "I suggest taking a break." },
-            { french: "négocier", english: "to negotiate", type: "v.", category: "cat1", example_fr: "Nous devons négocier le contrat.", example_en: "We must negotiate the contract." },
-            { french: "influencer", english: "to influence", type: "v.", category: "cat1", example_fr: "Les médias influencent l'opinion publique.", example_en: "The media influence public opinion." },
-            { french: "résoudre", english: "to resolve/solve", type: "v.", category: "cat1", example_fr: "Nous devons résoudre ce conflit rapidement.", example_en: "We must resolve this conflict quickly." },
-            { french: "aborder", english: "to tackle/approach", type: "v.", category: "cat1", example_fr: "Nous aborderons ce sujet demain.", example_en: "We will tackle this subject tomorrow." },
-            { french: "conclure", english: "to conclude", type: "v.", category: "cat1", example_fr: "Je voudrais conclure en remerciant l'équipe.", example_en: "I would like to conclude by thanking the team." },
-            { french: "la controverse", english: "controversy", type: "n.f.", category: "cat1", example_fr: "Cette loi a suscité une vive controverse.", example_en: "This law sparked a lively controversy." },
-            { french: "le préjugé", english: "prejudice", type: "n.m.", category: "cat1", example_fr: "Il faut lutter contre les préjugés.", example_en: "We must fight against prejudices." },
-            { french: "le consensus", english: "consensus", type: "n.m.", category: "cat1", example_fr: "Nous devons trouver un consensus.", example_en: "We must find a consensus." },
-            { french: "l'argument (m)", english: "argument/point", type: "n.m.", category: "cat1", example_fr: "C'est un argument convaincant.", example_en: "It's a convincing argument." },
-            { french: "le point de vue", english: "point of view", type: "n.m.", category: "cat1", example_fr: "Je respecte votre point de vue.", example_en: "I respect your point of view." },
-            // Cat 2
-            { french: "néanmoins", english: "nevertheless", type: "adv.", category: "cat2", example_fr: "Il est intelligent, néanmoins il manque d'expérience.", example_en: "He is smart, nevertheless he lacks experience." },
-            { french: "en revanche", english: "on the other hand", type: "adv.", category: "cat2", example_fr: "Paul est timide, en revanche sa sœur est très sociable.", example_en: "Paul is shy, on the other hand his sister is very sociable." },
-            { french: "par ailleurs", english: "furthermore/moreover", type: "adv.", category: "cat2", example_fr: "Ce projet est coûteux ; par ailleurs, il est risqué.", example_en: "This project is expensive; furthermore, it is risky." },
-            { french: "cependant", english: "however", type: "adv.", category: "cat2", example_fr: "J'ai étudié, cependant j'ai échoué.", example_en: "I studied, however I failed." },
-            { french: "toutefois", english: "however", type: "adv.", category: "cat2", example_fr: "La situation est grave, toutefois il y a de l'espoir.", example_en: "The situation is serious, however there is hope." },
-            { french: "or", english: "yet/now", type: "conj.", category: "cat2", example_fr: "Il voulait partir, or il n'avait pas d'argent.", example_en: "He wanted to leave, yet he had no money." },
-            { french: "ainsi que", english: "as well as", type: "conj.", category: "cat2", example_fr: "J'ai invité Paul ainsi que sa femme.", example_en: "I invited Paul as well as his wife." },
-            { french: "tandis que", english: "whereas", type: "conj.", category: "cat2", example_fr: "J'aime le thé, tandis qu'il préfère le café.", example_en: "I like tea, whereas he prefers coffee." },
-            { french: "bien que", english: "although (+ subj.)", type: "conj.", category: "cat2", example_fr: "Bien qu'il soit tard, je continue.", example_en: "Although it is late, I continue." },
-            { french: "quoique", english: "even though (+ subj.)", type: "conj.", category: "cat2", example_fr: "Quoique je sois fatigué, je viendrai.", example_en: "Even though I am tired, I will come." },
-            { french: "pourvu que", english: "provided that (+ subj.)", type: "conj.", category: "cat2", example_fr: "Nous sortirons pourvu qu'il fasse beau.", example_en: "We will go out provided that the weather is nice." },
-            { french: "à condition que", english: "on condition that (+ subj.)", type: "conj.", category: "cat2", example_fr: "Je t'aiderai à condition que tu fasses un effort.", example_en: "I will help you on condition that you make an effort." },
-            { french: "faute de", english: "for lack of", type: "prep.", category: "cat2", example_fr: "Faute de temps, nous n'avons pas fini.", example_en: "For lack of time, we didn't finish." },
-            { french: "grâce à", english: "thanks to (positive)", type: "prep.", category: "cat2", example_fr: "J'ai réussi grâce à ton aide.", example_en: "I succeeded thanks to your help." },
-            { french: "à cause de", english: "because of (negative)", type: "prep.", category: "cat2", example_fr: "Je suis en retard à cause du trafic.", example_en: "I am late because of traffic." },
-            { french: "en raison de", english: "due to (neutral)", type: "prep.", category: "cat2", example_fr: "Fermé en raison de travaux.", example_en: "Closed due to construction." },
-            { french: "dans le but de", english: "with the aim of", type: "prep.", category: "cat2", example_fr: "Il étudie dans le but de devenir médecin.", example_en: "He studies with the aim of becoming a doctor." },
-            { french: "afin de", english: "in order to", type: "prep.", category: "cat2", example_fr: "Je pars tôt afin d'arriver à l'heure.", example_en: "I leave early in order to arrive on time." },
-            { french: "au lieu de", english: "instead of", type: "prep.", category: "cat2", example_fr: "Fais du sport au lieu de regarder la télé.", example_en: "Exercise instead of watching TV." },
-            { french: "hormis", english: "except/apart from", type: "prep.", category: "cat2", example_fr: "Tout est prêt, hormis le dessert.", example_en: "Everything is ready, except the dessert." },
-            { french: "quant à", english: "as for", type: "prep.", category: "cat2", example_fr: "Quant à moi, je reste ici.", example_en: "As for me, I'm staying here." },
-            { french: "du fait que", english: "owing to the fact that", type: "conj.", category: "cat2", example_fr: "Cela est dû au fait qu'il est absent.", example_en: "This is owing to the fact that he is absent." },
-            { french: "si bien que", english: "so that/with the result that", type: "conj.", category: "cat2", example_fr: "Il a plu, si bien que le sol est mouillé.", example_en: "It rained, so that the ground is wet." },
-            { french: "c'est-à-dire", english: "that is to say", type: "conj.", category: "cat2", example_fr: "Il est bilingue, c'est-à-dire qu'il parle deux langues.", example_en: "He is bilingual, that is to say he speaks two languages." },
-            { french: "autrement dit", english: "in other words", type: "adv.", category: "cat2", example_fr: "C'est gratuit, autrement dit vous ne payez rien.", example_en: "It's free, in other words you pay nothing." },
-            // Cat 3
-            { french: "le réchauffement climatique", english: "global warming", type: "n.m.", category: "cat3", example_fr: "Le réchauffement climatique est une menace urgente.", example_en: "Global warming is an urgent threat." },
-            { french: "le développement durable", english: "sustainable development", type: "n.m.", category: "cat3", example_fr: "Nous devons investir dans le développement durable.", example_en: "We must invest in sustainable development." },
-            { french: "l'empreinte carbone", english: "carbon footprint", type: "n.f.", category: "cat3", example_fr: "Je réduis mon empreinte carbone en prenant le train.", example_en: "I reduce my carbon footprint by taking the train." },
-            { french: "les énergies renouvelables", english: "renewable energies", type: "n.f.pl.", category: "cat3", example_fr: "Le solaire et l'éolien sont des énergies renouvelables.", example_en: "Solar and wind are renewable energies." },
-            { french: "le gaspillage", english: "waste", type: "n.m.", category: "cat3", example_fr: "Le gaspillage alimentaire est un grand problème.", example_en: "Food waste is a big problem." },
-            { french: "la biodiversité", english: "biodiversity", type: "n.f.", category: "cat3", example_fr: "La protection de la biodiversité est essentielle.", example_en: "Protecting biodiversity is essential." },
-            { french: "polluer", english: "to pollute", type: "v.", category: "cat3", example_fr: "Les usines polluent l'air.", example_en: "Factories pollute the air." },
-            { french: "recycler", english: "to recycle", type: "v.", category: "cat3", example_fr: "Il est important de recycler le plastique.", example_en: "It is important to recycle plastic." },
-            { french: "préserver", english: "to preserve", type: "v.", category: "cat3", example_fr: "Nous devons préserver les forêts.", example_en: "We must preserve the forests." },
-            { french: "nuisible", english: "harmful", type: "adj.", category: "cat3", example_fr: "Ces produits sont nuisibles pour la santé.", example_en: "These products are harmful to health." },
-            { french: "l'épuisement (m)", english: "depletion", type: "n.m.", category: "cat3", example_fr: "L'épuisement des ressources naturelles.", example_en: "The depletion of natural resources." },
-            { french: "la sécheresse", english: "drought", type: "n.f.", category: "cat3", example_fr: "La sécheresse a détruit les récoltes.", example_en: "The drought destroyed the crops." },
-            { french: "l'inondation (f)", english: "flood", type: "n.f.", category: "cat3", example_fr: "Les inondations sont de plus en plus fréquentes.", example_en: "Floods are becoming more frequent." },
-            { french: "la déforestation", english: "deforestation", type: "n.f.", category: "cat3", example_fr: "La déforestation menace l'Amazonie.", example_en: "Deforestation threatens the Amazon." },
-            { french: "l'effet de serre", english: "greenhouse effect", type: "n.m.", category: "cat3", example_fr: "Les gaz à effet de serre augmentent.", example_en: "Greenhouse gases are increasing." },
-            { french: "écolo(gique)", english: "eco-friendly", type: "adj.", category: "cat3", example_fr: "J'essaie d'avoir un mode de vie plus écolo.", example_en: "I try to have a more eco-friendly lifestyle." },
-            { french: "trier", english: "to sort (waste)", type: "v.", category: "cat3", example_fr: "Je trie mes déchets chaque jour.", example_en: "I sort my waste every day." },
-            { french: "consommer", english: "to consume", type: "v.", category: "cat3", example_fr: "Nous consommons trop d'énergie.", example_en: "We consume too much energy." },
-            { french: "l'espèce (f)", english: "species", type: "n.f.", category: "cat3", example_fr: "De nombreuses espèces sont en danger.", example_en: "Many species are endangered." },
-            { french: "le déchet", english: "waste/rubbish", type: "n.m.", category: "cat3", example_fr: "Il faut réduire nos déchets.", example_en: "We must reduce our waste." },
-            { french: "biologique (bio)", english: "organic", type: "adj.", category: "cat3", example_fr: "J'achète des légumes biologiques.", example_en: "I buy organic vegetables." },
-            { french: "potable", english: "drinkable", type: "adj.", category: "cat3", example_fr: "L'eau du robinet est potable.", example_en: "Tap water is drinkable." },
-            { french: "toxique", english: "toxic", type: "adj.", category: "cat3", example_fr: "Ce produit chimique est toxique.", example_en: "This chemical product is toxic." },
-            { french: "sauver", english: "to save", type: "v.", category: "cat3", example_fr: "Il faut agir pour sauver la planète.", example_en: "We must act to save the planet." },
-            { french: "l'environnement (m)", english: "environment", type: "n.m.", category: "cat3", example_fr: "Respectons notre environnement.", example_en: "Let's respect our environment." },
-            // Cat 4
-            { french: "le numérique", english: "digital technology", type: "n.m.", category: "cat4", example_fr: "Le secteur du numérique recrute beaucoup.", example_en: "The digital sector is hiring a lot." },
-            { french: "l'intelligence artificielle", english: "artificial intelligence", type: "n.f.", category: "cat4", example_fr: "L'intelligence artificielle transforme nos vies.", example_en: "Artificial intelligence is transforming our lives." },
-            { french: "le réseau social", english: "social network", type: "n.m.", category: "cat4", example_fr: "Il passe trop de temps sur les réseaux sociaux.", example_en: "He spends too much time on social networks." },
-            { french: "télécharger", english: "to download/upload", type: "v.", category: "cat4", example_fr: "Je télécharge un fichier important.", example_en: "I am downloading an important file." },
-            { french: "le logiciel", english: "software", type: "n.m.", category: "cat4", example_fr: "Ce logiciel est très performant.", example_en: "This software is very powerful." },
-            { french: "les données (f.pl)", english: "data", type: "n.f.pl", category: "cat4", example_fr: "La protection des données est cruciale.", example_en: "Data protection is crucial." },
-            { french: "le mot de passe", english: "password", type: "n.m.", category: "cat4", example_fr: "J'ai oublié mon mot de passe.", example_en: "I forgot my password." },
-            { french: "le fichier", english: "file", type: "n.m.", category: "cat4", example_fr: "Enregistrez le fichier sur le bureau.", example_en: "Save the file on the desktop." },
-            { french: "le lien", english: "link", type: "n.m.", category: "cat4", example_fr: "Cliquez sur le lien ci-dessous.", example_en: "Click on the link below." },
-            { french: "l'écran tactile", english: "touch screen", type: "n.m.", category: "cat4", example_fr: "Mon téléphone a un écran tactile.", example_en: "My phone has a touch screen." },
-            { french: "sans fil", english: "wireless", type: "adj.", category: "cat4", example_fr: "J'utilise des écouteurs sans fil.", example_en: "I use wireless headphones." },
-            { french: "brancher", english: "to plug in", type: "v.", category: "cat4", example_fr: "Où puis-je brancher mon ordinateur ?", example_en: "Where can I plug in my computer?" },
-            { french: "le clavier", english: "keyboard", type: "n.m.", category: "cat4", example_fr: "Le clavier azerty est utilisé en France.", example_en: "The azerty keyboard is used in France." },
-            { french: "le disque dur", english: "hard drive", type: "n.m.", category: "cat4", example_fr: "Mon disque dur est plein.", example_en: "My hard drive is full." },
-            { french: "la mise à jour", english: "update", type: "n.f.", category: "cat4", example_fr: "Une mise à jour est disponible.", example_en: "An update is available." },
-            { french: "le bogue (bug)", english: "bug", type: "n.m.", category: "cat4", example_fr: "Il y a un bogue dans le système.", example_en: "There is a bug in the system." },
-            { french: "le pirate informatique", english: "hacker", type: "n.m.", category: "cat4", example_fr: "Un pirate a volé mes informations.", example_en: "A hacker stole my information." },
-            { french: "l'internaute", english: "internet user", type: "n.m.", category: "cat4", example_fr: "Les internautes donnent leur avis.", example_en: "Internet users give their opinion." },
-            { french: "le courriel", english: "email (formal)", type: "n.m.", category: "cat4", example_fr: "Envoyez-moi un courriel.", example_en: "Send me an email." },
-            { french: "imprimer", english: "to print", type: "v.", category: "cat4", example_fr: "Je dois imprimer ce document.", example_en: "I must print this document." },
-            { french: "sauvegarder", english: "to save (data)", type: "v.", category: "cat4", example_fr: "Pensez à sauvegarder votre travail.", example_en: "Remember to save your work." },
-            { french: "supprimer", english: "to delete", type: "v.", category: "cat4", example_fr: "J'ai supprimé le message par erreur.", example_en: "I deleted the message by mistake." },
-            { french: "virtuel", english: "virtual", type: "adj.", category: "cat4", example_fr: "La réalité virtuelle est immersive.", example_en: "Virtual reality is immersive." },
-            { french: "le moteur de recherche", english: "search engine", type: "n.m.", category: "cat4", example_fr: "Utilisez un moteur de recherche pour trouver la réponse.", example_en: "Use a search engine to find the answer." },
-            { french: "innover", english: "to innovate", type: "v.", category: "cat4", example_fr: "Il faut innover pour rester compétitif.", example_en: "We must innovate to remain competitive." },
-            // Cat 5
-            { french: "démissionner", english: "to resign", type: "v.", category: "cat5", example_fr: "Il a démissionné de son poste.", example_en: "He resigned from his position." },
-            { french: "embaucher", english: "to hire", type: "v.", category: "cat5", example_fr: "L'entreprise va embaucher dix personnes.", example_en: "The company is going to hire ten people." },
-            { french: "le chômage", english: "unemployment", type: "n.m.", category: "cat5", example_fr: "Le taux de chômage est élevé.", example_en: "The unemployment rate is high." },
-            { french: "la grève", english: "strike", type: "n.f.", category: "cat5", example_fr: "Les transports sont en grève.", example_en: "Transport is on strike." },
-            { french: "le syndicat", english: "union", type: "n.m.", category: "cat5", example_fr: "Le syndicat négocie avec la direction.", example_en: "The union is negotiating with management." },
-            { french: "la faillite", english: "bankruptcy", type: "n.f.", category: "cat5", example_fr: "L'entreprise a fait faillite.", example_en: "The company went bankrupt." },
-            { french: "l'entretien d'embauche", english: "job interview", type: "n.m.", category: "cat5", example_fr: "J'ai un entretien d'embauche demain.", example_en: "I have a job interview tomorrow." },
-            { french: "le CV (curriculum vitae)", english: "resume", type: "n.m.", category: "cat5", example_fr: "Envoyez-nous votre CV.", example_en: "Send us your resume." },
-            { french: "la lettre de motivation", english: "cover letter", type: "n.f.", category: "cat5", example_fr: "La lettre de motivation est importante.", example_en: "The cover letter is important." },
-            { french: "le salaire", english: "salary", type: "n.m.", category: "cat5", example_fr: "Il demande une augmentation de salaire.", example_en: "He is asking for a salary raise." },
-            { french: "le congé", english: "leave/time off", type: "n.m.", category: "cat5", example_fr: "Je suis en congé la semaine prochaine.", example_en: "I am on leave next week." },
-            { french: "la retraite", english: "retirement", type: "n.f.", category: "cat5", example_fr: "Il prendra sa retraite à 65 ans.", example_en: "He will retire at 65." },
-            { french: "le chiffre d'affaires", english: "turnover/revenue", type: "n.m.", category: "cat5", example_fr: "Le chiffre d'affaires a augmenté.", example_en: "The revenue has increased." },
-            { french: "investir", english: "to invest", type: "v.", category: "cat5", example_fr: "Il faut investir dans l'immobilier.", example_en: "One must invest in real estate." },
-            { french: "la dette", english: "debt", type: "n.f.", category: "cat5", example_fr: "Il a remboursé sa dette.", example_en: "He paid off his debt." },
-            { french: "le bénéfice", english: "profit", type: "n.m.", category: "cat5", example_fr: "L'entreprise a réalisé des bénéfices.", example_en: "The company made profits." },
-            { french: "le concurrent", english: "competitor", type: "n.m.", category: "cat5", example_fr: "C'est notre principal concurrent.", example_en: "It is our main competitor." },
-            { french: "le marché", english: "market", type: "n.m.", category: "cat5", example_fr: "Le marché de l'emploi est difficile.", example_en: "The job market is difficult." },
-            { french: "gérer", english: "to manage", type: "v.", category: "cat5", example_fr: "Elle gère une équipe de vente.", example_en: "She manages a sales team." },
-            { french: "promouvoir", english: "to promote", type: "v.", category: "cat5", example_fr: "Il a été promu directeur.", example_en: "He was promoted to director." },
-            { french: "efficace", english: "efficient", type: "adj.", category: "cat5", example_fr: "C'est une méthode très efficace.", example_en: "It's a very efficient method." },
-            { french: "la compétence", english: "skill", type: "n.f.", category: "cat5", example_fr: "Il a les compétences requises.", example_en: "He has the required skills." },
-            { french: "le stage", english: "internship", type: "n.m.", category: "cat5", example_fr: "Elle cherche un stage de fin d'études.", example_en: "She is looking for a final internship." },
-            { french: "le patron", english: "boss", type: "n.m.", category: "cat5", example_fr: "Le patron est en réunion.", example_en: "The boss is in a meeting." },
-            { french: "la réunion", english: "meeting", type: "n.f.", category: "cat5", example_fr: "La réunion a été annulée.", example_en: "The meeting was canceled." },
-            // Cat 6
-            { french: "la citoyenneté", english: "citizenship", type: "n.f.", category: "cat6", example_fr: "Il a demandé la citoyenneté française.", example_en: "He applied for French citizenship." },
-            { french: "le bénévole", english: "volunteer", type: "n.m.", category: "cat6", example_fr: "Il travaille comme bénévole pour une association.", example_en: "He works as a volunteer for a non-profit." },
-            { french: "l'électeur", english: "voter", type: "n.m.", category: "cat6", example_fr: "Les électeurs sont appelés aux urnes.", example_en: "Voters are called to the polls." },
-            { french: "s'engager", english: "to commit/get involved", type: "v.r.", category: "cat6", example_fr: "Elle s'engage pour la cause animale.", example_en: "She commits herself to the animal cause." },
-            { french: "la solidarité", english: "solidarity", type: "n.f.", category: "cat6", example_fr: "La solidarité est importante en temps de crise.", example_en: "Solidarity is important in times of crisis." },
-            { french: "le droit de l'homme", english: "human right", type: "n.m.", category: "cat6", example_fr: "Le respect des droits de l'homme est fondamental.", example_en: "Respect for human rights is fundamental." },
-            { french: "la manifestation", english: "protest/demonstration", type: "n.f.", category: "cat6", example_fr: "La manifestation a été pacifique.", example_en: "The protest was peaceful." },
-            { french: "la laïcité", english: "secularism", type: "n.f.", category: "cat6", example_fr: "La laïcité est un principe clé en France.", example_en: "Secularism is a key principle in France." },
-            { french: "l'impôt", english: "tax", type: "n.m.", category: "cat6", example_fr: "Payer ses impôts est un devoir.", example_en: "Paying taxes is a duty." },
-            { french: "l'intégration", english: "integration", type: "n.f.", category: "cat6", example_fr: "L'intégration des immigrés est un défi.", example_en: "Immigrant integration is a challenge." },
-            { french: "le sondage", english: "poll/survey", type: "n.m.", category: "cat6", example_fr: "Selon un récent sondage, les avis sont partagés.", example_en: "According to a recent poll, opinions are split." },
-            { french: "la démocratie", english: "democracy", type: "n.f.", category: "cat6", example_fr: "La démocratie permet au peuple de choisir.", example_en: "Democracy allows the people to choose." },
-            { french: "l'égalité", english: "equality", type: "n.f.", category: "cat6", example_fr: "L'égalité entre hommes et femmes progresse.", example_en: "Gender equality is progressing." },
-            { french: "la liberté d'expression", english: "freedom of speech", type: "n.f.", category: "cat6", example_fr: "La liberté d'expression a des limites.", example_en: "Freedom of speech has limits." },
-            { french: "élire", english: "to elect", type: "v.", category: "cat6", example_fr: "Ils ont élu un nouveau maire.", example_en: "They elected a new mayor." },
-            { french: "débattre", english: "to debate", type: "v.", category: "cat6", example_fr: "Nous devons débattre de ce sujet.", example_en: "We must debate this subject." },
-            { french: "la réforme", english: "reform", type: "n.f.", category: "cat6", example_fr: "La réforme des retraites est impopulaire.", example_en: "The pension reform is unpopular." },
-            { french: "le discours", english: "speech", type: "n.m.", category: "cat6", example_fr: "Le président a prononcé un discours.", example_en: "The president gave a speech." },
-            { french: "la communauté", english: "community", type: "n.f.", category: "cat6", example_fr: "Il est très actif dans sa communauté.", example_en: "He is very active in his community." },
-            { french: "les services publics", english: "public services", type: "n.m.pl.", category: "cat6", example_fr: "Il faut défendre les services publics.", example_en: "We must defend public services." },
-            { french: "la frontière", english: "border", type: "n.f.", category: "cat6", example_fr: "Les frontières sont ouvertes.", example_en: "The borders are open." },
-            { french: "le passeport", english: "passport", type: "n.m.", category: "cat6", example_fr: "Mon passeport est valide pour dix ans.", example_en: "My passport is valid for ten years." },
-            { french: "le visa", english: "visa", type: "n.m.", category: "cat6", example_fr: "J'ai besoin d'un visa pour voyager.", example_en: "I need a visa to travel." },
-            { french: "l'ambassade", english: "embassy", type: "n.f.", category: "cat6", example_fr: "Contactez l'ambassade en cas de problème.", example_en: "Contact the embassy in case of a problem." },
-            { french: "le patrimoine", english: "heritage", type: "n.m.", category: "cat6", example_fr: "Ce château fait partie du patrimoine national.", example_en: "This castle is part of the national heritage." }
+            // --- Catégorie 1: Verbes (Nuances & Action) ---
+            { french: "aboutir (à)", english: "to lead to, succeed", type: "v.", category: "cat1", example_fr: "Les négociations ont finalement abouti à un accord.", example_en: "The negotiations finally led to an agreement." },
+            { french: "accroître", english: "to increase, grow", type: "v.", category: "cat1", example_fr: "L'entreprise cherche à accroître ses parts de marché.", example_en: "The company seeks to increase its market share." },
+            { french: "acquérir", english: "to acquire", type: "v.", category: "cat1", example_fr: "Il a acquis une grande expérience dans ce domaine.", example_en: "He has acquired great experience in this field." },
+            { french: "atteindre", english: "to reach, attain", type: "v.", category: "cat1", example_fr: "Nous espérons atteindre nos objectifs avant la fin de l'année.", example_en: "We hope to reach our goals before the end of the year." },
+            { french: "bénéficier (de)", english: "to benefit (from)", type: "v.", category: "cat1", example_fr: "Les étudiants bénéficient de réductions au cinéma.", example_en: "Students benefit from discounts at the cinema." },
+            { french: "cibler", english: "to target", type: "v.", category: "cat1", example_fr: "Cette campagne publicitaire cible les jeunes adultes.", example_en: "This advertising campaign targets young adults." },
+            { french: "concevoir", english: "to design, conceive", type: "v.", category: "cat1", example_fr: "L'architecte a conçu un bâtiment écologique.", example_en: "The architect designed an eco-friendly building." },
+            { french: "contraindre", english: "to force, compel", type: "v.", category: "cat1", example_fr: "La météo nous a contraints à annuler l'événement.", example_en: "The weather forced us to cancel the event." },
+            { french: "déclencher", english: "to trigger", type: "v.", category: "cat1", example_fr: "Cette décision a déclenché une vague de protestations.", example_en: "This decision triggered a wave of protests." },
+            { french: "démontrer", english: "to demonstrate, prove", type: "v.", category: "cat1", example_fr: "L'étude démontre l'efficacité de ce nouveau médicament.", example_en: "The study demonstrates the effectiveness of this new drug." },
+            { french: "effectuer", english: "to carry out, perform", type: "v.", category: "cat1", example_fr: "Le technicien a effectué les réparations nécessaires.", example_en: "The technician performed the necessary repairs." },
+            { french: "élaborer", english: "to develop, work out", type: "v.", category: "cat1", example_fr: "Ils ont élaboré un plan complexe pour redresser l'entreprise.", example_en: "They developed a complex plan to turn the company around." },
+            { french: "entreprendre", english: "to undertake", type: "v.", category: "cat1", example_fr: "Elle a décidé d'entreprendre des études de droit.", example_en: "She decided to undertake law studies." },
+            { french: "exiger", english: "to demand, require", type: "v.", category: "cat1", example_fr: "Ce travail exige beaucoup de patience et de précision.", example_en: "This work requires a lot of patience and precision." },
+            { french: "favoriser", english: "to favor, promote", type: "v.", category: "cat1", example_fr: "Le gouvernement souhaite favoriser l'emploi des jeunes.", example_en: "The government wishes to promote youth employment." },
+            { french: "garantir", english: "to guarantee", type: "v.", category: "cat1", example_fr: "Nous ne pouvons pas garantir le succès de l'opération.", example_en: "We cannot guarantee the success of the operation." },
+            { french: "instaurer", english: "to establish, institute", type: "v.", category: "cat1", example_fr: "Une nouvelle loi a été instaurée pour protéger l'environnement.", example_en: "A new law was instituted to protect the environment." },
+            { french: "maîtriser", english: "to master, control", type: "v.", category: "cat1", example_fr: "Il maîtrise parfaitement trois langues étrangères.", example_en: "He perfectly masters three foreign languages." },
+            { french: "mener", english: "to lead, conduct", type: "v.", category: "cat1", example_fr: "La police mène une enquête sur l'incident.", example_en: "The police are conducting an investigation into the incident." },
+            { french: "parvenir (à)", english: "to manage to, succeed in", type: "v.", category: "cat1", example_fr: "Je ne parviens pas à comprendre son raisonnement.", example_en: "I cannot manage to understand his reasoning." },
+            { french: "prévoir", english: "to foresee, predict", type: "v.", category: "cat1", example_fr: "Il est difficile de prévoir les conséquences à long terme.", example_en: "It is difficult to foresee the long-term consequences." },
+            { french: "renforcer", english: "to strengthen, reinforce", type: "v.", category: "cat1", example_fr: "Ces mesures visent à renforcer la sécurité.", example_en: "These measures aim to strengthen security." },
+            { french: "subir", english: "to undergo, suffer", type: "v.", category: "cat1", example_fr: "Le secteur a subi de lourdes pertes l'année dernière.", example_en: "The sector suffered heavy losses last year." },
+            { french: "surmonter", english: "to overcome", type: "v.", category: "cat1", example_fr: "Elle a su surmonter ses peurs pour réussir.", example_en: "She knew how to overcome her fears to succeed." },
+            { french: "viser", english: "to aim at", type: "v.", category: "cat1", example_fr: "Cette politique vise à réduire les inégalités.", example_en: "This policy aims to reduce inequalities." },
+
+            // --- Catégorie 2: Opinion & Débat ---
+            { french: "admettre", english: "to admit", type: "v.", category: "cat2", example_fr: "Je dois admettre que vous aviez raison.", example_en: "I must admit that you were right." },
+            { french: "approuver", english: "to approve", type: "v.", category: "cat2", example_fr: "Le conseil a approuvé le budget à l'unanimité.", example_en: "The council unanimously approved the budget." },
+            { french: "argumenter", english: "to argue (make a case)", type: "v.", category: "cat2", example_fr: "Il a bien argumenté pour défendre son point de vue.", example_en: "He argued well to defend his point of view." },
+            { french: "certes", english: "admittedly, certainly", type: "adv.", category: "cat2", example_fr: "Certes, c'est cher, mais la qualité est là.", example_en: "Admittedly, it is expensive, but the quality is there." },
+            { french: "contester", english: "to dispute, challenge", type: "v.", category: "cat2", example_fr: "Ils contestent la décision du tribunal.", example_en: "They are challenging the court's decision." },
+            { french: "convaincre", english: "to convince", type: "v.", category: "cat2", example_fr: "J'ai essayé de le convaincre de venir, sans succès.", example_en: "I tried to convince him to come, without success." },
+            { french: "critiquer", english: "to criticize", type: "v.", category: "cat2", example_fr: "Il est facile de critiquer sans proposer de solutions.", example_en: "It is easy to criticize without proposing solutions." },
+            { french: "débattre", english: "to debate", type: "v.", category: "cat2", example_fr: "Nous avons débattu de ce sujet pendant des heures.", example_en: "We debated this topic for hours." },
+            { french: "démentir", english: "to deny (a rumor)", type: "v.", category: "cat2", example_fr: "Le ministre a démenti les rumeurs de démission.", example_en: "The minister denied the resignation rumors." },
+            { french: "dénoncer", english: "to denounce", type: "v.", category: "cat2", example_fr: "L'association dénonce les conditions de travail déplorables.", example_en: "The association denounces the deplorable working conditions." },
+            { french: "estimer", english: "to estimate, consider", type: "v.", category: "cat2", example_fr: "J'estime qu'il est trop tôt pour conclure.", example_en: "I consider that it is too early to conclude." },
+            { french: "évoquer", english: "to mention, evoke", type: "v.", category: "cat2", example_fr: "Le président a évoqué la possibilité d'une réforme.", example_en: "The president mentioned the possibility of a reform." },
+            { french: "insister (sur)", english: "to insist (on)", type: "v.", category: "cat2", example_fr: "Je voudrais insister sur l'importance de ce point.", example_en: "I would like to insist on the importance of this point." },
+            { french: "justifier", english: "to justify", type: "v.", category: "cat2", example_fr: "Comment justifiez-vous ce retard ?", example_en: "How do you justify this delay?" },
+            { french: "persuader", english: "to persuade", type: "v.", category: "cat2", example_fr: "Elle m'a persuadé de changer d'avis.", example_en: "She persuaded me to change my mind." },
+            { french: "préconiser", english: "to advocate, recommend", type: "v.", category: "cat2", example_fr: "Les experts préconisent une réduction du sucre.", example_en: "Experts advocate a reduction in sugar." },
+            { french: "prétendre", english: "to claim", type: "v.", category: "cat2", example_fr: "Il prétend être un expert, mais j'en doute.", example_en: "He claims to be an expert, but I doubt it." },
+            { french: "prouver", english: "to prove", type: "v.", category: "cat2", example_fr: "Vous devez prouver votre identité.", example_en: "You must prove your identity." },
+            { french: "réfuter", english: "to refute", type: "v.", category: "cat2", example_fr: "L'avocat a réfuté les accusations une par une.", example_en: "The lawyer refuted the accusations one by one." },
+            { french: "remettre en cause", english: "to question, challenge", type: "v.", category: "cat2", example_fr: "La crise nous oblige à remettre en cause notre modèle.", example_en: "The crisis forces us to question our model." },
+            { french: "revendiquer", english: "to claim, demand", type: "v.", category: "cat2", example_fr: "Le groupe a revendiqué l'attaque.", example_en: "The group claimed the attack." },
+            { french: "soutenir", english: "to support, maintain", type: "v.", category: "cat2", example_fr: "Je soutiens que cette solution est la meilleure.", example_en: "I maintain that this solution is the best." },
+            { french: "suggérer", english: "to suggest", type: "v.", category: "cat2", example_fr: "Je vous suggère de prendre rendez-vous.", example_en: "I suggest you make an appointment." },
+            { french: "supposer", english: "to suppose", type: "v.", category: "cat2", example_fr: "Je suppose qu'il sera en retard, comme d'habitude.", example_en: "I suppose he will be late, as usual." },
+            { french: "un point de vue", english: "a point of view", type: "n.m.", category: "cat2", example_fr: "D'un point de vue économique, c'est risqué.", example_en: "From an economic point of view, it is risky." },
+
+            // --- Catégorie 3: Société & Politique ---
+            { french: "une association", english: "an association, non-profit", type: "n.f.", category: "cat3", example_fr: "Je suis bénévole dans une association caritative.", example_en: "I volunteer in a charity organization." },
+            { french: "l'autorité (f)", english: "authority", type: "n.f.", category: "cat3", example_fr: "Il faut respecter l'autorité de l'État.", example_en: "One must respect the authority of the State." },
+            { french: "la citoyenneté", english: "citizenship", type: "n.f.", category: "cat3", example_fr: "L'école joue un rôle clé dans l'éducation à la citoyenneté.", example_en: "School plays a key role in citizenship education." },
+            { french: "la communauté", english: "community", type: "n.f.", category: "cat3", example_fr: "La communauté internationale doit réagir.", example_en: "The international community must react." },
+            { french: "le conflit", english: "conflict", type: "n.m.", category: "cat3", example_fr: "Le conflit armé a causé de nombreux déplacements.", example_en: "The armed conflict caused many displacements." },
+            { french: "la démocratie", english: "democracy", type: "n.f.", category: "cat3", example_fr: "La liberté de la presse est essentielle à la démocratie.", example_en: "Freedom of the press is essential to democracy." },
+            { french: "la discrimination", english: "discrimination", type: "n.f.", category: "cat3", example_fr: "La loi interdit toute forme de discrimination.", example_en: "The law forbids any form of discrimination." },
+            { french: "la diversité", english: "diversity", type: "n.f.", category: "cat3", example_fr: "La diversité culturelle est une richesse.", example_en: "Cultural diversity is a wealth." },
+            { french: "un droit", english: "a right", type: "n.m.", category: "cat3", example_fr: "Le droit de vote est fondamental.", example_en: "The right to vote is fundamental." },
+            { french: "l'égalité (f)", english: "equality", type: "n.f.", category: "cat3", example_fr: "Nous luttons pour l'égalité des chances.", example_en: "We fight for equal opportunities." },
+            { french: "un élu", english: "an elected official", type: "n.m.", category: "cat3", example_fr: "Les élus locaux ont voté le budget.", example_en: "Local elected officials voted on the budget." },
+            { french: "un enjeu", english: "a stake, issue", type: "n.m.", category: "cat3", example_fr: "L'enjeu écologique est majeur pour notre siècle.", example_en: "The ecological stake is major for our century." },
+            { french: "l'immigration (f)", english: "immigration", type: "n.f.", category: "cat3", example_fr: "Le débat sur l'immigration est souvent passionné.", example_en: "The debate on immigration is often passionate." },
+            { french: "une inégalité", english: "inequality", type: "n.f.", category: "cat3", example_fr: "Les inégalités de revenus se sont creusées.", example_en: "Income inequalities have widened." },
+            { french: "la laïcité", english: "secularism", type: "n.f.", category: "cat3", example_fr: "La laïcité garantit la liberté de conscience.", example_en: "Secularism guarantees freedom of conscience." },
+            { french: "une loi", english: "a law", type: "n.f.", category: "cat3", example_fr: "Le parlement a adopté une nouvelle loi.", example_en: "The parliament adopted a new law." },
+            { french: "une manifestation", english: "a protest, demonstration", type: "n.f.", category: "cat3", example_fr: "Des milliers de personnes ont participé à la manifestation.", example_en: "Thousands of people participated in the protest." },
+            { french: "un parti", english: "a party (political)", type: "n.m.", category: "cat3", example_fr: "Il a adhéré à un parti politique de gauche.", example_en: "He joined a left-wing political party." },
+            { french: "la polémique", english: "controversy", type: "n.f.", category: "cat3", example_fr: "Ses propos ont déclenché une vive polémique.", example_en: "His remarks triggered a lively controversy." },
+            { french: "une réforme", english: "a reform", type: "n.f.", category: "cat3", example_fr: "La réforme des retraites est impopulaire.", example_en: "The pension reform is unpopular." },
+            { french: "la solidarité", english: "solidarity", type: "n.f.", category: "cat3", example_fr: "La crise a suscité un élan de solidarité.", example_en: "The crisis sparked a wave of solidarity." },
+            { french: "un sondage", english: "a poll, survey", type: "n.m.", category: "cat3", example_fr: "Selon un sondage, 60% des Français sont d'accord.", example_en: "According to a poll, 60% of French people agree." },
+            { french: "le système", english: "the system", type: "n.m.", category: "cat3", example_fr: "Le système éducatif doit être modernisé.", example_en: "The education system must be modernized." },
+            { french: "une valeur", english: "a value", type: "n.f.", category: "cat3", example_fr: "La liberté est une valeur républicaine.", example_en: "Freedom is a republican value." },
+            { french: "le vote", english: "voting, vote", type: "n.m.", category: "cat3", example_fr: "Le vote est un devoir civique.", example_en: "Voting is a civic duty." },
+
+            // --- Catégorie 4: Économie & Travail ---
+            { french: "un atout", english: "an asset", type: "n.m.", category: "cat4", example_fr: "Parler anglais est un atout pour ce poste.", example_en: "Speaking English is an asset for this position." },
+            { french: "le bilan", english: "balance sheet, assessment", type: "n.m.", category: "cat4", example_fr: "C'est l'heure de faire le bilan de l'année.", example_en: "It is time to assess the year." },
+            { french: "le budget", english: "budget", type: "n.m.", category: "cat4", example_fr: "Nous devons réduire notre budget de fonctionnement.", example_en: "We must reduce our operating budget." },
+            { french: "le chômage", english: "unemployment", type: "n.m.", category: "cat4", example_fr: "Le taux de chômage a légèrement baissé.", example_en: "The unemployment rate slightly decreased." },
+            { french: "la concurrence", english: "competition", type: "n.f.", category: "cat4", example_fr: "La concurrence est rude dans ce secteur.", example_en: "Competition is tough in this sector." },
+            { french: "la consommation", english: "consumption", type: "n.f.", category: "cat4", example_fr: "La consommation des ménages a augmenté.", example_en: "Household consumption has increased." },
+            { french: "la croissance", english: "growth", type: "n.f.", category: "cat4", example_fr: "La croissance économique ralentit.", example_en: "Economic growth is slowing down." },
+            { french: "un débouché", english: "job prospect, outlet", type: "n.m.", category: "cat4", example_fr: "Cette filière offre peu de débouchés.", example_en: "This field offers few job prospects." },
+            { french: "démissionner", english: "to resign", type: "v.", category: "cat4", example_fr: "Il a démissionné de son poste de directeur.", example_en: "He resigned from his director position." },
+            { french: "une entreprise", english: "a company", type: "n.f.", category: "cat4", example_fr: "C'est une entreprise innovante.", example_en: "It is an innovative company." },
+            { french: "l'essor (m)", english: "boom, rapid development", type: "n.m.", category: "cat4", example_fr: "L'essor du numérique a transformé l'économie.", example_en: "The digital boom has transformed the economy." },
+            { french: "la faillite", english: "bankruptcy", type: "n.f.", category: "cat4", example_fr: "L'entreprise est au bord de la faillite.", example_en: "The company is on the verge of bankruptcy." },
+            { french: "un investissement", english: "investment", type: "n.m.", category: "cat4", example_fr: "C'est un investissement rentable à long terme.", example_en: "It is a profitable investment in the long term." },
+            { french: "le marché", english: "the market", type: "n.m.", category: "cat4", example_fr: "Ils veulent conquérir le marché asiatique.", example_en: "They want to conquer the Asian market." },
+            { french: "la mondialisation", english: "globalization", type: "n.f.", category: "cat4", example_fr: "La mondialisation a des effets positifs et négatifs.", example_en: "Globalization has positive and negative effects." },
+            { french: "un niveau de vie", english: "standard of living", type: "n.m.", category: "cat4", example_fr: "Le niveau de vie a augmenté ces dernières années.", example_en: "The standard of living has increased in recent years." },
+            { french: "la pénurie", english: "shortage", type: "n.f.", category: "cat4", example_fr: "Il y a une pénurie de main-d'œuvre qualifiée.", example_en: "There is a shortage of skilled labor." },
+            { french: "la précarité", english: "precariousness, instability", type: "n.f.", category: "cat4", example_fr: "La précarité de l'emploi inquiète les jeunes.", example_en: "Job insecurity worries young people." },
+            { french: "un prêt", english: "a loan", type: "n.m.", category: "cat4", example_fr: "J'ai demandé un prêt à la banque pour acheter une maison.", example_en: "I asked the bank for a loan to buy a house." },
+            { french: "la productivité", english: "productivity", type: "n.f.", category: "cat4", example_fr: "L'entreprise cherche à améliorer sa productivité.", example_en: "The company seeks to improve its productivity." },
+            { french: "promouvoir", english: "to promote", type: "v.", category: "cat4", example_fr: "Il a été promu au rang de manager.", example_en: "He was promoted to the rank of manager." },
+            { french: "le revenu", english: "income", type: "n.m.", category: "cat4", example_fr: "L'impôt sur le revenu est prélevé à la source.", example_en: "Income tax is deducted at the source." },
+            { french: "le syndicat", english: "trade union", type: "n.m.", category: "cat4", example_fr: "Les syndicats appellent à la grève.", example_en: "Trade unions are calling for a strike." },
+            { french: "le taux", english: "rate", type: "n.m.", category: "cat4", example_fr: "Le taux d'intérêt est très bas.", example_en: "The interest rate is very low." },
+
+            // --- Catégorie 5: Environnement & Sciences ---
+            { french: "le changement climatique", english: "climate change", type: "n.m.", category: "cat5", example_fr: "Le changement climatique menace la biodiversité.", example_en: "Climate change threatens biodiversity." },
+            { french: "la biodiversité", english: "biodiversity", type: "n.f.", category: "cat5", example_fr: "La préservation de la biodiversité est cruciale.", example_en: "Preservation of biodiversity is crucial." },
+            { french: "le développement durable", english: "sustainable development", type: "n.m.", category: "cat5", example_fr: "Nous devons adopter une stratégie de développement durable.", example_en: "We must adopt a sustainable development strategy." },
+            { french: "une éolienne", english: "wind turbine", type: "n.f.", category: "cat5", example_fr: "Un parc d'éoliennes a été installé en mer.", example_en: "A wind farm was installed at sea." },
+            { french: "l'empreinte carbone", english: "carbon footprint", type: "n.f.", category: "cat5", example_fr: "Je essaie de réduire mon empreinte carbone.", example_en: "I try to reduce my carbon footprint." },
+            { french: "une espèce", english: "species", type: "n.f.", category: "cat5", example_fr: "Cette espèce est en voie de disparition.", example_en: "This species is endangered." },
+            { french: "le gaspillage", english: "waste (squandering)", type: "n.m.", category: "cat5", example_fr: "Le gaspillage alimentaire est un scandale.", example_en: "Food waste is a scandal." },
+            { french: "un OGM", english: "GMO", type: "n.m.", category: "cat5", example_fr: "Les OGM sont interdits dans l'agriculture biologique.", example_en: "GMOs are banned in organic farming." },
+            { french: "la pollution", english: "pollution", type: "n.f.", category: "cat5", example_fr: "La pollution de l'air affecte la santé.", example_en: "Air pollution affects health." },
+            { french: "le réchauffement", english: "warming", type: "n.m.", category: "cat5", example_fr: "Le réchauffement planétaire s'accélère.", example_en: "Global warming is accelerating." },
+            { french: "le recyclage", english: "recycling", type: "n.m.", category: "cat5", example_fr: "Le tri et le recyclage sont obligatoires.", example_en: "Sorting and recycling are mandatory." },
+            { french: "renouvelable", english: "renewable", type: "adj.", category: "cat5", example_fr: "Il faut investir dans les énergies renouvelables.", example_en: "We must invest in renewable energies." },
+            { french: "la sécheresse", english: "drought", type: "n.f.", category: "cat5", example_fr: "La sécheresse a détruit les récoltes.", example_en: "The drought destroyed the crops." },
+            { french: "le tri sélectif", english: "waste sorting", type: "n.m.", category: "cat5", example_fr: "Le tri sélectif permet de valoriser les déchets.", example_en: "Waste sorting allows for waste recovery." },
+            { french: "l'ADN (m)", english: "DNA", type: "n.m.", category: "cat5", example_fr: "L'analyse de l'ADN a résolu l'enquête.", example_en: "DNA analysis solved the investigation." },
+            { french: "une découverte", english: "a discovery", type: "n.f.", category: "cat5", example_fr: "C'est une découverte majeure pour la médecine.", example_en: "It is a major discovery for medicine." },
+            { french: "une donnée", english: "data", type: "n.f.", category: "cat5", example_fr: "La protection des données personnelles est essentielle.", example_en: "Personal data protection is essential." },
+            { french: "une expérience", english: "experiment/experience", type: "n.f.", category: "cat5", example_fr: "Les scientifiques ont mené une expérience en laboratoire.", example_en: "Scientists conducted a laboratory experiment." },
+            { french: "l'intelligence artificielle", english: "artificial intelligence", type: "n.f.", category: "cat5", example_fr: "L'intelligence artificielle transforme nos métiers.", example_en: "Artificial intelligence is transforming our jobs." },
+            { french: "numérique", english: "digital", type: "adj.", category: "cat5", example_fr: "La transition numérique est en cours.", example_en: "The digital transition is underway." },
+            { french: "un vaccin", english: "vaccine", type: "n.m.", category: "cat5", example_fr: "La recherche d'un vaccin est prioritaire.", example_en: "Research for a vaccine is a priority." },
+            { french: "nocif", english: "harmful", type: "adj.", category: "cat5", example_fr: "Ces produits chimiques sont nocifs pour la santé.", example_en: "These chemicals are harmful to health." },
+            { french: "l'écosystème (m)", english: "ecosystem", type: "n.m.", category: "cat5", example_fr: "L'équilibre de l'écosystème est fragile.", example_en: "The balance of the ecosystem is fragile." },
+
+            // --- Catégorie 6: Adjectifs (Caractère & Qualité) ---
+            { french: "ambitieux/euse", english: "ambitious", type: "adj.", category: "cat6", example_fr: "C'est un projet très ambitieux.", example_en: "It is a very ambitious project." },
+            { french: "audacieux/euse", english: "bold, daring", type: "adj.", category: "cat6", example_fr: "Son plan était audacieux mais il a fonctionné.", example_en: "His plan was bold but it worked." },
+            { french: "autonome", english: "autonomous, independent", type: "adj.", category: "cat6", example_fr: "Il est très autonome dans son travail.", example_en: "He is very independent in his work." },
+            { french: "compétent/e", english: "competent", type: "adj.", category: "cat6", example_fr: "Nous cherchons une personne compétente et sérieuse.", example_en: "We are looking for a competent and serious person." },
+            { french: "consciencieux/euse", english: "conscientious", type: "adj.", category: "cat6", example_fr: "C'est une élève très consciencieuse.", example_en: "She is a very conscientious student." },
+            { french: "créatif/ve", english: "creative", type: "adj.", category: "cat6", example_fr: "Il faut être créatif pour trouver des solutions.", example_en: "One must be creative to find solutions." },
+            { french: "déterminé/e", english: "determined", type: "adj.", category: "cat6", example_fr: "Elle est déterminée à réussir.", example_en: "She is determined to succeed." },
+            { french: "dynamique", english: "dynamic", type: "adj.", category: "cat6", example_fr: "C'est une équipe jeune et dynamique.", example_en: "It is a young and dynamic team." },
+            { french: "efficace", english: "efficient", type: "adj.", category: "cat6", example_fr: "Cette méthode est simple et efficace.", example_en: "This method is simple and efficient." },
+            { french: "fiable", english: "reliable", type: "adj.", category: "cat6", example_fr: "J'ai besoin d'une voiture fiable.", example_en: "I need a reliable car." },
+            { french: "honnête", english: "honest", type: "adj.", category: "cat6", example_fr: "Soyez honnête avec moi.", example_en: "Be honest with me." },
+            { french: "indépendant/e", english: "independent", type: "adj.", category: "cat6", example_fr: "Les chats sont des animaux indépendants.", example_en: "Cats are independent animals." },
+            { french: "ingénieux/euse", english: "ingenious", type: "adj.", category: "cat6", example_fr: "C'est une solution ingénieuse.", example_en: "It is an ingenious solution." },
+            { french: "minutieux/euse", english: "meticulous", type: "adj.", category: "cat6", example_fr: "Il fait un travail minutieux.", example_en: "He does meticulous work." },
+            { french: "modeste", english: "modest, humble", type: "adj.", category: "cat6", example_fr: "Malgré son succès, il reste modeste.", example_en: "Despite his success, he remains modest." },
+            { french: "naïf/ve", english: "naive", type: "adj.", category: "cat6", example_fr: "Il ne faut pas être naïf, la situation est complexe.", example_en: "One shouldn't be naive, the situation is complex." },
+            { french: "optimiste", english: "optimistic", type: "adj.", category: "cat6", example_fr: "Restons optimistes pour l'avenir.", example_en: "Let's remain optimistic for the future." },
+            { french: "ouvert/e d'esprit", english: "open-minded", type: "adj.", category: "cat6", example_fr: "Il est très ouvert d'esprit sur les autres cultures.", example_en: "He is very open-minded about other cultures." },
+            { french: "passionné/e", english: "passionate", type: "adj.", category: "cat6", example_fr: "C'est un professeur passionné par son sujet.", example_en: "He is a teacher passionate about his subject." },
+            { french: "perfectionniste", english: "perfectionist", type: "adj.", category: "cat6", example_fr: "Être trop perfectionniste peut être un défaut.", example_en: "Being too much of a perfectionist can be a flaw." },
+            { french: "prudent/e", english: "careful, cautious", type: "adj.", category: "cat6", example_fr: "Soyez prudent sur la route.", example_en: "Be careful on the road." },
+            { french: "sociable", english: "sociable", type: "adj.", category: "cat6", example_fr: "Il est très sociable et se fait facilement des amis.", example_en: "He is very sociable and makes friends easily." },
+            { french: "spontané/e", english: "spontaneous", type: "adj.", category: "cat6", example_fr: "J'aime son côté spontané.", example_en: "I like his spontaneous side." },
+            { french: "tolérant/e", english: "tolerant", type: "adj.", category: "cat6", example_fr: "Nous devons être plus tolérants envers les autres.", example_en: "We must be more tolerant towards others." },
+
+            // --- Catégorie 7: Adjectifs (Appréciation & Nuance) ---
+            { french: "aberrant/e", english: "absurd, nonsensical", type: "adj.", category: "cat7", example_fr: "C'est une décision complètement aberrante.", example_en: "It is a completely absurd decision." },
+            { french: "adéquat/e", english: "adequate, suitable", type: "adj.", category: "cat7", example_fr: "Nous cherchons une solution adéquate.", example_en: "We are looking for a suitable solution." },
+            { french: "banal/e", english: "banal, commonplace", type: "adj.", category: "cat7", example_fr: "C'est une histoire banale sans grand intérêt.", example_en: "It is a banal story without much interest." },
+            { french: "bénéfique", english: "beneficial", type: "adj.", category: "cat7", example_fr: "Le sport est bénéfique pour la santé.", example_en: "Sport is beneficial for health." },
+            { french: "controversé/e", english: "controversial", type: "adj.", category: "cat7", example_fr: "C'est une mesure très controversée.", example_en: "It is a very controversial measure." },
+            { french: "convaincant/e", english: "convincing", type: "adj.", category: "cat7", example_fr: "Son argument n'était pas très convaincant.", example_en: "His argument was not very convincing." },
+            { french: "décevant/e", english: "disappointing", type: "adj.", category: "cat7", example_fr: "Le film était décevant malgré les critiques positives.", example_en: "The movie was disappointing despite positive reviews." },
+            { french: "déraisonnable", english: "unreasonable", type: "adj.", category: "cat7", example_fr: "Ses exigences sont déraisonnables.", example_en: "His demands are unreasonable." },
+            { french: "discutable", english: "debatable, questionable", type: "adj.", category: "cat7", example_fr: "Son honnêteté est discutable.", example_en: "His honesty is questionable." },
+            { french: "époustouflant/e", english: "breathtaking, mind-blowing", type: "adj.", category: "cat7", example_fr: "La vue du sommet est époustouflante.", example_en: "The view from the summit is breathtaking." },
+            { french: "essentiel/le", english: "essential", type: "adj.", category: "cat7", example_fr: "L'eau est essentielle à la vie.", example_en: "Water is essential to life." },
+            { french: "évident/e", english: "obvious", type: "adj.", category: "cat7", example_fr: "Il est évident qu'il ment.", example_en: "It is obvious that he is lying." },
+            { french: "exceptionnel/le", english: "exceptional", type: "adj.", category: "cat7", example_fr: "Il a fait un travail exceptionnel.", example_en: "He did exceptional work." },
+            { french: "fâcheux/euse", english: "unfortunate, annoying", type: "adj.", category: "cat7", example_fr: "C'est un incident fâcheux.", example_en: "It is an unfortunate incident." },
+            { french: "incontournable", english: "unavoidable, must-see", type: "adj.", category: "cat7", example_fr: "La tour Eiffel est un site incontournable à Paris.", example_en: "The Eiffel Tower is a must-see site in Paris." },
+            { french: "indispensable", english: "indispensable, essential", type: "adj.", category: "cat7", example_fr: "Votre présence est indispensable.", example_en: "Your presence is indispensable." },
+            { french: "inévitable", english: "inevitable", type: "adj.", category: "cat7", example_fr: "Le conflit semble inévitable.", example_en: "Conflict seems inevitable." },
+            { french: "justifié/e", english: "justified", type: "adj.", category: "cat7", example_fr: "Sa colère est tout à fait justifiée.", example_en: "His anger is completely justified." },
+            { french: "nuisible", english: "harmful", type: "adj.", category: "cat7", example_fr: "Le tabac est nuisible à la santé.", example_en: "Tobacco is harmful to health." },
+            { french: "pertinent/e", english: "relevant", type: "adj.", category: "cat7", example_fr: "Votre remarque est très pertinente.", example_en: "Your remark is very relevant." },
+            { french: "plausible", english: "plausible", type: "adj.", category: "cat7", example_fr: "Cette explication me semble plausible.", example_en: "This explanation seems plausible to me." },
+            { french: "préoccupant/e", english: "worrying, concerning", type: "adj.", category: "cat7", example_fr: "La situation sanitaire est préoccupante.", example_en: "The health situation is concerning." },
+            { french: "redoutable", english: "formidable, fearsome", type: "adj.", category: "cat7", example_fr: "C'est un adversaire redoutable.", example_en: "He is a formidable opponent." },
+            { french: "superficiel/le", english: "superficial", type: "adj.", category: "cat7", example_fr: "Il a une connaissance superficielle du sujet.", example_en: "He has a superficial knowledge of the subject." },
+            { french: "vraisemblable", english: "likely, plausible", type: "adj.", category: "cat7", example_fr: "Il est peu vraisemblable qu'il vienne.", example_en: "It is unlikely that he will come." },
+
+            // --- Catégorie 8: Connecteurs Logiques ---
+            { french: "auparavant", english: "beforehand, previously", type: "adv.", category: "cat8", example_fr: "Il n'avait jamais vu cela auparavant.", example_en: "He had never seen that before." },
+            { french: "cependant", english: "however", type: "adv.", category: "cat8", example_fr: "Il est intelligent, cependant il manque d'expérience.", example_en: "He is intelligent, however he lacks experience." },
+            { french: "d'ailleurs", english: "moreover, besides", type: "adv.", category: "cat8", example_fr: "Je ne l'aime pas, et d'ailleurs je ne l'ai pas invité.", example_en: "I don't like him, and besides I didn't invite him." },
+            { french: "désormais", english: "from now on", type: "adv.", category: "cat8", example_fr: "Désormais, tout sera différent.", example_en: "From now on, everything will be different." },
+            { french: "dorénavant", english: "henceforth", type: "adv.", category: "cat8", example_fr: "Dorénavant, il faudra être plus vigilant.", example_en: "Henceforth, we will have to be more vigilant." },
+            { french: "en effet", english: "indeed", type: "adv.", category: "cat8", example_fr: "En effet, la situation est complexe.", example_en: "Indeed, the situation is complex." },
+            { french: "en outre", english: "furthermore, in addition", type: "adv.", category: "cat8", example_fr: "En outre, il parle trois langues.", example_en: "Furthermore, he speaks three languages." },
+            { french: "en revanche", english: "on the other hand", type: "adv.", category: "cat8", example_fr: "Il est timide, en revanche son frère est très sociable.", example_en: "He is shy, on the other hand his brother is very sociable." },
+            { french: "néanmoins", english: "nevertheless", type: "adv.", category: "cat8", example_fr: "C'est difficile, néanmoins nous allons essayer.", example_en: "It is difficult, nevertheless we will try." },
+            { french: "par ailleurs", english: "furthermore", type: "adv.", category: "cat8", example_fr: "Par ailleurs, nous devons réduire les coûts.", example_en: "Furthermore, we must reduce costs." },
+            { french: "par conséquent", english: "consequently", type: "adv.", category: "cat8", example_fr: "Il a plu, par conséquent le match est annulé.", example_en: "It rained, consequently the match is canceled." },
+            { french: "toutefois", english: "however", type: "adv.", category: "cat8", example_fr: "Je suis d'accord, toutefois j'ai une réserve.", example_en: "I agree, however I have a reservation." },
+            { french: "aussi... que", english: "as... as", type: "comp.", category: "cat8", example_fr: "Il est aussi grand que son père.", example_en: "He is as tall as his father." },
+            { french: "autant que", english: "as much as", type: "comp.", category: "cat8", example_fr: "Il travaille autant que moi.", example_en: "He works as much as I do." },
+            { french: "bien que", english: "although", type: "conj.", category: "cat8", example_fr: "Bien qu'il soit malade, il travaille.", example_en: "Although he is sick, he is working." },
+            { french: "pourvu que", english: "provided that", type: "conj.", category: "cat8", example_fr: "Nous sortirons pourvu qu'il ne pleuve pas.", example_en: "We will go out provided that it doesn't rain." },
+            { french: "à condition que", english: "on condition that", type: "conj.", category: "cat8", example_fr: "Je viendrai à condition que tu sois là.", example_en: "I will come on condition that you are there." },
+            { french: "faute de", english: "for lack of", type: "prep.", category: "cat8", example_fr: "Faute de temps, nous n'avons pas fini.", example_en: "For lack of time, we didn't finish." },
+            { french: "en raison de", english: "due to", type: "prep.", category: "cat8", example_fr: "Fermé en raison des travaux.", example_en: "Closed due to construction works." },
+            { french: "grâce à", english: "thanks to", type: "prep.", category: "cat8", example_fr: "J'ai réussi grâce à ton aide.", example_en: "I succeeded thanks to your help." },
+            { french: "contrairement à", english: "unlike", type: "prep.", category: "cat8", example_fr: "Contrairement à toi, j'aime le café.", example_en: "Unlike you, I like coffee." },
+            { french: "vis-à-vis de", english: "regarding, towards", type: "prep.", category: "cat8", example_fr: "Quelle est ta position vis-à-vis de ce projet ?", example_en: "What is your position regarding this project?" },
+            { french: "au fur et à mesure", english: "gradually, bit by bit", type: "expr.", category: "cat8", example_fr: "On apprend au fur et à mesure.", example_en: "We learn bit by bit." },
+
+            // --- Catégorie 9: Expressions Idiomatiques ---
+            { french: "avoir du pain sur la planche", english: "to have a lot on one's plate", type: "expr.", category: "cat9", example_fr: "Je ne peux pas sortir, j'ai du pain sur la planche.", example_en: "I can't go out, I have a lot on my plate." },
+            { french: "casser les pieds", english: "to annoy someone", type: "expr.", category: "cat9", example_fr: "Il commence à me casser les pieds avec ses questions.", example_en: "He's starting to annoy me with his questions." },
+            { french: "coûter les yeux de la tête", english: "to cost an arm and a leg", type: "expr.", category: "cat9", example_fr: "Ce sac coûte les yeux de la tête.", example_en: "This bag costs an arm and a leg." },
+            { french: "être dans la lune", english: "to be daydreaming", type: "expr.", category: "cat9", example_fr: "Écoute-moi, tu es encore dans la lune !", example_en: "Listen to me, you're daydreaming again!" },
+            { french: "faire la grasse matinée", english: "to sleep in", type: "expr.", category: "cat9", example_fr: "Le dimanche, j'aime faire la grasse matinée.", example_en: "On Sundays, I like to sleep in." },
+            { french: "jeter l'argent par les fenêtres", english: "to throw money down the drain", type: "expr.", category: "cat9", example_fr: "Arrête de jeter l'argent par les fenêtres !", example_en: "Stop throwing money down the drain!" },
+            { french: "passer une nuit blanche", english: "to have a sleepless night", type: "expr.", category: "cat9", example_fr: "J'ai passé une nuit blanche à cause du bruit.", example_en: "I had a sleepless night because of the noise." },
+            { french: "pleuvoir des cordes", english: "to rain cats and dogs", type: "expr.", category: "cat9", example_fr: "Prends ton parapluie, il pleut des cordes.", example_en: "Take your umbrella, it's raining cats and dogs." },
+            { french: "prendre ses jambes à son cou", english: "to run for one's life", type: "expr.", category: "cat9", example_fr: "Quand il a vu le chien, il a pris ses jambes à son cou.", example_en: "When he saw the dog, he ran for his life." },
+            { french: "raconter des salades", english: "to tell lies/tall tales", type: "expr.", category: "cat9", example_fr: "Ne le crois pas, il raconte des salades.", example_en: "Don't believe him, he's telling lies." },
+            { french: "se mettre le doigt dans l'œil", english: "to be entirely mistaken", type: "expr.", category: "cat9", example_fr: "Si tu penses que c'est facile, tu te mets le doigt dans l'œil.", example_en: "If you think it's easy, you are entirely mistaken." },
+            { french: "tomber dans les pommes", english: "to faint", type: "expr.", category: "cat9", example_fr: "Elle a failli tomber dans les pommes.", example_en: "She almost fainted." },
+            { french: "un froid de canard", english: "freezing cold", type: "expr.", category: "cat9", example_fr: "Il fait un froid de canard dehors.", example_en: "It's freezing cold outside." },
+            { french: "avoir le cafard", english: "to have the blues/be depressed", type: "expr.", category: "cat9", example_fr: "Il a le cafard depuis son départ.", example_en: "He's had the blues since he left." },
+            { french: "poser un lapin", english: "to stand someone up", type: "expr.", category: "cat9", example_fr: "Il ne viendra pas, il m'a posé un lapin.", example_en: "He won't come, he stood me up." },
+
+            // --- Catégorie 10: Arts & Culture ---
+            { french: "une œuvre", english: "a work (of art)", type: "n.f.", category: "cat10", example_fr: "C'est une œuvre majeure du XXe siècle.", example_en: "It is a major work of the 20th century." },
+            { french: "l'architecture (f)", english: "architecture", type: "n.f.", category: "cat10", example_fr: "L'architecture de cette ville est fascinante.", example_en: "The architecture of this city is fascinating." },
+            { french: "le patrimoine", english: "heritage", type: "n.m.", category: "cat10", example_fr: "Il faut préserver notre patrimoine culturel.", example_en: "We must preserve our cultural heritage." },
+            { french: "un chef-d'œuvre", english: "a masterpiece", type: "n.m.", category: "cat10", example_fr: "Ce tableau est un véritable chef-d'œuvre.", example_en: "This painting is a true masterpiece." },
+            { french: "la littérature", english: "literature", type: "n.f.", category: "cat10", example_fr: "La littérature française est très riche.", example_en: "French literature is very rich." },
+            { french: "une exposition", english: "an exhibition", type: "n.f.", category: "cat10", example_fr: "Nous sommes allés voir une exposition de photos.", example_en: "We went to see a photo exhibition." },
+            { french: "le tournage", english: "filming, shooting", type: "n.m.", category: "cat10", example_fr: "Le tournage du film a duré trois mois.", example_en: "The filming of the movie lasted three months." },
+            { french: "un critique", english: "a critic", type: "n.m.", category: "cat10", example_fr: "Le critique a détesté le film.", example_en: "The critic hated the movie." },
+            { french: "la scène", english: "the stage/scene", type: "n.f.", category: "cat10", example_fr: "L'acteur est monté sur scène.", example_en: "The actor went on stage." },
+            { french: "un roman", english: "a novel", type: "n.m.", category: "cat10", example_fr: "Je préfère lire des romans historiques.", example_en: "I prefer reading historical novels." },
+            { french: "l'art contemporain", english: "contemporary art", type: "n.m.", category: "cat10", example_fr: "Je ne comprends pas toujours l'art contemporain.", example_en: "I don't always understand contemporary art." },
+            { french: "le courant", english: "movement/trend", type: "n.m.", category: "cat10", example_fr: "Il appartient au courant impressionniste.", example_en: "He belongs to the Impressionist movement." },
+
+            // --- Catégorie 11: Problèmes & Solutions ---
+            { french: "une anomalie", english: "an anomaly", type: "n.f.", category: "cat11", example_fr: "Le système a détecté une anomalie.", example_en: "The system detected an anomaly." },
+            { french: "une lacune", english: "a gap, shortcoming", type: "n.f.", category: "cat11", example_fr: "Il a des lacunes en mathématiques.", example_en: "He has gaps in mathematics." },
+            { french: "un malentendu", english: "a misunderstanding", type: "n.m.", category: "cat11", example_fr: "C'était juste un malentendu.", example_en: "It was just a misunderstanding." },
+            { french: "un obstacle", english: "an obstacle", type: "n.m.", category: "cat11", example_fr: "Nous avons surmonté tous les obstacles.", example_en: "We overcame all obstacles." },
+            { french: "une polémique", english: "a controversy", type: "n.f.", category: "cat11", example_fr: "Cette décision a créé une polémique.", example_en: "This decision created a controversy." },
+            { french: "un préjugé", english: "a prejudice", type: "n.m.", category: "cat11", example_fr: "Il faut lutter contre les préjugés.", example_en: "We must fight against prejudices." },
+            { french: "une contrainte", english: "a constraint", type: "n.f.", category: "cat11", example_fr: "Nous avons des contraintes budgétaires.", example_en: "We have budgetary constraints." },
+            { french: "remédier à", english: "to remedy, fix", type: "v.", category: "cat11", example_fr: "Il faut remédier à ce problème rapidement.", example_en: "We must remedy this problem quickly." },
+            { french: "résoudre", english: "to solve, resolve", type: "v.", category: "cat11", example_fr: "Nous avons résolu le conflit.", example_en: "We resolved the conflict." },
+            { french: "surmonter", english: "to overcome", type: "v.", category: "cat11", example_fr: "Elle a surmonté sa peur.", example_en: "She overcame her fear." },
+            { french: "pallier", english: "to mitigate, compensate for", type: "v.", category: "cat11", example_fr: "Il faut pallier le manque de personnel.", example_en: "We must compensate for the lack of staff." },
+            { french: "empirer", english: "to worsen", type: "v.", category: "cat11", example_fr: "La situation a empiré hier.", example_en: "The situation worsened yesterday." },
+
+            // --- Catégorie 12: Sentiments Complexes ---
+            { french: "l'angoisse (f)", english: "anxiety, dread", type: "n.f.", category: "cat12", example_fr: "L'attente a provoqué une grande angoisse.", example_en: "The wait caused great anxiety." },
+            { french: "l'amertume (f)", english: "bitterness", type: "n.f.", category: "cat12", example_fr: "Il a parlé avec beaucoup d'amertume.", example_en: "He spoke with a lot of bitterness." },
+            { french: "la déception", english: "disappointment", type: "n.f.", category: "cat12", example_fr: "Sa déception était visible.", example_en: "His disappointment was visible." },
+            { french: "l'enthousiasme (m)", english: "enthusiasm", type: "n.m.", category: "cat12", example_fr: "Ils ont accueilli le projet avec enthousiasme.", example_en: "They welcomed the project with enthusiasm." },
+            { french: "l'euphorie (f)", english: "euphoria", type: "n.f.", category: "cat12", example_fr: "La victoire a provoqué une euphorie générale.", example_en: "The victory caused general euphoria." },
+            { french: "la frustration", english: "frustration", type: "n.f.", category: "cat12", example_fr: "Je comprends ta frustration.", example_en: "I understand your frustration." },
+            { french: "la gratitude", english: "gratitude", type: "n.f.", category: "cat12", example_fr: "Je vous exprime ma profonde gratitude.", example_en: "I express my deep gratitude to you." },
+            { french: "l'indifférence (f)", english: "indifference", type: "n.f.", category: "cat12", example_fr: "Son indifférence m'a blessé.", example_en: "His indifference hurt me." },
+            { french: "le mépris", english: "contempt", type: "n.m.", category: "cat12", example_fr: "Il a regardé son ennemi avec mépris.", example_en: "He looked at his enemy with contempt." },
+            { french: "la nostalgie", english: "nostalgia", type: "n.f.", category: "cat12", example_fr: "J'ai la nostalgie de mon enfance.", example_en: "I have nostalgia for my childhood." },
+            { french: "la rancune", english: "grudge", type: "n.f.", category: "cat12", example_fr: "Il ne garde pas de rancune.", example_en: "He holds no grudge." },
+            { french: "le soulagement", english: "relief", type: "n.m.", category: "cat12", example_fr: "Quel soulagement de savoir que tu vas bien !", example_en: "What a relief to know you are okay!" },
+
+            // --- Catégorie 13: Medias & Communication ---
+            { french: "l'actualité (f)", english: "current events/news", type: "n.f.", category: "cat13", example_fr: "Je suis l'actualité tous les jours.", example_en: "I follow current events every day." },
+            { french: "une annonce", english: "an announcement/ad", type: "n.f.", category: "cat13", example_fr: "J'ai lu une annonce intéressante dans le journal.", example_en: "I read an interesting ad in the newspaper." },
+            { french: "la censure", english: "censorship", type: "n.f.", category: "cat13", example_fr: "La censure est interdite dans ce pays.", example_en: "Censorship is forbidden in this country." },
+            { french: "une chaîne", english: "a channel", type: "n.f.", category: "cat13", example_fr: "Quelle est ta chaîne de télévision préférée ?", example_en: "What is your favorite TV channel?" },
+            { french: "un fait divers", english: "a news item (minor)", type: "n.m.", category: "cat13", example_fr: "Les faits divers passionnent souvent le public.", example_en: "Minor news items often fascinate the public." },
+            { french: "l'hebdomadaire (m)", english: "weekly magazine", type: "n.m.", category: "cat13", example_fr: "J'achète cet hebdomadaire tous les jeudis.", example_en: "I buy this weekly magazine every Thursday." },
+            { french: "le journalisme", english: "journalism", type: "n.m.", category: "cat13", example_fr: "Le journalisme d'investigation est dangereux.", example_en: "Investigative journalism is dangerous." },
+            { french: "un média", english: "a media", type: "n.m.", category: "cat13", example_fr: "Les médias jouent un rôle important.", example_en: "The media play an important role." },
+            { french: "le numérique", english: "digital technology", type: "n.m.", category: "cat13", example_fr: "Le numérique a bouleversé la presse écrite.", example_en: "Digital technology has disrupted the print press." },
+            { french: "la publicité", english: "advertising", type: "n.f.", category: "cat13", example_fr: "Il y a trop de publicité à la télé.", example_en: "There is too much advertising on TV." },
+            { french: "un réseau social", english: "social network", type: "n.m.", category: "cat13", example_fr: "Il passe trop de temps sur les réseaux sociaux.", example_en: "He spends too much time on social networks." },
+            { french: "la source", english: "the source", type: "n.f.", category: "cat13", example_fr: "Vérifiez toujours vos sources.", example_en: "Always check your sources." },
+            { french: "le téléspectateur", english: "TV viewer", type: "n.m.", category: "cat13", example_fr: "Les téléspectateurs ont voté en direct.", example_en: "The viewers voted live." },
+            { french: "diffuser", english: "to broadcast", type: "v.", category: "cat13", example_fr: "Le match sera diffusé ce soir.", example_en: "The match will be broadcast tonight." },
+
+            // --- Catégorie 14: Noms Abstraits ---
+            { french: "le concept", english: "concept", type: "n.m.", category: "cat14", example_fr: "C'est un concept difficile à expliquer.", example_en: "It is a difficult concept to explain." },
+            { french: "le critère", english: "criterion", type: "n.m.", category: "cat14", example_fr: "Quel est le critère de sélection ?", example_en: "What is the selection criterion?" },
+            { french: "l'hypothèse (f)", english: "hypothesis", type: "n.f.", category: "cat14", example_fr: "Nous partons de l'hypothèse que tout ira bien.", example_en: "We start from the hypothesis that everything will be fine." },
+            { french: "l'impact (m)", english: "impact", type: "n.m.", category: "cat14", example_fr: "Cette mesure aura un impact positif.", example_en: "This measure will have a positive impact." },
+            { french: "la notion", english: "notion", type: "n.f.", category: "cat14", example_fr: "Il n'a aucune notion du temps.", example_en: "He has no notion of time." },
+            { french: "le paradoxe", english: "paradox", type: "n.m.", category: "cat14", example_fr: "C'est un paradoxe intéressant.", example_en: "It is an interesting paradox." },
+            { french: "le phénomène", english: "phenomenon", type: "n.m.", category: "cat14", example_fr: "Ce phénomène est rare.", example_en: "This phenomenon is rare." },
+            { french: "le principe", english: "principle", type: "n.m.", category: "cat14", example_fr: "C'est une question de principe.", example_en: "It is a matter of principle." },
+            { french: "le processus", english: "process", type: "n.m.", category: "cat14", example_fr: "Le processus de paix est long.", example_en: "The peace process is long." },
+            { french: "la stratégie", english: "strategy", type: "n.f.", category: "cat14", example_fr: "Quelle est votre stratégie marketing ?", example_en: "What is your marketing strategy?" },
+            { french: "la théorie", english: "theory", type: "n.f.", category: "cat14", example_fr: "En théorie, c'est possible.", example_en: "In theory, it is possible." },
+            { french: "la tendance", english: "trend", type: "n.f.", category: "cat14", example_fr: "La tendance actuelle est au minimalisme.", example_en: "The current trend is minimalism." },
+
+            // --- Catégorie 15: Verbes Pronominaux (Avancés) ---
+            { french: "s'apercevoir", english: "to realize/notice", type: "v.", category: "cat15", example_fr: "Je me suis aperçu de mon erreur.", example_en: "I realized my mistake." },
+            { french: "s'attendre à", english: "to expect", type: "v.", category: "cat15", example_fr: "Je m'attends à une réponse rapide.", example_en: "I expect a quick answer." },
+            { french: "se débarrasser de", english: "to get rid of", type: "v.", category: "cat15", example_fr: "Je dois me débarrasser de ces vieux livres.", example_en: "I must get rid of these old books." },
+            { french: "se dérouler", english: "to take place (event)", type: "v.", category: "cat15", example_fr: "La réunion s'est bien déroulée.", example_en: "The meeting took place well." },
+            { french: "s'emparer de", english: "to seize/grab", type: "v.", category: "cat15", example_fr: "Les rebelles se sont emparés de la ville.", example_en: "The rebels seized the city." },
+            { french: "s'habituer à", english: "to get used to", type: "v.", category: "cat15", example_fr: "Je ne m'habitue pas au froid.", example_en: "I can't get used to the cold." },
+            { french: "se méfier de", english: "to mistrust/be wary of", type: "v.", category: "cat15", example_fr: "Méfie-toi des apparences.", example_en: "Be wary of appearances." },
+            { french: "se moquer de", english: "to make fun of / not care", type: "v.", category: "cat15", example_fr: "Il se moque de ce que pensent les autres.", example_en: "He doesn't care what others think." },
+            { french: "se passer de", english: "to do without", type: "v.", category: "cat15", example_fr: "Je ne peux pas me passer de café.", example_en: "I cannot do without coffee." },
+            { french: "se plaindre", english: "to complain", type: "v.", category: "cat15", example_fr: "Il se plaint tout le temps.", example_en: "He complains all the time." },
+            { french: "se rendre compte", english: "to realize", type: "v.", category: "cat15", example_fr: "Tu te rends compte de la gravité de la situation ?", example_en: "Do you realize the gravity of the situation?" },
+            { french: "se servir de", english: "to use", type: "v.", category: "cat15", example_fr: "Je sais me servir de cet outil.", example_en: "I know how to use this tool." },
+            { french: "se souvenir de", english: "to remember", type: "v.", category: "cat15", example_fr: "Je me souviens de mes vacances en Italie.", example_en: "I remember my vacation in Italy." }
         ];
 
         let currentDeck = [...masterDeck];
@@ -290,19 +439,30 @@
         const shuffleButton = document.getElementById('shuffle-button');
 
         function updateCard() {
-            if (currentDeck.length === 0) return;
+            if (currentDeck.length === 0) {
+                cardFrontText.textContent = "Aucune carte";
+                cardBackText.textContent = "";
+                cardTypeText.textContent = "";
+                exampleFr.textContent = "Veuillez choisir une autre catégorie.";
+                exampleEn.textContent = "";
+                updateProgress();
+                return;
+            }
             const card = currentDeck[currentIndex];
             cardFrontText.textContent = card.french;
             cardBackText.textContent = card.english;
             cardTypeText.textContent = card.type;
             exampleFr.textContent = card.example_fr;
             exampleEn.textContent = `(${card.example_en})`;
+
             resetCardToFront();
             updateProgress();
         }
 
         function updateProgress() {
-            progressIndicator.textContent = `Carte ${currentIndex + 1} sur ${currentDeck.length}`;
+            const total = currentDeck.length;
+            const current = total > 0 ? currentIndex + 1 : 0;
+            progressIndicator.textContent = `Carte ${current} sur ${total}`;
         }
 
         function resetCardToFront() {
@@ -311,16 +471,19 @@
         }
 
         function flipCard() {
+            if (currentDeck.length === 0) return;
             cardContainer.classList.toggle('is-flipped');
             isFlipped = !isFlipped;
         }
 
         function nextCard() {
+            if (currentDeck.length === 0) return;
             currentIndex = (currentIndex + 1) % currentDeck.length;
             updateCard();
         }
 
         function prevCard() {
+            if (currentDeck.length === 0) return;
             currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
             updateCard();
         }
@@ -344,23 +507,6 @@
             currentIndex = 0;
             updateCard();
         }
-        
-        // Audio
-        function playAudio(e) {
-            e.stopPropagation(); 
-            const text = currentDeck[currentIndex].french;
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'fr-FR'; 
-                utterance.rate = 0.9;
-                const voices = window.speechSynthesis.getVoices();
-                const frenchVoice = voices.find(voice => voice.lang.includes('fr'));
-                if (frenchVoice) utterance.voice = frenchVoice;
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-        function playExampleAudio(e) {e.stopPropagation(); speakText(currentDeck[currentIndex].example_fr);}
 
         prevButton.addEventListener('click', (e) => { e.stopPropagation(); prevCard(); });
         nextButton.addEventListener('click', (e) => { e.stopPropagation(); nextCard(); });
@@ -368,13 +514,46 @@
         shuffleButton.addEventListener('click', (e) => { e.stopPropagation(); shuffleDeck(); });
         categorySelect.addEventListener('change', filterDeck);
 
+        function playAudio(e) {
+            e.stopPropagation();
+            speakText(currentDeck[currentIndex].french);
+        }
+
+        function playExampleAudio(e) {
+            e.stopPropagation();
+            speakText(currentDeck[currentIndex].example_fr);
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.9;
+                
+                const voices = window.speechSynthesis.getVoices();
+                const frenchVoice = voices.find(voice => voice.lang.includes('fr'));
+                if (frenchVoice) {
+                    utterance.voice = frenchVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Désolé, votre navigateur ne supporte pas la synthèse vocale.");
+            }
+        }
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextCard();
-            else if (e.key === 'ArrowLeft') prevCard();
-            else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+            if (e.key === 'ArrowRight') {
+                nextCard();
+            } else if (e.key === 'ArrowLeft') {
+                prevCard();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
         });
 
-        // Init
         window.speechSynthesis.getVoices();
         updateCard();
     </script>
