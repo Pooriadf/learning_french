@@ -25,6 +25,7 @@
         .nav-link-active { background-color: white; color: #1e293b; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .nav-link-inactive { color: rgba(255,255,255,0.7); }
         .nav-link-inactive:hover { background-color: rgba(255,255,255,0.1); color: white; }
+        .conjugaison-btn.visible { display: inline-block; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 relative">
@@ -93,6 +94,7 @@
                                 <p id="example-fr" class="text-lg text-slate-700 font-medium mb-1 text-center leading-snug pr-6"></p>
                                 <p id="example-en" class="text-sm text-slate-400 text-center"></p>
                             </div>
+                            <button id="conjugaison-button" onclick="openConjugation(event)" class="conjugaison-btn mt-4 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition active:scale-95 shadow-md hidden">Conjugaison</button>
                         </div>
                     </div>
                 </div>
@@ -662,7 +664,9 @@
         const nextButton = document.getElementById('next-button');
         const flipButton = document.getElementById('flip-button');
         const shuffleButton = document.getElementById('shuffle-button');
-        function updateCard() { if (currentDeck.length === 0) return; const card = currentDeck[currentIndex]; cardFrontText.textContent = card.french; cardBackText.textContent = card.english; cardTypeText.textContent = card.type; exampleFr.textContent = card.example_fr; exampleEn.textContent = `(${card.example_en})`; resetCardToFront(); updateProgress(); }
+        function updateCard() { if (currentDeck.length === 0) return; const card = currentDeck[currentIndex]; cardFrontText.textContent = card.french; cardBackText.textContent = card.english; cardTypeText.textContent = card.type; exampleFr.textContent = card.example_fr; exampleEn.textContent = `(${card.example_en})`; updateConjugationButton(card); resetCardToFront(); updateProgress(); }
+        function updateConjugationButton(card) { const conjugaisonBtn = document.getElementById('conjugaison-button'); if (card.type && card.type.toLowerCase().startsWith('v')) { conjugaisonBtn.classList.add('visible'); } else { conjugaisonBtn.classList.remove('visible'); } }
+        function openConjugation(event) { event.stopPropagation(); const currentCard = currentDeck[currentIndex]; const verb = encodeURIComponent(currentCard.french); window.open(`https://www.conjugaison.com/du/verbe/${verb}.html`, '_blank'); }
         function updateProgress() { progressIndicator.textContent = `Carte ${currentIndex + 1} sur ${currentDeck.length}`; }
         function resetCardToFront() { cardContainer.classList.remove('is-flipped'); isFlipped = false; }
         function flipCard() { cardContainer.classList.toggle('is-flipped'); isFlipped = !isFlipped; }
