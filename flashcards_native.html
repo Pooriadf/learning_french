@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Expressions Natives - Style iOS</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+        .mesh-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; background-image: radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(355,85%,93%,1) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(240,100%,70%,1) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%); filter: blur(60px); opacity: 0.6; animation: meshMove 20s infinite alternate; }
+        @keyframes meshMove { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+        .flashcard-container { perspective: 1200px; }
+        .flashcard { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .flashcard-container.is-flipped .flashcard { transform: rotateY(180deg); }
+        .flashcard-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 1.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset; }
+        .flashcard-back { transform: rotateY(180deg); background: rgba(255, 255, 255, 0.95); }
+        select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
+        .btn-glass { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease; }
+        .btn-glass:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.4); }
+        .btn-primary { background: #5856D6; color: white; box-shadow: 0 4px 12px rgba(88, 86, 214, 0.3); transition: all 0.3s ease; }
+        .btn-primary:active { transform: scale(0.96); opacity: 0.9; }
+        .nav-link { padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; text-decoration: none; }
+        .nav-link-active { background-color: white; color: #1e293b; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .nav-link-inactive { color: rgba(255,255,255,0.7); }
+        .nav-link-inactive:hover { background-color: rgba(255,255,255,0.1); color: white; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 relative">
+    <div class="mesh-bg"></div>
+    <main class="w-full max-w-md mx-auto flex flex-col gap-6 relative z-10">
+        <nav class="bg-black/20 backdrop-blur-md p-1.5 rounded-full flex justify-between items-center mx-4 shadow-lg border border-white/10">
+            <a href="https://pooriadf.github.io/learning_french/flashcards_A1" class="nav-link nav-link-inactive flex-1 text-center">A1</a>
+            <a href="https://pooriadf.github.io/learning_french/flashcards_A2" class="nav-link nav-link-inactive flex-1 text-center">A2</a>
+            <a href="https://pooriadf.github.io/learning_french/flashcards_B1" class="nav-link nav-link-inactive flex-1 text-center">B1</a>
+            <a href="https://pooriadf.github.io/learning_french/flashcards_B2" class="nav-link nav-link-inactive flex-1 text-center">B2</a>
+            <a href="#" class="nav-link nav-link-active flex-1 text-center pointer-events-none">Native</a>
+        </nav>
+        <header class="text-center mb-1">
+            <h1 class="text-4xl font-bold text-white tracking-tight drop-shadow-md">Expressions Natives</h1>
+            <p class="text-slate-200 font-medium text-lg opacity-90">Fillers & Colloquialisms</p>
+        </header>
+        <section class="bg-white/10 backdrop-blur-xl border border-white/20 p-2 rounded-3xl flex gap-2 shadow-lg">
+            <div class="relative w-full">
+                <select id="category-select" class="w-full bg-white/20 border-none text-white font-medium rounded-2xl px-4 py-3 pr-10 focus:ring-2 focus:ring-white/50 outline-none transition hover:bg-white/30 cursor-pointer placeholder-white">
+                    <option class="text-slate-800" value="all">Toutes les catégories (123)</option>
+                    <option class="text-slate-800" value="cat1">Fillers Essentiels</option>
+                    <option class="text-slate-800" value="cat2">Réactions & Interjections</option>
+                    <option class="text-slate-800" value="cat3">Expressions d'Accord</option>
+                    <option class="text-slate-800" value="cat4">Expressions de Désaccord</option>
+                    <option class="text-slate-800" value="cat5">Expressions Courantes</option>
+                    <option class="text-slate-800" value="cat6">Expressions de Temps</option>
+                    <option class="text-slate-800" value="cat7">Expressions d'Émotion</option>
+                    <option class="text-slate-800" value="cat8">Colloquialisms Populaires</option>
+                    <option class="text-slate-800" value="cat9">Expressions de Transition</option>
+                    <option class="text-slate-800" value="cat10">Expressions Familières</option>
+                </select>
+            </div>
+            <button id="shuffle-button" class="btn-glass p-3 rounded-2xl text-white" title="Mélanger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l14.2 12.6"/><path d="M20 2l4 4-4 4"/><path d="M20 14l4 4-4 4"/></svg></button>
+        </section>
+        <section class="relative group">
+            <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 123</p>
+            <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
+                <div class="flashcard">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flex flex-col items-center gap-4 z-10">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Français</span>
+                            <h2 id="card-front-text" class="text-3xl sm:text-4xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
+                            <button onclick="playAudio(event)" class="mt-4 w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition shadow-sm active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
+                            <p class="text-slate-400 text-sm mt-1 font-medium">Toucher pour retourner</p>
+                        </div>
+                    </div>
+                    <div class="flashcard-face flashcard-back p-8">
+                        <div class="w-full h-full flex flex-col justify-between items-center">
+                            <div class="text-center">
+                                <span class="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1 rounded-full mb-3 inline-block">Anglais</span>
+                                <h3 id="card-back-text" class="text-2xl sm:text-3xl font-bold text-slate-800 mb-1"></h3>
+                                <p id="card-type-text" class="text-lg text-slate-500 font-medium italic font-serif"></p>
+                            </div>
+                            <div class="w-full bg-slate-50 rounded-2xl p-4 border border-slate-100 relative">
+                                <button onclick="playExampleAudio(event)" class="absolute top-2 right-2 text-slate-400 hover:text-purple-500 transition p-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
+                                <p id="example-fr" class="text-lg text-slate-700 font-medium mb-1 text-center leading-snug pr-6"></p>
+                                <p id="example-en" class="text-sm text-slate-400 text-center"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <nav class="bg-white/80 backdrop-blur-2xl border border-white/40 rounded-full p-2 shadow-2xl flex justify-between items-center gap-2">
+            <button id="prev-button" class="flex-1 py-4 rounded-full hover:bg-black/5 active:bg-black/10 transition text-slate-600 flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button id="flip-button" class="flex-none btn-primary w-16 h-16 rounded-full flex justify-center items-center text-white text-xl font-bold shadow-lg shadow-purple-500/30"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></button>
+            <button id="next-button" class="flex-1 py-4 rounded-full hover:bg-black/5 active:bg-black/10 transition text-slate-600 flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+        </nav>
+    </main>
+    <script>
+        const masterDeck = [
+            // --- Catégorie 1: Fillers Essentiels (15 mots) ---
+            { french: "ben", english: "well, um", type: "adv.", category: "cat1", example_fr: "Ben, je sais pas trop quoi te dire.", example_en: "Well, I don't really know what to say to you." },
+            { french: "donc", english: "so, therefore", type: "conj.", category: "cat1", example_fr: "J'ai faim, donc je vais manger.", example_en: "I'm hungry, so I'm going to eat." },
+            { french: "alors", english: "so, well then", type: "adv.", category: "cat1", example_fr: "Alors, qu'est-ce que tu veux faire ce soir ?", example_en: "So, what do you want to do tonight?" },
+            { french: "euh", english: "uh, um", type: "interj.", category: "cat1", example_fr: "Euh, c'est compliqué à expliquer.", example_en: "Um, it's complicated to explain." },
+            { french: "voilà", english: "there you go, that's it", type: "adv.", category: "cat1", example_fr: "Voilà, c'est exactement ce que je pensais.", example_en: "There you go, that's exactly what I thought." },
+            { french: "quoi", english: "like, you know (filler)", type: "pron.", category: "cat1", example_fr: "C'est bizarre, quoi.", example_en: "It's weird, like." },
+            { french: "enfin", english: "well, I mean", type: "adv.", category: "cat1", example_fr: "Enfin, je crois que c'est une bonne idée.", example_en: "Well, I think it's a good idea." },
+            { french: "tu vois", english: "you see, you know", type: "expr.", category: "cat1", example_fr: "C'est difficile à comprendre, tu vois.", example_en: "It's difficult to understand, you see." },
+            { french: "bref", english: "anyway, in short", type: "adv.", category: "cat1", example_fr: "Bref, on a passé une super soirée.", example_en: "Anyway, we had a great evening." },
+            { french: "genre", english: "like, kind of", type: "adv.", category: "cat1", example_fr: "Il est genre super content de te voir.", example_en: "He's like super happy to see you." },
+            { french: "t'sais / tu sais", english: "y'know", type: "expr.", category: "cat1", example_fr: "T'sais, c'est pas facile tous les jours.", example_en: "Y'know, it's not easy every day." },
+            { french: "bon", english: "well, okay", type: "adv.", category: "cat1", example_fr: "Bon, on y va ou pas ?", example_en: "Well, are we going or not?" },
+            { french: "disons", english: "let's say", type: "v.", category: "cat1", example_fr: "Disons que c'est un compromis acceptable.", example_en: "Let's say it's an acceptable compromise." },
+            { french: "en fait", english: "actually, in fact", type: "expr.", category: "cat1", example_fr: "En fait, je ne suis pas d'accord avec toi.", example_en: "Actually, I don't agree with you." },
+            { french: "du coup", english: "so, as a result", type: "expr.", category: "cat1", example_fr: "Il pleut, du coup on reste à la maison.", example_en: "It's raining, so we're staying home." },
+
+            // --- Catégorie 2: Réactions & Interjections (12 mots) ---
+            { french: "ah bon ?", english: "really? is that so?", type: "expr.", category: "cat2", example_fr: "Tu pars en Italie ? Ah bon ?", example_en: "You're going to Italy? Really?" },
+            { french: "ah d'accord", english: "oh okay, I see", type: "expr.", category: "cat2", example_fr: "Ah d'accord, je comprends maintenant.", example_en: "Oh okay, I understand now." },
+            { french: "bah oui", english: "well yeah, obviously", type: "expr.", category: "cat2", example_fr: "Tu viens avec nous ? Bah oui !", example_en: "Are you coming with us? Well yeah!" },
+            { french: "bah non", english: "well no, of course not", type: "expr.", category: "cat2", example_fr: "Tu as oublié ? Bah non !", example_en: "Did you forget? Well no!" },
+            { french: "oh là là", english: "oh my, wow", type: "interj.", category: "cat2", example_fr: "Oh là là, quelle catastrophe !", example_en: "Oh my, what a disaster!" },
+            { french: "ouais", english: "yeah", type: "adv.", category: "cat2", example_fr: "Ouais, je pense que c'est une bonne idée.", example_en: "Yeah, I think it's a good idea." },
+            { french: "ouah / waouh", english: "wow", type: "interj.", category: "cat2", example_fr: "Waouh, c'est magnifique !", example_en: "Wow, it's beautiful!" },
+            { french: "pfff", english: "pfff (expressing frustration)", type: "interj.", category: "cat2", example_fr: "Pfff, j'en ai marre de cette situation.", example_en: "Pfff, I'm fed up with this situation." },
+            { french: "ouf", english: "phew, relief", type: "interj.", category: "cat2", example_fr: "Ouf, on a réussi à temps !", example_en: "Phew, we made it in time!" },
+            { french: "eh beh", english: "well well, wow", type: "expr.", category: "cat2", example_fr: "Eh beh, tu as vraiment changé !", example_en: "Well well, you've really changed!" },
+            { french: "tiens", english: "hey, here (surprise)", type: "interj.", category: "cat2", example_fr: "Tiens, je ne t'avais pas vu !", example_en: "Hey, I hadn't seen you!" },
+            { french: "dis donc", english: "wow, say", type: "expr.", category: "cat2", example_fr: "Dis donc, tu as vu le prix ?", example_en: "Wow, have you seen the price?" },
+
+            // --- Catégorie 3: Expressions d'Accord (12 mots) ---
+            { french: "ça marche", english: "that works, okay", type: "expr.", category: "cat3", example_fr: "On se voit demain ? Ça marche !", example_en: "See you tomorrow? That works!" },
+            { french: "d'accord", english: "okay, agreed", type: "expr.", category: "cat3", example_fr: "D'accord, je suis d'accord avec toi.", example_en: "Okay, I agree with you." },
+            { french: "carrément", english: "totally, absolutely", type: "adv.", category: "cat3", example_fr: "Tu as raison, carrément !", example_en: "You're right, totally!" },
+            { french: "c'est clair", english: "that's clear, exactly", type: "expr.", category: "cat3", example_fr: "Il faut agir maintenant. C'est clair.", example_en: "We need to act now. That's clear." },
+            { french: "tout à fait", english: "absolutely, exactly", type: "expr.", category: "cat3", example_fr: "Vous avez tout à fait raison.", example_en: "You're absolutely right." },
+            { french: "exactement", english: "exactly", type: "adv.", category: "cat3", example_fr: "C'est exactement ce que je pense.", example_en: "That's exactly what I think." },
+            { french: "bien sûr", english: "of course", type: "expr.", category: "cat3", example_fr: "Bien sûr que je viens avec toi !", example_en: "Of course I'm coming with you!" },
+            { french: "évidemment", english: "obviously", type: "adv.", category: "cat3", example_fr: "Évidemment, je suis d'accord.", example_en: "Obviously, I agree." },
+            { french: "sans problème", english: "no problem", type: "expr.", category: "cat3", example_fr: "Tu peux compter sur moi, sans problème.", example_en: "You can count on me, no problem." },
+            { french: "pas de souci", english: "no worries", type: "expr.", category: "cat3", example_fr: "Pas de souci, je m'en occupe.", example_en: "No worries, I'll take care of it." },
+            { french: "volontiers", english: "gladly, with pleasure", type: "adv.", category: "cat3", example_fr: "Tu veux un café ? Volontiers !", example_en: "Do you want a coffee? Gladly!" },
+            { french: "avec plaisir", english: "with pleasure", type: "expr.", category: "cat3", example_fr: "Je t'aide avec plaisir.", example_en: "I'll help you with pleasure." },
+
+            // --- Catégorie 4: Expressions de Désaccord (10 mots) ---
+            { french: "pas du tout", english: "not at all", type: "expr.", category: "cat4", example_fr: "Je ne suis pas du tout d'accord avec toi.", example_en: "I don't agree with you at all." },
+            { french: "n'importe quoi", english: "nonsense, whatever", type: "expr.", category: "cat4", example_fr: "Il dit n'importe quoi, ne l'écoute pas.", example_en: "He's talking nonsense, don't listen to him." },
+            { french: "tu rigoles / tu plaisantes", english: "you're kidding", type: "expr.", category: "cat4", example_fr: "Tu rigoles ? C'est beaucoup trop cher !", example_en: "You're kidding? That's way too expensive!" },
+            { french: "franchement", english: "honestly, frankly", type: "adv.", category: "cat4", example_fr: "Franchement, je ne pense pas que ce soit une bonne idée.", example_en: "Honestly, I don't think it's a good idea." },
+            { french: "c'est n'importe quoi", english: "that's ridiculous", type: "expr.", category: "cat4", example_fr: "Cette décision, c'est n'importe quoi !", example_en: "That decision is ridiculous!" },
+            { french: "pas vraiment", english: "not really", type: "expr.", category: "cat4", example_fr: "Tu aimes ce film ? Pas vraiment.", example_en: "Do you like this movie? Not really." },
+            { french: "jamais de la vie", english: "no way, never", type: "expr.", category: "cat4", example_fr: "Tu vas accepter ? Jamais de la vie !", example_en: "You're going to accept? No way!" },
+            { french: "sûrement pas", english: "certainly not", type: "expr.", category: "cat4", example_fr: "Je vais payer ça ? Sûrement pas !", example_en: "I'm going to pay for that? Certainly not!" },
+            { french: "tu parles", english: "yeah right, as if", type: "expr.", category: "cat4", example_fr: "Il va réussir ? Tu parles !", example_en: "He's going to succeed? Yeah right!" },
+            { french: "mouais", english: "yeah... (skeptical)", type: "interj.", category: "cat4", example_fr: "Mouais, je ne suis pas convaincu.", example_en: "Yeah... I'm not convinced." },
+
+            // --- Catégorie 5: Expressions Courantes (15 mots) ---
+            { french: "ça va", english: "it's okay, fine", type: "expr.", category: "cat5", example_fr: "Comment ça va ? Ça va bien, merci.", example_en: "How's it going? It's going well, thanks." },
+            { french: "pas mal", english: "not bad", type: "expr.", category: "cat5", example_fr: "Comment s'est passé ton examen ? Pas mal !", example_en: "How did your exam go? Not bad!" },
+            { french: "comme ci comme ça", english: "so-so", type: "expr.", category: "cat5", example_fr: "Ça va aujourd'hui ? Comme ci comme ça.", example_en: "How's it going today? So-so." },
+            { french: "c'est pas grave", english: "it's not serious, no big deal", type: "expr.", category: "cat5", example_fr: "J'ai oublié ton anniversaire. C'est pas grave.", example_en: "I forgot your birthday. It's no big deal." },
+            { french: "tant pis", english: "too bad, oh well", type: "expr.", category: "cat5", example_fr: "Il ne vient pas ? Tant pis, on ira sans lui.", example_en: "He's not coming? Too bad, we'll go without him." },
+            { french: "tant mieux", english: "so much the better, great", type: "expr.", category: "cat5", example_fr: "Elle a réussi son examen ! Tant mieux !", example_en: "She passed her exam! Great!" },
+            { french: "ça dépend", english: "it depends", type: "expr.", category: "cat5", example_fr: "Tu viens ce soir ? Ça dépend.", example_en: "Are you coming tonight? It depends." },
+            { french: "on verra", english: "we'll see", type: "expr.", category: "cat5", example_fr: "Tu penses réussir ? On verra bien.", example_en: "Do you think you'll succeed? We'll see." },
+            { french: "j'en sais rien", english: "I have no idea", type: "expr.", category: "cat5", example_fr: "Où sont mes clés ? J'en sais rien.", example_en: "Where are my keys? I have no idea." },
+            { french: "aucune idée", english: "no idea", type: "expr.", category: "cat5", example_fr: "Quelle heure est-il ? Aucune idée.", example_en: "What time is it? No idea." },
+            { french: "ça me dit rien", english: "doesn't ring a bell, doesn't appeal to me", type: "expr.", category: "cat5", example_fr: "Tu connais ce restaurant ? Ça me dit rien.", example_en: "Do you know this restaurant? Doesn't ring a bell." },
+            { french: "je m'en fiche", english: "I don't care", type: "expr.", category: "cat5", example_fr: "Qu'est-ce qu'ils pensent ? Je m'en fiche.", example_en: "What do they think? I don't care." },
+            { french: "peu importe", english: "it doesn't matter", type: "expr.", category: "cat5", example_fr: "Peu importe ce qu'ils disent.", example_en: "It doesn't matter what they say." },
+            { french: "c'est comme ça", english: "that's how it is", type: "expr.", category: "cat5", example_fr: "La vie est difficile, c'est comme ça.", example_en: "Life is hard, that's how it is." },
+            { french: "qu'est-ce que tu veux", english: "what can you do, what do you expect", type: "expr.", category: "cat5", example_fr: "Il est en retard encore. Qu'est-ce que tu veux ?", example_en: "He's late again. What can you do?" },
+
+            // --- Catégorie 6: Expressions de Temps (8 mots) ---
+            { french: "tout de suite", english: "right away", type: "expr.", category: "cat6", example_fr: "J'arrive tout de suite, attends-moi.", example_en: "I'm coming right away, wait for me." },
+            { french: "tout à l'heure", english: "later, a moment ago", type: "expr.", category: "cat6", example_fr: "On se voit tout à l'heure.", example_en: "See you later." },
+            { french: "à tout à l'heure", english: "see you later", type: "expr.", category: "cat6", example_fr: "Je dois partir. À tout à l'heure !", example_en: "I have to leave. See you later!" },
+            { french: "tout le temps", english: "all the time", type: "expr.", category: "cat6", example_fr: "Il se plaint tout le temps.", example_en: "He complains all the time." },
+            { french: "de temps en temps", english: "from time to time", type: "expr.", category: "cat6", example_fr: "On se voit de temps en temps.", example_en: "We see each other from time to time." },
+            { french: "en ce moment", english: "right now, these days", type: "expr.", category: "cat6", example_fr: "En ce moment, je suis très occupé.", example_en: "Right now, I'm very busy." },
+            { french: "depuis un moment", english: "for a while", type: "expr.", category: "cat6", example_fr: "Je l'attends depuis un moment.", example_en: "I've been waiting for him for a while." },
+            { french: "à la dernière minute", english: "at the last minute", type: "expr.", category: "cat6", example_fr: "Il fait toujours tout à la dernière minute.", example_en: "He always does everything at the last minute." },
+
+            // --- Catégorie 7: Expressions d'Émotion (12 mots) ---
+            { french: "j'en ai marre", english: "I'm fed up", type: "expr.", category: "cat7", example_fr: "J'en ai marre d'attendre.", example_en: "I'm fed up with waiting." },
+            { french: "j'en ai ras-le-bol", english: "I'm sick of it", type: "expr.", category: "cat7", example_fr: "J'en ai ras-le-bol de ses mensonges.", example_en: "I'm sick of his lies." },
+            { french: "ça me saoule", english: "it annoys me (slang)", type: "expr.", category: "cat7", example_fr: "Cette situation me saoule vraiment.", example_en: "This situation really annoys me." },
+            { french: "ça me gave", english: "I'm stuffed, sick of it (slang)", type: "expr.", category: "cat7", example_fr: "Ça me gave de faire ça tous les jours.", example_en: "I'm sick of doing this every day." },
+            { french: "ça craint", english: "it sucks, that's bad", type: "expr.", category: "cat7", example_fr: "On ne peut pas sortir ce soir, ça craint.", example_en: "We can't go out tonight, that sucks." },
+            { french: "c'est nul", english: "it sucks, it's rubbish", type: "expr.", category: "cat7", example_fr: "Ce film est vraiment nul.", example_en: "This movie really sucks." },
+            { french: "c'est génial", english: "it's great, awesome", type: "expr.", category: "cat7", example_fr: "Tu as eu le job ? C'est génial !", example_en: "You got the job? That's awesome!" },
+            { french: "c'est cool", english: "it's cool, nice", type: "expr.", category: "cat7", example_fr: "On part en vacances demain. C'est cool !", example_en: "We're leaving on vacation tomorrow. That's cool!" },
+            { french: "c'est top", english: "it's great, top-notch", type: "expr.", category: "cat7", example_fr: "Ce restau est vraiment top.", example_en: "This restaurant is really great." },
+            { french: "c'est ouf", english: "it's crazy (verlan)", type: "expr.", category: "cat7", example_fr: "Cette histoire est complètement ouf.", example_en: "This story is completely crazy." },
+            { french: "j'hallucine", english: "I can't believe it", type: "expr.", category: "cat7", example_fr: "J'hallucine qu'il ait dit ça.", example_en: "I can't believe he said that." },
+            { french: "je suis choqué(e)", english: "I'm shocked", type: "expr.", category: "cat7", example_fr: "Je suis choqué par son comportement.", example_en: "I'm shocked by his behavior." },
+
+            // --- Catégorie 8: Colloquialisms Populaires (12 mots) ---
+            { french: "grave", english: "seriously, really (slang)", type: "adv.", category: "cat8", example_fr: "C'est grave bien ce que tu as fait.", example_en: "What you did is seriously good." },
+            { french: "trop", english: "too much, so (as intensifier)", type: "adv.", category: "cat8", example_fr: "Elle est trop sympa.", example_en: "She's so nice." },
+            { french: "hyper", english: "super, really", type: "adv.", category: "cat8", example_fr: "Je suis hyper content de te voir.", example_en: "I'm super happy to see you." },
+            { french: "vachement", english: "really, very (colloquial)", type: "adv.", category: "cat8", example_fr: "C'est vachement difficile.", example_en: "It's really difficult." },
+            { french: "super", english: "super, great", type: "adv.", category: "cat8", example_fr: "C'est super intéressant.", example_en: "It's super interesting." },
+            { french: "méga", english: "mega, really", type: "adv.", category: "cat8", example_fr: "J'ai méga faim.", example_en: "I'm mega hungry." },
+            { french: "un truc", english: "a thing, something", type: "n.m.", category: "cat8", example_fr: "Il m'a dit un truc bizarre.", example_en: "He told me a weird thing." },
+            { french: "un machin", english: "a thingy, whatchamacallit", type: "n.m.", category: "cat8", example_fr: "Passe-moi le machin là-bas.", example_en: "Pass me the thingy over there." },
+            { french: "un bidule", english: "a gadget, thingamajig", type: "n.m.", category: "cat8", example_fr: "Tu as vu mon bidule pour ouvrir les bouteilles ?", example_en: "Have you seen my thingamajig for opening bottles?" },
+            { french: "des trucs", english: "stuff, things", type: "n.m.pl.", category: "cat8", example_fr: "J'ai plein de trucs à faire aujourd'hui.", example_en: "I have lots of stuff to do today." },
+            { french: "un max", english: "a lot, loads", type: "n.m.", category: "cat8", example_fr: "Il y avait un max de monde au concert.", example_en: "There were loads of people at the concert." },
+            { french: "des masses", english: "a lot, loads (negative contexts)", type: "n.f.pl.", category: "cat8", example_fr: "Il n'y avait pas des masses de gens.", example_en: "There weren't loads of people." },
+
+            // --- Catégorie 9: Expressions de Transition (10 mots) ---
+            { french: "de toute façon", english: "anyway, in any case", type: "expr.", category: "cat9", example_fr: "De toute façon, on n'avait pas le choix.", example_en: "Anyway, we didn't have a choice." },
+            { french: "au fait", english: "by the way", type: "expr.", category: "cat9", example_fr: "Au fait, tu as des nouvelles de Marie ?", example_en: "By the way, do you have news from Marie?" },
+            { french: "sinon", english: "otherwise, apart from that", type: "conj.", category: "cat9", example_fr: "Sinon, comment ça va ?", example_en: "Apart from that, how are you?" },
+            { french: "d'ailleurs", english: "by the way, moreover", type: "adv.", category: "cat9", example_fr: "D'ailleurs, je voulais te dire quelque chose.", example_en: "By the way, I wanted to tell you something." },
+            { french: "en plus", english: "furthermore, on top of that", type: "expr.", category: "cat9", example_fr: "Il pleut et en plus, il fait froid.", example_en: "It's raining and on top of that, it's cold." },
+            { french: "en tout cas", english: "in any case, anyway", type: "expr.", category: "cat9", example_fr: "En tout cas, moi je pense que c'est faux.", example_en: "In any case, I think it's wrong." },
+            { french: "par contre", english: "on the other hand, however", type: "expr.", category: "cat9", example_fr: "J'aime le thé. Par contre, je déteste le café.", example_en: "I like tea. On the other hand, I hate coffee." },
+            { french: "du moins", english: "at least", type: "expr.", category: "cat9", example_fr: "Il est intelligent, du moins je le pense.", example_en: "He's intelligent, at least I think so." },
+            { french: "pour le moment", english: "for the moment, for now", type: "expr.", category: "cat9", example_fr: "Pour le moment, tout va bien.", example_en: "For the moment, everything is fine." },
+            { french: "au pire", english: "at worst", type: "expr.", category: "cat9", example_fr: "Au pire, on reporte à demain.", example_en: "At worst, we postpone until tomorrow." },
+
+            // --- Catégorie 10: Expressions Familières (7 mots) ---
+            { french: "y a pas", english: "there isn't (colloquial)", type: "expr.", category: "cat10", example_fr: "Y a pas de problème avec ça.", example_en: "There isn't a problem with that." },
+            { french: "j'ai la flemme", english: "I can't be bothered", type: "expr.", category: "cat10", example_fr: "J'ai la flemme de sortir ce soir.", example_en: "I can't be bothered to go out tonight." },
+            { french: "c'est la galère", english: "it's a hassle, it's tough", type: "expr.", category: "cat10", example_fr: "Trouver un appart à Paris, c'est la galère.", example_en: "Finding an apartment in Paris is a hassle." },
+            { french: "au taquet", english: "at full speed, pumped", type: "expr.", category: "cat10", example_fr: "Je suis au taquet pour ce projet.", example_en: "I'm pumped for this project." },
+            { french: "nickel", english: "perfect, spotless", type: "adj.", category: "cat10", example_fr: "Ta chambre est nickel.", example_en: "Your room is perfect." },
+            { french: "relou", english: "annoying (verlan)", type: "adj.", category: "cat10", example_fr: "Ce type est vraiment relou.", example_en: "This guy is really annoying." },
+            { french: "chelou", english: "weird (verlan)", type: "adj.", category: "cat10", example_fr: "Cette situation est chelou.", example_en: "This situation is weird." }
+        ];
+
+        let currentDeck = [...masterDeck];
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const flashcardContainer = document.getElementById('flashcard-container');
+        const frontText = document.getElementById('card-front-text');
+        const backText = document.getElementById('card-back-text');
+        const typeText = document.getElementById('card-type-text');
+        const exampleFr = document.getElementById('example-fr');
+        const exampleEn = document.getElementById('example-en');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const categorySelect = document.getElementById('category-select');
+
+        function shuffleDeck() {
+            for (let i = currentDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+            }
+            currentIndex = 0;
+            displayCard();
+        }
+
+        function filterByCategory() {
+            const selected = categorySelect.value;
+            if (selected === 'all') {
+                currentDeck = [...masterDeck];
+            } else {
+                currentDeck = masterDeck.filter(card => card.category === selected);
+            }
+            currentIndex = 0;
+            displayCard();
+        }
+
+        function displayCard() {
+            if (currentDeck.length === 0) {
+                frontText.textContent = "Aucune carte";
+                backText.textContent = "No cards";
+                typeText.textContent = "";
+                exampleFr.textContent = "";
+                exampleEn.textContent = "";
+                progressIndicator.textContent = "0 sur 0";
+                return;
+            }
+            const card = currentDeck[currentIndex];
+            frontText.textContent = card.french;
+            backText.textContent = card.english;
+            typeText.textContent = card.type;
+            exampleFr.textContent = card.example_fr;
+            exampleEn.textContent = card.example_en;
+            progressIndicator.textContent = `Carte ${currentIndex + 1} sur ${currentDeck.length}`;
+            
+            if (isFlipped) {
+                flashcardContainer.classList.remove('is-flipped');
+                isFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            flashcardContainer.classList.toggle('is-flipped');
+            isFlipped = !isFlipped;
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % currentDeck.length;
+            displayCard();
+        }
+
+        function prevCard() {
+            currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
+            displayCard();
+        }
+
+        function playAudio(event) {
+            event.stopPropagation();
+            const card = currentDeck[currentIndex];
+            const utterance = new SpeechSynthesisUtterance(card.french);
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+
+        function playExampleAudio(event) {
+            event.stopPropagation();
+            const card = currentDeck[currentIndex];
+            const utterance = new SpeechSynthesisUtterance(card.example_fr);
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+
+        document.getElementById('next-button').addEventListener('click', nextCard);
+        document.getElementById('prev-button').addEventListener('click', prevCard);
+        document.getElementById('flip-button').addEventListener('click', (e) => {
+            e.stopPropagation();
+            flipCard();
+        });
+        document.getElementById('shuffle-button').addEventListener('click', shuffleDeck);
+        categorySelect.addEventListener('change', filterByCategory);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            else if (e.key === 'ArrowLeft') prevCard();
+            else if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        displayCard();
+    </script>
+</body>
+</html>
