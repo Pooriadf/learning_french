@@ -11,7 +11,7 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
         .mesh-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; background-image: radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%); filter: blur(60px); opacity: 0.6; animation: meshMove 20s infinite alternate; }
         @keyframes meshMove { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
-        .flashcard-container { perspective: 1200px; }
+        .flashcard-container { perspective: 1200px; aspect-ratio: 3/4; }
         .flashcard { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .flashcard-container.is-flipped .flashcard { transform: rotateY(180deg); }
         .flashcard-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 1.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset; }
@@ -82,7 +82,7 @@
         </section>
         <section class="relative group">
             <p id="progress-indicator" class="text-center text-white/80 text-sm font-medium mb-3 tracking-wide">Carte 1 sur 500</p>
-            <div id="flashcard-container" class="flashcard-container w-full h-[420px] cursor-pointer" onclick="flipCard()">
+            <div id="flashcard-container" class="flashcard-container w-full cursor-pointer" onclick="flipCard()">
                 <div class="flashcard">
                     <div class="flashcard-face flashcard-front">
                         <div class="flex flex-col items-center gap-4 z-10">
