@@ -66,7 +66,7 @@
                     <div class="flashcard-face flashcard-front">
                         <div class="flex flex-col items-center gap-2 z-10">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-0.5 rounded-full">Français</span>
-                            <h2 id="card-front-text" class="text-3xl sm:text-4xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
+                            <h2 id="card-front-text" class="text-4xl sm:text-5xl font-bold text-slate-800 text-center tracking-tight leading-tight px-2"></h2>
                             <button onclick="playAudio(event)" class="mt-2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition shadow-sm active:scale-90"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button>
                             <p class="text-slate-400 text-xs sm:text-sm mt-1 font-medium">Toucher pour retourner</p>
                         </div>
@@ -75,7 +75,7 @@
                         <div class="w-full h-full flex flex-col justify-between items-center">
                             <div class="text-center">
                                 <span class="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-2 py-0.5 rounded-full mb-2 inline-block">Anglais</span>
-                                <h3 id="card-back-text" class="text-xl sm:text-2xl font-bold text-slate-800 mb-0.5"></h3>
+                                <h3 id="card-back-text" class="text-2xl sm:text-3xl font-bold text-slate-800 mb-0.5"></h3>
                                 <p id="card-type-text" class="text-base sm:text-base text-slate-500 font-medium italic font-serif"></p>
                             </div>
                             <div class="w-full bg-slate-50 rounded-lg sm:rounded-2xl p-2 sm:p-4 border border-slate-100 relative">
@@ -331,7 +331,13 @@
             { french: "carrément bizarre", english: "totally weird", type: "expr.", category: "cat10", example_fr: "C'est carrément bizarre comme comportement.", example_en: "That's totally weird behavior." },
             { french: "j'en ai marre", english: "I'm fed up", type: "expr.", category: "cat10", example_fr: "J'en ai marre de cette situation.", example_en: "I'm fed up with this situation." },
             { french: "arrête tes conneries", english: "stop your nonsense", type: "expr.", category: "cat10", example_fr: "Arrête tes conneries et viens aider.", example_en: "Stop your nonsense and come help." },
-            { french: "dis pas de conneries", english: "don't talk nonsense", type: "expr.", category: "cat10", example_fr: "Dis pas de conneries, c'est sérieux.", example_en: "Don't talk nonsense, this is serious." }
+            { french: "dis pas de conneries", english: "don't talk nonsense", type: "expr.", category: "cat10", example_fr: "Dis pas de conneries, c'est sérieux.", example_en: "Don't talk nonsense, this is serious." },
+            { french: "ça va pas la tête ?", english: "are you crazy?", type: "expr.", category: "cat10", example_fr: "Ça va pas la tête ? Pourquoi tu fais ça ?", example_en: "Are you crazy? Why are you doing that?" },
+            { french: "tu me prends la tête", english: "you're getting on my nerves", type: "expr.", category: "cat10", example_fr: "Tu me prends la tête avec tes questions.", example_en: "You're getting on my nerves with your questions." },
+            { french: "laisse tomber", english: "forget it", type: "expr.", category: "cat10", example_fr: "Laisse tomber, c'est pas grave.", example_en: "Forget it, it's not a big deal." },
+            { french: "t'abuses", english: "you're overdoing it", type: "expr.", category: "cat10", example_fr: "Franchement, t'abuses là.", example_en: "Honestly, you're overdoing it." },
+            { french: "ça suffit", english: "that's enough", type: "expr.", category: "cat10", example_fr: "Ça suffit maintenant, on arrête.", example_en: "That's enough now, we stop." },
+            { french: "c'est bon, tranquille", english: "it's fine, relax", type: "expr.", category: "cat10", example_fr: "C'est bon, tranquille, pas de stress.", example_en: "It's fine, relax, no stress." }
         ];
 
         let currentDeck = [...masterDeck];
