@@ -583,19 +583,113 @@
             displayConjugation(verb, conjugaisons);
         }
 
+        function getExtendedConjugations(verb, baseConjugations) {
+            const irregular = {
+                "être": {
+                    imparfait: { je: "étais", tu: "étais", il: "était", nous: "étions", vous: "étiez", ils: "étaient" },
+                    subjonctif: { je: "sois", tu: "sois", il: "soit", nous: "soyons", vous: "soyez", ils: "soient" }
+                },
+                "avoir": {
+                    imparfait: { je: "avais", tu: "avais", il: "avait", nous: "avions", vous: "aviez", ils: "avaient" },
+                    subjonctif: { je: "aie", tu: "aies", il: "ait", nous: "ayons", vous: "ayez", ils: "aient" }
+                },
+                "aller": {
+                    imparfait: { je: "allais", tu: "allais", il: "allait", nous: "allions", vous: "alliez", ils: "allaient" },
+                    subjonctif: { je: "aille", tu: "ailles", il: "aille", nous: "allions", vous: "alliez", ils: "aillent" }
+                },
+                "faire": {
+                    imparfait: { je: "faisais", tu: "faisais", il: "faisait", nous: "faisions", vous: "faisiez", ils: "faisaient" },
+                    subjonctif: { je: "fasse", tu: "fasses", il: "fasse", nous: "fassions", vous: "fassiez", ils: "fassent" }
+                },
+                "pouvoir": {
+                    imparfait: { je: "pouvais", tu: "pouvais", il: "pouvait", nous: "pouvions", vous: "pouviez", ils: "pouvaient" },
+                    subjonctif: { je: "puisse", tu: "puisses", il: "puisse", nous: "puissions", vous: "puissiez", ils: "puissent" }
+                },
+                "vouloir": {
+                    imparfait: { je: "voulais", tu: "voulais", il: "voulait", nous: "voulions", vous: "vouliez", ils: "voulaient" },
+                    subjonctif: { je: "veuille", tu: "veuilles", il: "veuille", nous: "voulions", vous: "vouliez", ils: "veuillent" }
+                },
+                "devoir": {
+                    imparfait: { je: "devais", tu: "devais", il: "devait", nous: "devions", vous: "deviez", ils: "devaient" },
+                    subjonctif: { je: "doive", tu: "doives", il: "doive", nous: "devions", vous: "deviez", ils: "doivent" }
+                },
+                "savoir": {
+                    imparfait: { je: "savais", tu: "savais", il: "savait", nous: "savions", vous: "saviez", ils: "savaient" },
+                    subjonctif: { je: "sache", tu: "saches", il: "sache", nous: "sachions", vous: "sachiez", ils: "sachent" }
+                }
+            };
+
+            const present = baseConjugations["présent"] || {};
+            const clean = (value) => (value || "").toLowerCase().replace(/\(.*?\)/g, "").trim();
+            const getNousStem = () => {
+                const nousForm = clean(present.nous);
+                if (nousForm.endsWith("ons")) {
+                    return nousForm.slice(0, -3);
+                }
+                if (verb.endsWith("er") || verb.endsWith("ir") || verb.endsWith("re")) {
+                    return verb.slice(0, -2);
+                }
+                return verb;
+            };
+            const getIlsStem = () => {
+                const ilsForm = clean(present.ils);
+                if (ilsForm.endsWith("ent")) {
+                    return ilsForm.slice(0, -3);
+                }
+                return getNousStem();
+            };
+
+            const nousStem = getNousStem();
+            const ilsStem = getIlsStem();
+
+            const generatedImparfait = {
+                je: `${nousStem}ais`,
+                tu: `${nousStem}ais`,
+                il: `${nousStem}ait`,
+                nous: `${nousStem}ions`,
+                vous: `${nousStem}iez`,
+                ils: `${nousStem}aient`
+            };
+
+            const generatedSubjonctif = {
+                je: `${ilsStem}e`,
+                tu: `${ilsStem}es`,
+                il: `${ilsStem}e`,
+                nous: `${nousStem}ions`,
+                vous: `${nousStem}iez`,
+                ils: `${ilsStem}ent`
+            };
+
+            const extended = { ...baseConjugations };
+            if (!extended.imparfait) {
+                extended.imparfait = irregular[verb]?.imparfait || generatedImparfait;
+            }
+            if (!extended.subjonctif) {
+                extended.subjonctif = irregular[verb]?.subjonctif || generatedSubjonctif;
+            }
+            return extended;
+        }
+
         function displayConjugation(verb, conjugaisons) {
             const modal = document.getElementById('conjugaison-modal');
             const title = document.getElementById('conjugaison-title');
             const content = document.getElementById('conjugaison-content');
             title.textContent = `Conjugaison: ${verb}`;
+            const fullConjugations = getExtendedConjugations(verb, conjugaisons);
             let html = '';
-            const tenseLabels = { présent: 'Présent', passé: 'Passé Composé', futur: 'Futur Simple' };
+            const tenseLabels = {
+                présent: 'Présent',
+                passé: 'Passé Composé',
+                imparfait: 'Imparfait',
+                futur: 'Futur Simple',
+                subjonctif: 'Subjonctif Présent'
+            };
             for (const [tenseKey, tenselabel] of Object.entries(tenseLabels)) {
-                if (conjugaisons[tenseKey]) {
+                if (fullConjugations[tenseKey]) {
                     html += `<div class="tense-section"><div class="tense-title">${tenselabel}</div><table class="conjugation-table"><tr><th>Pronoun</th><th>Conjugation</th></tr>`;
                     const pronouns = { je: 'je', tu: 'tu', il: 'il/elle', nous: 'nous', vous: 'vous', ils: 'ils/elles' };
                     for (const [pronounKey, pronounLabel] of Object.entries(pronouns)) {
-                        const form = conjugaisons[tenseKey][pronounKey] || '—';
+                        const form = fullConjugations[tenseKey][pronounKey] || '—';
                         html += `<tr><td class="pronoun">${pronounLabel}</td><td>${form}</td></tr>`;
                     }
                     html += '</table></div>';
