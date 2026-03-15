@@ -771,9 +771,87 @@
         const shuffleButton = document.getElementById('shuffle-button');
         function updateCard() { if (currentDeck.length === 0) return; const card = currentDeck[currentIndex]; cardFrontText.textContent = card.french; cardBackText.textContent = card.english; cardTypeText.textContent = card.type; exampleFr.textContent = card.example_fr; exampleEn.textContent = `(${card.example_en})`; updateConjugationButton(card); resetCardToFront(); updateProgress(); }
         function updateConjugationButton(card) { const conjugaisonBtn = document.getElementById('conjugaison-button'); if (card.type && card.type.toLowerCase().startsWith('v')) { conjugaisonBtn.classList.add('visible'); } else { conjugaisonBtn.classList.remove('visible'); } }
-        function openConjugation(event) { event.stopPropagation(); const currentCard = currentDeck[currentIndex]; const verb = currentCard.french.toLowerCase(); const conjugaisons = conjugationDatabase[verb]; if (!conjugaisons) { alert(`Conjugation not available for "${verb}"`); return; } displayConjugation(verb, conjugaisons); }
-        function getExtendedConjugations(verb, baseConjugations) { const irregular = { "être": { imparfait: { je: "étais", tu: "étais", il: "était", nous: "étions", vous: "étiez", ils: "étaient" }, subjonctif: { je: "sois", tu: "sois", il: "soit", nous: "soyons", vous: "soyez", ils: "soient" } }, "avoir": { imparfait: { je: "avais", tu: "avais", il: "avait", nous: "avions", vous: "aviez", ils: "avaient" }, subjonctif: { je: "aie", tu: "aies", il: "ait", nous: "ayons", vous: "ayez", ils: "aient" } }, "aller": { imparfait: { je: "allais", tu: "allais", il: "allait", nous: "allions", vous: "alliez", ils: "allaient" }, subjonctif: { je: "aille", tu: "ailles", il: "aille", nous: "allions", vous: "alliez", ils: "aillent" } }, "faire": { imparfait: { je: "faisais", tu: "faisais", il: "faisait", nous: "faisions", vous: "faisiez", ils: "faisaient" }, subjonctif: { je: "fasse", tu: "fasses", il: "fasse", nous: "fassions", vous: "fassiez", ils: "fassent" } }, "pouvoir": { imparfait: { je: "pouvais", tu: "pouvais", il: "pouvait", nous: "pouvions", vous: "pouviez", ils: "pouvaient" }, subjonctif: { je: "puisse", tu: "puisses", il: "puisse", nous: "puissions", vous: "puissiez", ils: "puissent" } }, "vouloir": { imparfait: { je: "voulais", tu: "voulais", il: "voulait", nous: "voulions", vous: "vouliez", ils: "voulaient" }, subjonctif: { je: "veuille", tu: "veuilles", il: "veuille", nous: "voulions", vous: "vouliez", ils: "veuillent" } }, "devoir": { imparfait: { je: "devais", tu: "devais", il: "devait", nous: "devions", vous: "deviez", ils: "devaient" }, subjonctif: { je: "doive", tu: "doives", il: "doive", nous: "devions", vous: "deviez", ils: "doivent" } }, "savoir": { imparfait: { je: "savais", tu: "savais", il: "savait", nous: "savions", vous: "saviez", ils: "savaient" }, subjonctif: { je: "sache", tu: "saches", il: "sache", nous: "sachions", vous: "sachiez", ils: "sachent" } } }; const present = baseConjugations["présent"] || {}; const clean = (value) => (value || "").toLowerCase().replace(/\(.*?\)/g, "").trim(); const getNousStem = () => { const nousForm = clean(present.nous); if (nousForm.endsWith("ons")) { return nousForm.slice(0, -3); } if (verb.endsWith("er") || verb.endsWith("ir") || verb.endsWith("re")) { return verb.slice(0, -2); } return verb; }; const getIlsStem = () => { const ilsForm = clean(present.ils); if (ilsForm.endsWith("ent")) { return ilsForm.slice(0, -3); } return getNousStem(); }; const nousStem = getNousStem(); const ilsStem = getIlsStem(); const generatedImparfait = { je: `${nousStem}ais`, tu: `${nousStem}ais`, il: `${nousStem}ait`, nous: `${nousStem}ions`, vous: `${nousStem}iez`, ils: `${nousStem}aient` }; const generatedSubjonctif = { je: `${ilsStem}e`, tu: `${ilsStem}es`, il: `${ilsStem}e`, nous: `${nousStem}ions`, vous: `${nousStem}iez`, ils: `${ilsStem}ent` }; const extended = { ...baseConjugations }; if (!extended.imparfait) { extended.imparfait = irregular[verb]?.imparfait || generatedImparfait; } if (!extended.subjonctif) { extended.subjonctif = irregular[verb]?.subjonctif || generatedSubjonctif; } return extended; }
-        function displayConjugation(verb, conjugaisons) { const modal = document.getElementById('conjugaison-modal'); const title = document.getElementById('conjugaison-title'); const content = document.getElementById('conjugaison-content'); title.textContent = `Conjugaison: ${verb}`; const fullConjugations = getExtendedConjugations(verb, conjugaisons); let html = ''; const tenseLabels = { présent: 'Présent', passé: 'Passé Composé', imparfait: 'Imparfait', futur: 'Futur Simple', subjonctif: 'Subjonctif Présent' }; for (const [tenseKey, tenselabel] of Object.entries(tenseLabels)) { if (fullConjugations[tenseKey]) { html += `<div class="tense-section"><div class="tense-title">${tenselabel}</div><table class="conjugation-table"><tr><th>Pronoun</th><th>Conjugation</th></tr>`; const pronouns = { je: 'je', tu: 'tu', il: 'il/elle', nous: 'nous', vous: 'vous', ils: 'ils/elles' }; for (const [pronounKey, pronounLabel] of Object.entries(pronouns)) { const form = fullConjugations[tenseKey][pronounKey] || '—'; html += `<tr><td class="pronoun">${pronounLabel}</td><td>${form}</td></tr>`; } html += '</table></div>'; } } content.innerHTML = html; modal.classList.remove('hidden'); }
+        function openConjugation(event) {
+            event.stopPropagation();
+            const currentCard = currentDeck[currentIndex];
+            const verb = currentCard.french.toLowerCase();
+            const conjugaisons = conjugationDatabase[verb];
+            if (!conjugaisons) {
+                alert(`Conjugation not available for "${verb}"`);
+                return;
+            }
+            displayConjugation(verb, conjugaisons);
+        }
+        function getExtendedConjugations(verb, baseConjugations) {
+            const irregular = {
+                "être": { imparfait: { je: "étais", tu: "étais", il: "était", nous: "étions", vous: "étiez", ils: "étaient" }, subjonctif: { je: "sois", tu: "sois", il: "soit", nous: "soyons", vous: "soyez", ils: "soient" }, conditionnel: { je: "serais", tu: "serais", il: "serait", nous: "serions", vous: "seriez", ils: "seraient" } },
+                "avoir": { imparfait: { je: "avais", tu: "avais", il: "avait", nous: "avions", vous: "aviez", ils: "avaient" }, subjonctif: { je: "aie", tu: "aies", il: "ait", nous: "ayons", vous: "ayez", ils: "aient" }, conditionnel: { je: "aurais", tu: "aurais", il: "aurait", nous: "aurions", vous: "auriez", ils: "auraient" } },
+                "aller": { imparfait: { je: "allais", tu: "allais", il: "allait", nous: "allions", vous: "alliez", ils: "allaient" }, subjonctif: { je: "aille", tu: "ailles", il: "aille", nous: "allions", vous: "alliez", ils: "aillent" }, conditionnel: { je: "irais", tu: "irais", il: "irait", nous: "irions", vous: "iriez", ils: "iraient" } },
+                "faire": { imparfait: { je: "faisais", tu: "faisais", il: "faisait", nous: "faisions", vous: "faisiez", ils: "faisaient" }, subjonctif: { je: "fasse", tu: "fasses", il: "fasse", nous: "fassions", vous: "fassiez", ils: "fassent" }, conditionnel: { je: "ferais", tu: "ferais", il: "ferait", nous: "ferions", vous: "feriez", ils: "feraient" } },
+                "pouvoir": { imparfait: { je: "pouvais", tu: "pouvais", il: "pouvait", nous: "pouvions", vous: "pouviez", ils: "pouvaient" }, subjonctif: { je: "puisse", tu: "puisses", il: "puisse", nous: "puissions", vous: "puissiez", ils: "puissent" }, conditionnel: { je: "pourrais", tu: "pourrais", il: "pourrait", nous: "pourrions", vous: "pourriez", ils: "pourraient" } },
+                "vouloir": { imparfait: { je: "voulais", tu: "voulais", il: "voulait", nous: "voulions", vous: "vouliez", ils: "voulaient" }, subjonctif: { je: "veuille", tu: "veuilles", il: "veuille", nous: "voulions", vous: "vouliez", ils: "veuillent" }, conditionnel: { je: "voudrais", tu: "voudrais", il: "voudrait", nous: "voudrions", vous: "voudriez", ils: "voudraient" } },
+                "devoir": { imparfait: { je: "devais", tu: "devais", il: "devait", nous: "devions", vous: "deviez", ils: "devaient" }, subjonctif: { je: "doive", tu: "doives", il: "doive", nous: "devions", vous: "deviez", ils: "doivent" }, conditionnel: { je: "devrais", tu: "devrais", il: "devrait", nous: "devrions", vous: "devriez", ils: "devraient" } },
+                "savoir": { imparfait: { je: "savais", tu: "savais", il: "savait", nous: "savions", vous: "saviez", ils: "savaient" }, subjonctif: { je: "sache", tu: "saches", il: "sache", nous: "sachions", vous: "sachiez", ils: "sachent" }, conditionnel: { je: "saurais", tu: "saurais", il: "saurait", nous: "saurions", vous: "sauriez", ils: "sauraient" } }
+            };
+            const present = baseConjugations["présent"] || {};
+            const futur = baseConjugations["futur"] || {};
+            const clean = (value) => (value || "").toLowerCase().replace(/\(.*?\)/g, "").trim();
+            const getNousStem = () => {
+                const nousForm = clean(present.nous);
+                if (nousForm.endsWith("ons")) return nousForm.slice(0, -3);
+                if (verb.endsWith("er") || verb.endsWith("ir") || verb.endsWith("re")) return verb.slice(0, -2);
+                return verb;
+            };
+            const getIlsStem = () => {
+                const ilsForm = clean(present.ils);
+                if (ilsForm.endsWith("ent")) return ilsForm.slice(0, -3);
+                return getNousStem();
+            };
+            const getFutureStem = () => {
+                const futureJe = clean(futur.je);
+                if (futureJe.endsWith("ai")) return futureJe.slice(0, -2);
+                if (verb.endsWith("re")) return verb.slice(0, -1);
+                if (verb.endsWith("er") || verb.endsWith("ir")) return verb;
+                return verb;
+            };
+            const nousStem = getNousStem();
+            const ilsStem = getIlsStem();
+            const futureStem = getFutureStem();
+            const generatedImparfait = { je: `${nousStem}ais`, tu: `${nousStem}ais`, il: `${nousStem}ait`, nous: `${nousStem}ions`, vous: `${nousStem}iez`, ils: `${nousStem}aient` };
+            const generatedSubjonctif = { je: `${ilsStem}e`, tu: `${ilsStem}es`, il: `${ilsStem}e`, nous: `${nousStem}ions`, vous: `${nousStem}iez`, ils: `${ilsStem}ent` };
+            const generatedConditionnel = { je: `${futureStem}ais`, tu: `${futureStem}ais`, il: `${futureStem}ait`, nous: `${futureStem}ions`, vous: `${futureStem}iez`, ils: `${futureStem}aient` };
+            const extended = { ...baseConjugations };
+            if (!extended.imparfait) extended.imparfait = irregular[verb]?.imparfait || generatedImparfait;
+            if (!extended.subjonctif) extended.subjonctif = irregular[verb]?.subjonctif || generatedSubjonctif;
+            if (!extended.conditionnel) extended.conditionnel = irregular[verb]?.conditionnel || generatedConditionnel;
+            return extended;
+        }
+        function displayConjugation(verb, conjugaisons) {
+            const modal = document.getElementById('conjugaison-modal');
+            const title = document.getElementById('conjugaison-title');
+            const content = document.getElementById('conjugaison-content');
+            const pronouns = { je: 'je', tu: 'tu', il: 'il/elle', nous: 'nous', vous: 'vous', ils: 'ils/elles' };
+            const sections = [
+                { title: 'Présent', tenses: [{ key: 'présent', label: 'Présent' }] },
+                { title: 'Passé Composé / Imparfait', tenses: [{ key: 'passé', label: 'Passé Composé' }, { key: 'imparfait', label: 'Imparfait' }] },
+                { title: 'Futur Simple', tenses: [{ key: 'futur', label: 'Futur Simple' }] },
+                { title: 'Subjonctif / Conditionnel', tenses: [{ key: 'subjonctif', label: 'Subjonctif Présent' }, { key: 'conditionnel', label: 'Conditionnel Présent' }] }
+            ];
+            title.textContent = `Conjugaison: ${verb}`;
+            const fullConjugations = getExtendedConjugations(verb, conjugaisons);
+            let html = '';
+            for (const section of sections) {
+                const availableTenses = section.tenses.filter((tense) => fullConjugations[tense.key]);
+                if (!availableTenses.length) continue;
+                html += `<div class="tense-section"><div class="tense-title">${section.title}</div><table class="conjugation-table"><tr><th>Pronoun</th>${availableTenses.map((tense) => `<th>${tense.label}</th>`).join('')}</tr>`;
+                for (const [pronounKey, pronounLabel] of Object.entries(pronouns)) {
+                    html += `<tr><td class="pronoun">${pronounLabel}</td>${availableTenses.map((tense) => `<td>${fullConjugations[tense.key][pronounKey] || '—'}</td>`).join('')}</tr>`;
+                }
+                html += '</table></div>';
+            }
+            content.innerHTML = html;
+            modal.classList.remove('hidden');
+        }
         function closeConjugation() { const modal = document.getElementById('conjugaison-modal'); modal.classList.add('hidden'); }
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeConjugation(); });
         function updateProgress() { progressIndicator.textContent = `Carte ${currentIndex + 1} sur ${currentDeck.length}`; }
